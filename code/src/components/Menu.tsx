@@ -48,7 +48,7 @@ const appPages: AppPage[] = [
     mdIcon: archiveSharp
   },
   {
-    title: 'Trash',
+    title: 'Robert',
     url: '/page/Trash',
     iosIcon: trashOutline,
     mdIcon: trashSharp
