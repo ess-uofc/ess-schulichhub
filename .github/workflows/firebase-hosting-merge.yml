@@ -16,7 +16,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          entryPoint: code/firebase.json
+          entryPoint: code
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_HUB_116D7 }}'
           channelId: live
           projectId: project-hub-116d7
