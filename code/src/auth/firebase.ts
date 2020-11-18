@@ -23,8 +23,10 @@ export async function signUpUser(first:string,last:string, email:string,password
 
     try{
         const res = await app.auth().createUserWithEmailAndPassword(email,password)
-        if (res){
-            return res.user
+        if (res.user!=null){
+            // TODO transfrom to user Model
+            
+            return new User(first,last,res.user.uid.toString())
         }else{
             return null //
         }
@@ -62,6 +64,22 @@ async function addUserToDB(uid:string,firstName:string,lastName:string){
         }
     )
 
+}
+
+async function loginUser(email:string,password:string){
+    
+    try{
+        const res = await app.auth().signInWithEmailAndPassword(email,password)
+        if (res){
+            //TODO call getUserDetails
+            return res.user
+        }else{
+            return null //
+        }
+    }catch(e){
+        return parseError(e.code)
+    }
+    
 }
 
 
