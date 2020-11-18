@@ -1,4 +1,4 @@
-import app from "../auth/firebase"
+import app from "firebase"
 
 
 export default class User{
