@@ -1,4 +1,4 @@
-import app from "../auth/firebase"
+import app from "firebase"
 
 
 export default class User{
@@ -24,7 +24,7 @@ export default class User{
         )
     
     }
-    async fetchUserDetails(){
+    private async fetchUserDetails(){
         //get's user information from firebase
         // returns Promise with User model if transaction completed
         // TODO Add props to list and iterate instead of getting each 

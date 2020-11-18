@@ -8,11 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: cd code && npm ci && npm run build
+      - uses: actions/cache@v1
+        with:
+          path: code/node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/code/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-${{ env.cache-name }}-
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      - run: npm install && npm run build
         working-directory: code
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          entryPoint: code
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_HUB_116D7 }}'
           projectId: project-hub-116d7
         env:
