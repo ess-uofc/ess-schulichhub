@@ -64,7 +64,7 @@ export default class User{
             this.firstName = firstName
             this.lastName = lastName
         }else{
-            throw new Error("firstName or lastName not found on ${this.uid}");
+            throw new Error("firstName or lastName not found on ${this.uid} firestore document");
         }
     }
 
