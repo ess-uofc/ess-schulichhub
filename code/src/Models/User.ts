@@ -2,58 +2,90 @@ import app from "firebase"
 
 
 export default class User{
+    /**
+     * User class contains uid, firstName, lastName
+     * @author Mohamad Abdel Rida
+     * 
+     * 
+     */
+
+
     firstName?:string
     lastName?:string
+    email:string
     uid:string
-    // TODO add other attributes
-    constructor(uid:string,firstName?:string, lastName?:string){
+
+    /**
+     * 
+     * @param uid user id used in firebase
+     * @param firstName user's first name | from firestore or user input
+     * @param lastName user's last name | from firestore user input
+     * @param email user's email address
+     */
+
+    constructor(uid:string,email:string,firstName?:string, lastName?:string){
         this.firstName = firstName
         this.lastName =lastName
         this.uid = uid
+        this.email = email
     }
 
     private async addToDb(){
-        //Adds the user to the users colleciton 
-        
-        const doc = await app.firestore().collection('users').doc(this.uid).set(
+        /**
+         * method on User
+         * adds user fields to a unique document in firestore using uid
+         * 
+        */
+        try{
+            await app.firestore().collection('users').doc(this.uid).set(
             {
                 firstName:this.firstName,
                 lastName:this.lastName,
-                //TOOD add other fields
+               
             }
-        )
+        )}catch(e){
+            console.log(e)
+        }
     
     }
     private async fetchUserDetails(){
-        //get's user information from firebase
-        // returns Promise with User model if transaction completed
-        // TODO Add props to list and iterate instead of getting each 
-        // field line by line?
+
+        /**
+         * fetches user informaiton from firestore
+         * private as its only used in the static login method
+         * 
+        */
+        
         const doc = await app.firestore().collection('users').doc(this.uid).get()
         const firstName = await doc.get("firstName")
         const lastName = await doc.get("lastName")
-    
-        const data = doc.data
-    
+        
         if(firstName && lastName) {
             this.firstName = firstName
             this.lastName = lastName
+        }else{
+            throw new Error("firstName or lastName not found on ${this.uid}");
         }
     }
 
-    static async signUp(first:string,last:string, email:string,password:string):Promise<User|undefined>{
+    static async signUp(firstName:string,lastName:string, email:string,password:string):Promise<User|undefined>{
 
-        //Creates a user in firebase using email and password auth
-        //returns a string with error code in sentence case
-        //
+        /**
+         * @param firstName: user's firstname
+         * @param lastName:user's lastname
+         * @param email: user's email
+         * @param password: user's password
+         * creates a new user from email and password.
+         * adds user information to firestore
+         * @return returns User object if successfull otherwise null 
+        */
     
         try{
             const res = await app.auth().createUserWithEmailAndPassword(email,password)
             if (res.user!=null){
-                // TODO transfrom to user Model
-                const user = new User(first,last,res.user.uid.toString())
+                const user = new User(res.user.uid,email,firstName,lastName)
                 user.addToDb()
-                
+
                 return user
             }else{
                 console.log(res) //
@@ -65,13 +97,18 @@ export default class User{
         
     }
     static async login(email:string,password:string):Promise<User|undefined>{
+
+        /**
+         * @param email:user's email
+         * @param password:user's password
+         * logs user in
+         * @return User object if successful otherwise null
+        */
     
         try{
             const res = await app.auth().signInWithEmailAndPassword(email,password)
             if (res.user){
-                //TODO call getUserDetails
-                
-                const user = new User(res.user.uid.toString())
+                const user = new User(res.user.uid,email)
                 await user.fetchUserDetails()
                 return user
             }else{
@@ -82,13 +119,21 @@ export default class User{
         }
         
     }
-    
-    
-
 }
 
 function parseError(error:string){
-    //example error auth/email-already-exists to Email Already Exists
-    // Could be used to communicate with user in front end
-    return error.split('/')[1].split('-').map((e)=>(e.charAt(0).toUpperCase()+e.slice(1)))
+    /**
+     * @param error - firebase error code from  [https://firebase.google.com/docs/auth/admin/errors]
+     * converts error to user friendly string
+     * @return user friendly string
+     */
+    switch (error){
+        case "auth/email-already-exists":
+            return "Look's like you already have an account"
+        case "auth/user-not-found":
+            return "Please signup for an account" // Routing user would be cool
+        default:
+            return "Internal error occured"
+    }
+
 }
