@@ -1,59 +1,136 @@
 import app from "firebase"
 
+export class UserError extends Error{
+    /**
+     * Defines and handles errors that occur with user authentication
+     */
+
+    static userNotFound = new UserError("Please Sign Up for an account")
+    static emailAlreadyExists = new UserError("Look's like you already have an account")
+    static externalError = new UserError("External Error Occured")
+
+    /**
+     * @param error - firebase error code from  [https://firebase.google.com/docs/auth/admin/errors]
+     * converts error to user friendly string
+     * @throw Error with user friendly string wrapped
+     */
+        
+    constructor(message:string){
+        super(message)
+    }
+    static hanlde(res:app.FirebaseError):void{
+
+        const code = res.code
+        switch (code){
+            case "auth/email-already-exists":
+                throw UserError.emailAlreadyExists
+            case "auth/user-not-found":
+                throw UserError.userNotFound // Routing user would be cool
+            default:
+                console.log(code)
+                throw new UserError("Internal error occured "+code)
+        }
+    
+    }
+
+
+} 
+
+interface UserDoc {
+    firstName: string;
+    lastName: string;
+    [key:string]:any;
+    // Add other user fields here
+}
 
 export default class User{
+    /**
+     * User class contains uid, firstName, lastName
+     * @author Mohamad Abdel Rida
+     * 
+     * 
+     */
+
+
     firstName?:string
     lastName?:string
+    email:string
     uid:string
-    // TODO add other attributes
-    constructor(uid:string,firstName?:string, lastName?:string){
+    // Add user attributes here
+
+    /**
+     * 
+     * @param uid user id used in firebase
+     * @param firstName user's first name | from firestore or user input
+     * @param lastName user's last name | from firestore user input
+     * @param email user's email address
+     */
+
+    constructor(uid:string,email:string,firstName?:string, lastName?:string){
         this.firstName = firstName
         this.lastName =lastName
         this.uid = uid
+        this.email = email
     }
 
-    private async addToDb(){
-        //Adds the user to the users colleciton 
-        
-        const doc = await app.firestore().collection('users').doc(this.uid).set(
-            {
+
+    /**
+     * method on User
+     * adds user fields to a unique document in firestore using uid
+     * 
+    */
+    private async addToDb():Promise<void>{
+     
+        try{
+            await app.firestore().collection('users').doc(this.uid).set(
+                {
                 firstName:this.firstName,
                 lastName:this.lastName,
-                //TOOD add other fields
             }
-        )
+            )
+        }catch(e){
+            console.log(e)
+        }
     
     }
-    async fetchUserDetails(){
-        //get's user information from firebase
-        // returns Promise with User model if transaction completed
-        // TODO Add props to list and iterate instead of getting each 
-        // field line by line?
+
+
+    /**
+     * fetches user informaiton from firestore
+     * private as its only used in the static login method
+     * 
+    */
+    private async fetchUserDetails():Promise<void>{
         const doc = await app.firestore().collection('users').doc(this.uid).get()
-        const firstName = await doc.get("firstName")
-        const lastName = await doc.get("lastName")
-    
-        const data = doc.data
-    
-        if(firstName && lastName) {
-            this.firstName = firstName
-            this.lastName = lastName
+        try{
+            const test = {a:1,b:2}
+
+        const data= <UserDoc>doc.data()
+
+            this.firstName = data.firstName
+            this.lastName = data.lastName
+     
+        }catch(e){
+            console.log(e)
         }
     }
 
-    static async signUp(first:string,last:string, email:string,password:string):Promise<User|undefined>{
 
-        //Creates a user in firebase using email and password auth
-        //returns a string with error code in sentence case
-        //
-    
+    /**
+     * @param firstName: user's firstname
+     * @param lastName:user's lastname
+     * @param email: user's email
+     * @param password: user's password
+     * creates a new user from email and password.
+     * adds user information to firestore
+     * @return returns User object if successfull otherwise null 
+    */
+    static async signUp(firstName:string,lastName:string, email:string,password:string):Promise<User|undefined>{
         try{
             const res = await app.auth().createUserWithEmailAndPassword(email,password)
             if (res.user!=null){
-                // TODO transfrom to user Model
-                const user = new User(first,last,res.user.uid.toString())
+                const user = new User(res.user.uid,email,firstName,lastName)
                 user.addToDb()
-                
                 return user
             }else{
                 console.log(res) //
@@ -61,17 +138,20 @@ export default class User{
         }catch(e){
             console.log(e)
         }
-        
-        
     }
-    static async login(email:string,password:string):Promise<User|undefined>{
+
     
+    /**
+     * @param email:user's email
+     * @param password:user's password
+     * logs user in
+     * @return User object if successful otherwise null
+    */
+    static async login(email:string,password:string):Promise<User|undefined>{
         try{
             const res = await app.auth().signInWithEmailAndPassword(email,password)
             if (res.user){
-                //TODO call getUserDetails
-                
-                const user = new User(res.user.uid.toString())
+                const user = new User(res.user.uid,email)
                 await user.fetchUserDetails()
                 return user
             }else{
@@ -82,13 +162,5 @@ export default class User{
         }
         
     }
-    
-    
-
 }
 
-function parseError(error:string){
-    //example error auth/email-already-exists to Email Already Exists
-    // Could be used to communicate with user in front end
-    return error.split('/')[1].split('-').map((e)=>(e.charAt(0).toUpperCase()+e.slice(1)))
-}
