@@ -31,3 +31,5 @@ jobs:
         with:
           eslint-config-path: "./code/.eslintrc.json"
           custom-directory: "./code"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
