@@ -1,6 +1,4 @@
 /.idea
 /code/node_modules
 .env
-/code/package-lock.json
 /code/.env
-/code/yarn.lock
