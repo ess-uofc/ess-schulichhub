@@ -29,7 +29,6 @@ jobs:
       - name: ESLint checker
         uses: ninosaurus/eslint-check@v5.3.1
         with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           eslint-config-path: "./code/.eslintrc.json"
           custom-directory: "./code"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
