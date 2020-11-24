@@ -18,6 +18,12 @@ jobs:
             ${{ runner.OS }}-
       - run: npm install && npm run build
         working-directory: code
+      - name: ESLint checker
+        uses: ninosaurus/eslint-check@v5.3.1
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          eslint-config-path: "./code/.eslintrc.json"
+          custom-directory: "./code"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -26,9 +32,3 @@ jobs:
           projectId: project-hub-116d7
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
-      - name: ESLint checker
-        uses: ninosaurus/eslint-check@v5.3.1
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          eslint-config-path: "./code/.eslintrc.json"
-          custom-directory: "./code"
