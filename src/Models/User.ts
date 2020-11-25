@@ -32,7 +32,9 @@ export class UserError extends Error {
 interface UserDoc {
     firstName: string;
     lastName: string;
+
     [key: string]: any;
+
     // Add other user fields here
 }
 
@@ -48,6 +50,7 @@ export default class User {
     lastName?: string;
     email: string;
     uid: string;
+
     // Add user attributes here
 
     /**
