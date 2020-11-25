@@ -18,7 +18,7 @@ jobs:
                       ${{ runner.OS }}-
             - run: yarn install && yarn run build
             - name: ESLint checker
-              run: eslint . --ext .js,.jsx,.ts,.tsx
+              run: yarn run eslint . --ext .js,.jsx,.ts,.tsx
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: '${{ secrets.GITHUB_TOKEN }}'
