@@ -1,0 +1,44 @@
+div {
+  text-align: center;
+}
+
+p {
+  color: #ffffff;
+}
+
+.username {
+  margin-top: 100px;
+  margin-bottom: 10px;
+}
+
+.password {
+  margin-bottom: 10px;
+}
+
+.loginContent {
+  --background: #121212;
+}
+
+.loginToolbar {
+  --background: #696969;
+}
+
+.loginTitle {
+  --color: #ffffff;
+}
+
+.loginInputs {
+  width: 20% !important;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  border: 3px solid #d50000;
+  --background: #121212 !important;
+  --color: #ffffff !important;
+  --placeholder-color: #ffffff !important;
+}
+
+.loginButton {
+  --background: #d50000;
+  width: 20%;
+}
