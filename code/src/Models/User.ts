@@ -1,4 +1,4 @@
-import app from "firebase"
+import app from "./firebase"
 
 export class UserError extends Error{
     /**
