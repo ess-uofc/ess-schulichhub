@@ -20,7 +20,7 @@ import User from '../Models/User';
  * @param password the user's password
  */
 async function handleSubmit(email: string, password: string) {
-    if ((await User.login(email, password))) {
+    if (await User.login(email, password)) {
         alert('login success');
     } else {
         alert('login failed');
