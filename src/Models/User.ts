@@ -1,4 +1,3 @@
-import { assert } from 'console';
 import app from './firebase';
 
 export class UserError extends Error {
@@ -33,7 +32,7 @@ interface UserDoc {
     firstName: string;
     lastName: string;
 
-    [key: string]: any;
+    //[key: string]: any;
 
     // Add other user fields here
 }

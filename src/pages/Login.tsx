@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { InputChangeEventDetail } from '@ionic/core';
 import {
     IonContent,
     IonHeader,
@@ -46,13 +47,13 @@ const Login: React.FC = () => {
                 <IonInput
                     placeholder="Username"
                     className="username loginInputs"
-                    onIonChange={(e: any) => setUsername(e.target.value)}
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setUsername(e.detail.value!)}
                 />
                 <IonInput
                     type="password"
                     placeholder="Password"
                     className="password loginInputs"
-                    onIonChange={(e: any) => setPassword(e.target.value)}
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value!)}
                 />
                 <IonButton className="loginButton" onClick={async () => handleSubmit(username, password)}>
                     Sign In
