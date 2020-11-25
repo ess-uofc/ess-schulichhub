@@ -20,7 +20,7 @@ import User from '../Models/User';
  * @param password the user's password
  */
 async function handleSubmit(email: string, password: string) {
-    if ((await User.login(email, password)) != null) {
+    if ((await User.login(email, password))) {
         alert('login success');
     } else {
         alert('login failed');
@@ -33,7 +33,7 @@ async function handleSubmit(email: string, password: string) {
  * are used when the login button is clicked
  */
 const Login: React.FC = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     return (
@@ -47,15 +47,15 @@ const Login: React.FC = () => {
                 <IonInput
                     placeholder="Username"
                     className="username loginInputs"
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setUsername(e.detail.value!)}
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setEmail(e.detail.value ?? '')}
                 />
                 <IonInput
                     type="password"
                     placeholder="Password"
                     className="password loginInputs"
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value!)}
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value ?? '')}
                 />
-                <IonButton className="loginButton" onClick={async () => handleSubmit(username, password)}>
+                <IonButton className="loginButton" onClick={async () => handleSubmit(email, password)}>
                     Sign In
                 </IonButton>
                 <IonTextarea>
