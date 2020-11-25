@@ -1,3 +1,4 @@
+import { assert } from "console"
 import app from "./firebase"
 
 export class UserError extends Error{
@@ -14,8 +15,6 @@ export class UserError extends Error{
      * converts error to user friendly string
      * @throw Error with user friendly string wrapped
      */
-        
-    
     static hanlde(res:firebase.default.auth.Error):void{
 
         const code = res.code
@@ -101,9 +100,7 @@ export default class User{
     private async fetchUserDetails():Promise<void>{
         const doc = await app.firestore().collection('users').doc(this.uid).get()
         try{
-            const test = {a:1,b:2}
-
-        const data= <UserDoc>doc.data()
+            const data= (doc.data() as UserDoc)
 
             this.firstName = data.firstName
             this.lastName = data.lastName
