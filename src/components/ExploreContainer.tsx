@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactPropTypes } from 'react';
 import './ExploreContainer.css';
 
 interface ContainerProps {
     name: string;
 }
 
-const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
+const ExploreContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     return (
         <div className="container">
-            <strong>{name}</strong>
+            <strong>{props.name}</strong>
             <p>
                 Explore{' '}
                 <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">
