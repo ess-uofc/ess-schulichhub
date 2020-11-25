@@ -8,14 +8,14 @@ export class UserError extends Error{
 
     static userNotFound = new UserError("Please Sign Up for an account")
     static emailAlreadyExists = new UserError("Look's like you already have an account")
-    static externalError = new UserError("External Error Occured")
+    static externalError = new UserError("External Error Occurred")
 
     /**
      * @param error - firebase error code from  [https://firebase.google.com/docs/auth/admin/errors]
      * converts error to user friendly string
      * @throw Error with user friendly string wrapped
      */
-    static hanlde(res:firebase.default.auth.Error):void{
+    static handle(res:firebase.default.auth.Error):void{
 
         const code = res.code
         switch (code){
@@ -25,7 +25,7 @@ export class UserError extends Error{
                 throw UserError.userNotFound // Routing user would be cool
             default:
                 console.log(code)
-                throw new UserError("Internal error occured "+code)
+                throw new UserError("Internal error Occurred "+code)
         }
     
     }
@@ -58,8 +58,8 @@ export default class User{
     /**
      * 
      * @param uid user id used in firebase
-     * @param firstName user's first name | from firestore or user input
-     * @param lastName user's last name | from firestore user input
+     * @param firstName user's first name | from FireStore or user input
+     * @param lastName user's last name | from FireStore user input
      * @param email user's email address
      */
 
@@ -73,7 +73,7 @@ export default class User{
 
     /**
      * method on User
-     * adds user fields to a unique document in firestore using uid
+     * adds user fields to a unique document in FireStore using uid
      * 
     */
     private async addToDb():Promise<void>{
@@ -93,7 +93,7 @@ export default class User{
 
 
     /**
-     * fetches user informaiton from firestore
+     * fetches user information from FireStore
      * private as its only used in the static login method
      * 
     */
@@ -112,13 +112,13 @@ export default class User{
 
 
     /**
-     * @param firstName: user's firstname
-     * @param lastName:user's lastname
+     * @param firstName: user's first name
+     * @param lastName:user's last name
      * @param email: user's email
      * @param password: user's password
      * creates a new user from email and password.
-     * adds user information to firestore
-     * @return returns User object if successfull otherwise null 
+     * adds user information to FireStore
+     * @return returns User object if successful otherwise null 
     */
     static async signUp(firstName:string,lastName:string, email:string,password:string):Promise<User|undefined>{
         try{
