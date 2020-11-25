@@ -20,7 +20,7 @@ const Tab1: React.FC = () => {
                 <ExploreContainer name="Tab 1 page, Ratik says hello!" />
             </IonContent>
         </IonPage>
-    );
-};
+    ) 
+} 
 
-export default Tab1;
+export default Tab1 
