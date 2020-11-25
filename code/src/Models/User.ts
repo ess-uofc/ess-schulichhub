@@ -31,7 +31,7 @@ export class UserError extends Error{
     }
 
 
-} 
+}
 
 interface UserDoc {
     firstName: string;
@@ -44,8 +44,8 @@ export default class User{
     /**
      * User class contains uid, firstName, lastName
      * @author Mohamad Abdel Rida
-     * 
-     * 
+     *
+     *
      */
 
 
@@ -56,7 +56,7 @@ export default class User{
     // Add user attributes here
 
     /**
-     * 
+     *
      * @param uid user id used in firebase
      * @param firstName user's first name | from FireStore or user input
      * @param lastName user's last name | from FireStore user input
@@ -95,7 +95,7 @@ export default class User{
     /**
      * fetches user information from FireStore
      * private as its only used in the static login method
-     * 
+     *
     */
     private async fetchUserDetails():Promise<void>{
         const doc = await app.firestore().collection('users').doc(this.uid).get()
@@ -125,7 +125,7 @@ export default class User{
             const res = await app.auth().createUserWithEmailAndPassword(email,password)
             if (res.user!=null){
                 const user = new User(res.user.uid,email,firstName,lastName)
-                user.addToDb()
+                await user.addToDb()
                 return user
             }else{
                 console.log(res) //
