@@ -18,7 +18,8 @@ export class UserError extends Error{
     constructor(message:string){
         super(message)
     }
-    static hanlde(res:app.FirebaseError):void{
+    
+    static hanlde(res:firebase.default.auth.Error):void{
 
         const code = res.code
         switch (code){
