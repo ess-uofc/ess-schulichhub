@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   IonContent,
   IonHeader,
@@ -13,7 +13,7 @@ import "./Login.css";
 import User from "../Models/User";
 
 /**
- * @author Carter Zimer
+ * @author Carter Zimmer
  * @param email the user's email aka username
  * @param password the user's password
  */
@@ -31,8 +31,8 @@ async function handleSubmit(email: string, password: string) {
  * are used when the login button is clicked
  */
 const Login: React.FC = () => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   
   return (
       <IonPage>
@@ -58,7 +58,7 @@ const Login: React.FC = () => {
             />
             <IonButton
                 className="loginButton"
-                onClick={async () => await handleSubmit(username, password)}>
+                onClick={async () => handleSubmit(username, password)}>
               Sign In
             </IonButton>
             <p>
