@@ -18,10 +18,7 @@ jobs:
                       ${{ runner.OS }}-
             - run: yarn install && yarn run build
             - name: ESLint checker
-              uses: ninosaurus/eslint-check@v5.3.1
-              with:
-                  repo-token: '${{ secrets.GITHUB_TOKEN }}'
-                  eslint-config-path: './eslintrc.json'
+              run: eslint . --ext .js,.jsx,.ts,.tsx
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: '${{ secrets.GITHUB_TOKEN }}'
