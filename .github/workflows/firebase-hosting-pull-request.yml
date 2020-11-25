@@ -17,13 +17,13 @@ jobs:
                       ${{ runner.OS }}-build-
                       ${{ runner.OS }}-
             - name: Yarn install
-            - run: yarn install
+              run: yarn install
             - name: ESLint checker
               run: yarn run eslint ./src --ext .js,.jsx,.ts,.tsx
             - name: Build
               run: yarn run build
             - name: Deploy to Firebase
-            - uses: FirebaseExtended/action-hosting-deploy@v0
+              uses: FirebaseExtended/action-hosting-deploy@v0
               with:
                   repoToken: '${{ secrets.GITHUB_TOKEN }}'
                   firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_HUB_116D7 }}'
