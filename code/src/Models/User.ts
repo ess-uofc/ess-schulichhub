@@ -15,9 +15,6 @@ export class UserError extends Error{
      * @throw Error with user friendly string wrapped
      */
         
-    constructor(message:string){
-        super(message)
-    }
     
     static hanlde(res:firebase.default.auth.Error):void{
 
