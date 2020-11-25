@@ -8,7 +8,6 @@ import {
     IonInput,
     IonButton,
     IonRouterLink,
-    IonItemDivider,
     IonTextarea,
 } from '@ionic/react';
 import './Login.css';
