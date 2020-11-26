@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import { InputChangeEventDetail } from '@ionic/core';
-import {
-    IonContent,
-    IonHeader,
-    IonPage,
-    IonTitle,
-    IonToolbar,
-    IonInput,
-    IonButton,
-    IonRouterLink,
-    IonTextarea,
-} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import './Login.css';
 import User from '../Models/User';
 
