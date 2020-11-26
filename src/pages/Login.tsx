@@ -40,27 +40,27 @@ const Login: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar className="loginToolbar">
-                    <IonTitle className="loginTitle">Welcome to the Schulich Hub!</IonTitle>
+                    <IonTitle className="loginTitle">Login to the Schulich Hub</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen className="loginContent">
                 <IonInput
-                    placeholder="Username"
+                    placeholder="email"
                     className="username loginInputs"
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setEmail(e.detail.value ?? '')}
                 />
                 <IonInput
                     type="password"
-                    placeholder="Password"
+                    placeholder="password"
                     className="password loginInputs"
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value ?? '')}
                 />
                 <IonButton className="loginButton" onClick={async () => handleSubmit(email, password)}>
                     Sign In
                 </IonButton>
-                <IonTextarea>
-                    New here? <IonRouterLink>Join the Hub</IonRouterLink>
-                </IonTextarea>
+                <p>
+                    New Here? <IonRouterLink>Join the Hub</IonRouterLink>
+                </p>
                 <IonRouterLink>Forgot Password?</IonRouterLink>
             </IonContent>
         </IonPage>
