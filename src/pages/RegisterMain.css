@@ -1,0 +1,38 @@
+.hubRegisterHeader{
+    margin: 0.25em;
+    font-size: min(5.5vw, 30px);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hubLogoText{
+    font-family: 'Comfortaa', cursive;
+    font-style: bold;
+}
+
+.hubLogoText > span{
+    margin-right: 3000px;
+    font-size: 28.44px;
+    padding-top: 10px;
+    padding-left: 3px;
+}
+
+.footerLogo{
+    position: absolute;
+}
+
+
+/** Smaller mobile Handling **/
+@media screen and (max-width: 310px) {
+    .hubLogoText > span{
+        font-size: 22px;
+        padding-top: 7.5px;
+        padding-left: 3px;
+    }
+    
+
+    .menuIcon{
+
+        font-size: 36px;
+    }
+}
+
