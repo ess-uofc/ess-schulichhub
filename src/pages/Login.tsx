@@ -48,9 +48,9 @@ const Login: React.FC = () => {
                 <IonButton className="loginButton" onClick={async () => handleSubmit(email, password)}>
                     Sign In
                 </IonButton>
-                <p>
-                    New Here? <IonRouterLink>Join the Hub</IonRouterLink>
-                </p>
+                <IonTextarea>
+                    New here? <IonRouterLink href="/register">Join the Hub</IonRouterLink>
+                </IonTextarea>
                 <IonRouterLink>Forgot Password?</IonRouterLink>
             </IonContent>
         </IonPage>
