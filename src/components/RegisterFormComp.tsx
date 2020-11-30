@@ -1,6 +1,7 @@
 import React from 'react';
 import './RegisterLanding.css';
 import { IonButton, IonInput, IonItemDivider, IonItem } from '@ionic/react';
+import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import '../pages/RegisterMain.css';
 
@@ -29,14 +30,14 @@ const RegisterForm: React.FC = () => {
                         type="email"
                         className="inputField"
                         placeholder="Email"
-                        onIonChange={(e: any) => setEmail(e.target.value)}
+                        onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setEmail(e.detail.value ?? '')}
                     />
                 </IonItem>
                 <IonItem className="inputItem">
                     <IonInput
                         className="inputField"
                         placeholder="Username"
-                        onIonChange={(e: any) => setUsername(e.target.value)}
+                        onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setUsername(e.detail.value ?? '')}
                     />
                 </IonItem>
                 <IonItem className="inputItem">
@@ -44,7 +45,7 @@ const RegisterForm: React.FC = () => {
                         type="password"
                         className="inputField"
                         placeholder="Password"
-                        onIonChange={(e: any) => setPassword(e.target.value)}
+                        onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value ?? '')}
                     />
                 </IonItem>
                 <IonItem className="inputItem">
