@@ -53,7 +53,7 @@ const RegisterForm: React.FC = () => {
                         type="password"
                         className="inputField"
                         placeholder="Confirm Password"
-                        onIonChange={(e: any) => setCpassword(e.target.value)}
+                        onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setCpassword(e.detail.value ?? '')}
                     />
                 </IonItem>
             </ul>
