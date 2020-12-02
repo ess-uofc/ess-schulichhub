@@ -24,6 +24,7 @@ import User from '../Models/User';
 async function handleSubmit(email: string, password: string) {
     if (await User.login(email, password)) {
         alert('login success');
+        window.history.replaceState({}, '', '/tab1'); //TODO Redirect use to the homepage
     } else {
         alert('login failed');
     }
