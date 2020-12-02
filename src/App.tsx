@@ -12,10 +12,9 @@ import {
     IonContent,
     IonList,
     IonItem,
-    IonMenuToggle,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { homeOutline, logInOutline, ellipseOutline } from 'ionicons/icons';
+import { ellipseOutline, homeOutline, logInOutline } from 'ionicons/icons';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -41,33 +40,53 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.scss';
+import app from './Models/firebase';
 
-<<<<<<< main
-const App: React.FC = () => (
-    <IonApp>
-        <IonReactRouter>
-            <IonMenu side="start" content-id="main">
-                <IonHeader>
-                    <IonToolbar>
+const App: React.FC = () => {
+    useEffect(() => {
+        app.auth().onAuthStateChanged((user) => {
+            /**
+             * @author Mohamad Rida
+             * @param user Firebase User
+             * Redirects user to login page on top level
+             */
+            if (user) {
+                // Redirect User here if they are logged in
+                // window.history.replaceState({},'','/home')
+            } else {
+                console.log('Redirecting User');
+                window.history.replaceState({}, '', '/login');
+            }
+        });
+    });
+    return (
+    
+       <IonApp>
+            <div className="navBar">
+                <IonMenu side="start" content-id="main">
+                    <IonHeader>
+                        <IonToolbar>
                         <IonTitle>Menu</IonTitle>
                     </IonToolbar>
-                </IonHeader>
+                    </IonHeader>
                 <IonContent>
                     <IonList>
-                        <IonMenuToggle>
-                            <IonItem routerLink="/home">
-                                <IonIcon icon={homeOutline} size="small" class="ion-padding"></IonIcon>
-                                <IonLabel>Home</IonLabel>
-                            </IonItem>
-                            <IonItem routerLink="/login">
-                                <IonIcon icon={logInOutline} size="small" class="ion-padding"></IonIcon>
-                                <IonLabel>Login</IonLabel>
-                            </IonItem>
-                            <IonItem routerLink="/landing">
-                                <IonIcon icon={ellipseOutline} size="small" class="ion-padding"></IonIcon>
-                                <IonLabel>Landing</IonLabel>
-                            </IonItem>
-                        </IonMenuToggle>
+                        <IonItem routerLink="/Landing">
+                            <IonIcon icon={homeOutline} size="small" class="ion-padding"></IonIcon>
+                            <IonLabel>Landing (Dev)</IonLabel>
+                        </IonItem>
+                        <IonItem routerLink="/Home">
+                            <IonIcon icon={homeOutline} size="small" class="ion-padding"></IonIcon>
+                            <IonLabel>Home</IonLabel>
+                        </IonItem>
+                        <IonItem routerLink="/login">
+                            <IonIcon icon={logInOutline} size="small" class="ion-padding"></IonIcon>
+                            <IonLabel>Login</IonLabel>
+                        </IonItem>
+                        <IonItem routerLink="/tab1">
+                            <IonIcon icon={ellipseOutline} size="small" class="ion-padding"></IonIcon>
+                            <IonLabel>Tab 1</IonLabel>
+                        </IonItem>
                     </IonList>
                 </IonContent>
             </IonMenu>
