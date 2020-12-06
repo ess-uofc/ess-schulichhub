@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import { InputChangeEventDetail } from '@ionic/core';
-import {
-    IonContent,
-    IonHeader,
-    IonPage,
-    IonTitle,
-    IonToolbar,
-    IonInput,
-    IonButton,
-    IonRouterLink,
-    IonTextarea,
-} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import './Login.css';
 import User from '../Models/User';
 
@@ -45,22 +35,25 @@ const Login: React.FC = () => {
             </IonHeader>
             <IonContent fullscreen className="loginContent">
                 <IonInput
-                    placeholder="email"
+                    placeholder="Email"
                     className="username loginInputs"
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setEmail(e.detail.value ?? '')}
                 />
                 <IonInput
                     type="password"
-                    placeholder="password"
+                    placeholder="Password"
                     className="password loginInputs"
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value ?? '')}
                 />
                 <IonButton className="loginButton" onClick={async () => handleSubmit(email, password)}>
                     Sign In
                 </IonButton>
-                <IonTextarea>
+                <div>
+                    <IonButton className="googleLogin">Sign in with Google</IonButton>
+                </div>
+                <p>
                     New here? <IonRouterLink href="/register">Join the Hub</IonRouterLink>
-                </IonTextarea>
+                </p>
                 <IonRouterLink>Forgot Password?</IonRouterLink>
             </IonContent>
         </IonPage>
