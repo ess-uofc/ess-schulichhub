@@ -1,6 +1,21 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
+import {
+    IonApp,
+    IonIcon,
+    IonLabel,
+    IonRouterOutlet,
+    IonTabBar,
+    IonTabButton,
+    IonTabs,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
@@ -32,37 +47,44 @@ import './theme/variables.css';
 
 const App: React.FC = () => (
     <IonApp>
-        <IonReactRouter>
-            <IonTabs>
-                <IonRouterOutlet>
-                    <Route path="/tab1" component={Tab1} exact={true} />
-                    <Route path="/tab2" component={Tab2} exact={true} />
-                    <Route path="/tab3" component={Tab3} />
-                    <Route path="/home" component={Home} />
-                    <Route path="/login" component={Login} exact={true} />
-                    <Route path="/register" component={RegisterLanding} exact={true} />
-                    <Route path="/emailregister" component={RegisterForm} exact={true} />
-                    <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
-                </IonRouterOutlet>
-                <IonTabBar slot="bottom">
-                    <IonTabButton tab="tab1" href="/tab1">
-                        <IonIcon icon={triangle} />
+        <IonMenu side="start" content-id="main">
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle>Menu</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent>
+                <IonList>
+                    <IonItem routerLink="/tab1">
+                        <IonIcon icon={triangle}></IonIcon>
                         <IonLabel>Tab 1</IonLabel>
-                    </IonTabButton>
-                    <IonTabButton tab="tab2" href="/tab2">
-                        <IonIcon icon={ellipse} />
+                    </IonItem>
+                    <IonItem routerLink="/tab2">
+                        <IonIcon icon={ellipse}></IonIcon>
                         <IonLabel>Tab 2</IonLabel>
-                    </IonTabButton>
-                    <IonTabButton tab="tab3" href="/tab3">
-                        <IonIcon icon={square} />
+                    </IonItem>
+                    <IonItem routerLink="/tab3">
+                        <IonIcon icon={square}></IonIcon>
                         <IonLabel>Tab 3</IonLabel>
-                    </IonTabButton>
-                    <IonTabButton tab="login" href="/login">
-                        <IonIcon icon={square} />
+                    </IonItem>
+                    <IonItem routerLink="/login">
+                        <IonIcon icon={square}></IonIcon>
                         <IonLabel>Login</IonLabel>
-                    </IonTabButton>
-                </IonTabBar>
-            </IonTabs>
+                    </IonItem>
+                </IonList>
+            </IonContent>
+        </IonMenu>
+        <IonReactRouter>
+            <IonRouterOutlet id="main">
+                <Route path="/tab1" component={Tab1} exact={true} />
+                <Route path="/tab2" component={Tab2} exact={true} />
+                <Route path="/tab3" component={Tab3} />
+                <Route path="/home" component={Home} />
+                <Route path="/login" component={Login} exact={true} />
+                <Route path="/register" component={RegisterLanding} exact={true} />
+                <Route path="/emailregister" component={RegisterForm} exact={true} />
+                <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+            </IonRouterOutlet>
         </IonReactRouter>
     </IonApp>
 );
