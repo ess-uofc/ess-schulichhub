@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons, IonMenuButton, IonIcon } from '@ionic/react';
 import './Home.css';
 import HomePostView from '../components/HomePostView';
 
@@ -8,6 +8,13 @@ const Home: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton auto-hide="false">
+                            <IonButton>
+                                <IonIcon name="reorder-three-outline"></IonIcon>
+                            </IonButton>
+                        </IonMenuButton>
+                    </IonButtons>
                     <IonTitle>Home</IonTitle>
                 </IonToolbar>
             </IonHeader>

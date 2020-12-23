@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonMenuButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonIcon } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 
@@ -9,7 +9,9 @@ const Tab3: React.FC = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton auto-hide="false"> Menu </IonMenuButton>
+                        <IonMenuButton auto-hide="false">
+                            <IonIcon name="reorder-three-outline"></IonIcon>
+                        </IonMenuButton>
                     </IonButtons>
                     <IonTitle>Tab 3</IonTitle>
                 </IonToolbar>

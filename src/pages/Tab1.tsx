@@ -1,5 +1,15 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonMenuButton } from '@ionic/react';
+import {
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonButton,
+    IonIcon,
+} from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab1.css';
 
@@ -9,7 +19,11 @@ const Tab1: React.FC = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton auto-hide="false"> Menu </IonMenuButton>
+                        <IonMenuButton auto-hide="false">
+                            <IonButton>
+                                <IonIcon name="reorder-three-outline"></IonIcon>
+                            </IonButton>
+                        </IonMenuButton>
                     </IonButtons>
                     <IonTitle>Tab 1</IonTitle>
                 </IonToolbar>
