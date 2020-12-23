@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { InputChangeEventDetail } from '@ionic/core';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonButton, IonRouterLink } from '@ionic/react';
+import {
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    IonInput,
+    IonButton,
+    IonButtons,
+    IonMenuButton,
+    IonRouterLink,
+    IonIcon,
+} from '@ionic/react';
 import './Login.css';
 import User from '../Models/User';
 
@@ -30,6 +42,13 @@ const Login: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar className="loginToolbar">
+                    <IonButtons slot="start">
+                        <IonMenuButton auto-hide="false">
+                            <IonButton>
+                                <IonIcon name="reorder-three-outline"></IonIcon>
+                            </IonButton>
+                        </IonMenuButton>
+                    </IonButtons>
                     <IonTitle className="loginTitle">Login to the Schulich Hub</IonTitle>
                 </IonToolbar>
             </IonHeader>
