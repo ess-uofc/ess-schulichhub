@@ -8,7 +8,7 @@
 
 Source code behind the development of the SchulichHub created by the Engineering Students' Society. This project creates a platform for engineering students at the University of Calgary to share, discuss, and initiate technical projects. The SchulichHub aims to connect individuals across departments in order to better experiential learning initiatives from the ESS.
 
-Link to live website: [hub.essucalgary.ca](https://hub.essucalgary.ca)
+Link to live website: [hub.essucalgary.com](https://hub.essucalgary.com)
 
 ## Prerequisites
 
