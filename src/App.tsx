@@ -60,14 +60,13 @@ const App: React.FC = () => {
         });
     });
     return (
-    
-       <IonApp>
+        <IonApp>
             <div className="navBar">
                 <IonMenu side="start" content-id="main">
                     <IonHeader>
                         <IonToolbar>
-                        <IonTitle>Menu</IonTitle>
-                    </IonToolbar>
+                            <IonTitle>Menu</IonTitle>
+                        </IonToolbar>
                     </IonHeader>
                 <IonContent>
                     <IonList>
