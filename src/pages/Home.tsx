@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons, IonMenuButton, IonIcon } from '@ionic/react';
-import './Home.css';
+import './Home.scss';
 import HomePostView from '../components/HomePostView';
 
 const Home: React.FC = () => {

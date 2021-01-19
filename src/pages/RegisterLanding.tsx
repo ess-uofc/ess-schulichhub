@@ -1,9 +1,7 @@
 import React from 'react';
-/**import { IoIosMenu } from "react-icons/io";**/
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import RegisterLanding from '../components/RegisterLandingComp';
-import './RegisterMain.css';
-/**import '../theme/variables.css';**/
+import './RegisterMain.scss';
 
 const Tab1: React.FC = () => {
     return (

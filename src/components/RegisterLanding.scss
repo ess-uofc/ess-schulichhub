@@ -1,6 +1,10 @@
-:root {
-    --AccentRed: #d50000;
-}
+/** Smaller mobile screen handling **/
+/** **/
+/** 580px - 825px **/
+/** 475px - 580px **/
+/** 365px - 475px **/
+/** 0px - 365px **/
+$accentRed: #d50000;
 
 .container {
     text-align: center;
@@ -8,39 +12,33 @@
     left: 20%;
     right: 20%;
     top: 425px;
+    > h2 {
+        margin-top: 25px;
+    }
 }
-.container > h2 {
-    margin-top: 25px;
-}
-
 .custombutton {
     margin-top: 1.5em;
     margin-bottom: 1em;
     width: 500px;
     height: 65px;
 }
-
 .hubRegisterText {
     margin: 0.25em;
     font-size: 30px;
-
     font-family: 'Montserrat', sans-serif;
 }
-
 .accentText {
-    color: var(--AccentRed);
+    color: $accentRed;
 }
 .accentTextBig {
-    color: var(--AccentRed);
+    color: $accentRed;
     font-size: 46px;
 }
-
 .ButtonText {
     font-family: 'Roboto', sans-serif;
     font-size: 24px;
     color: #ffffff;
 }
-
 .footerRule {
     margin: 0;
     min-height: 1px;
@@ -52,12 +50,10 @@
     color: #999999;
     padding-bottom: 3.5em;
 }
-
 .inputField {
     width: 610px;
     height: 65px;
 }
-
 .inputItem {
     width: 610px;
     height: 65px;
@@ -68,20 +64,12 @@
     margin-top: 0;
     margin-bottom: 1em;
 }
-
-/** Smaller mobile screen handling **/
-
-/** **/
-
 @media screen and (max-width: 1100px) {
     .inputItem {
         width: 550px;
         height: 65px;
     }
 }
-
-/** 580px - 825px **/
-
 @media screen and (max-width: 825px) {
     .custombutton {
         width: 450px;
@@ -99,9 +87,6 @@
         height: 65px;
     }
 }
-
-/** 475px - 580px **/
-
 @media screen and (max-width: 580px) {
     .custombutton {
         width: 400px;
@@ -119,9 +104,6 @@
         height: 65px;
     }
 }
-
-/** 365px - 475px **/
-
 @media screen and (max-width: 475px) {
     .container {
         left: 0%;
@@ -141,9 +123,6 @@
         right: 2.5%;
     }
 }
-
-/** 0px - 365px **/
-
 @media screen and (max-width: 365px) {
     .container {
         left: 0%;

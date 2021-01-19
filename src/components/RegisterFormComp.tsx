@@ -1,9 +1,9 @@
 import React from 'react';
-import './RegisterLanding.css';
+import './RegisterLanding.scss';
 import { IonButton, IonInput, IonItemDivider, IonItem } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
-import '../pages/RegisterMain.css';
+import '../pages/RegisterMain.scss';
 
 const RegisterForm: React.FC = () => {
     const [Email, setEmail] = useState<string>('');

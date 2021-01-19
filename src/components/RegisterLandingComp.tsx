@@ -1,7 +1,7 @@
 import React from 'react';
-import './RegisterLanding.css';
+import './RegisterLanding.scss';
 import { IonButton, IonItemDivider } from '@ionic/react';
-import '../pages/RegisterMain.css';
+import '../pages/RegisterMain.scss';
 
 const RegisterLanding: React.FC = () => {
     return (
