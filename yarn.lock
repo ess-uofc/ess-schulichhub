@@ -1437,27 +1437,27 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@ionic/core@5.5.0":
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-5.5.0.tgz#2825c6c0a418be2c72037b4a702dfcc6de9c526d"
-  integrity sha512-LHKRQ4kmJN6Z9aqbYajYIQi3CFULjO/UI16frMu2Oc4rx8uewMNPBClAR5Dhy/jSkL3MiIOiuQzLPO4Kyd/zzw==
+"@ionic/core@5.5.2":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-5.5.2.tgz#6a2107236ca69c149d55ac99a9aa0ca716e973de"
+  integrity sha512-rOfPj8D5NRWdOYYulNTdKtMAMURfmutDQ3ciA3L7daCooG3MWt2/0siiL6rcZFMxfG7KDxHctuwVwYoC1mPuhg==
   dependencies:
     ionicons "^5.1.2"
     tslib "^1.10.0"
 
-"@ionic/react-router@^5.0.7":
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/@ionic/react-router/-/react-router-5.5.0.tgz#0e6d4642d04ec0fdde974ea09aa251b6f41af21e"
-  integrity sha512-iIJ/vdTZo9I1JQ1dzVGXcU1iLav4XmmWBwXkwr+ohQwmNWlsOxGMQ2LCIc/59uhDElZ75YqkvJlcd0P1PSF7mw==
+"@ionic/react-router@^5.5.2":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@ionic/react-router/-/react-router-5.5.2.tgz#93b85c69329106ff10844efb8fcc55f9059d3278"
+  integrity sha512-VJz4WA5B7X84MtcLOXIVOcrGsJFaZzFJ5Mzah+7z/M88InUwc6FoAjinFtTgmAmFbOXmGzo9lBBmzbKs86iZVQ==
   dependencies:
     tslib "*"
 
-"@ionic/react@^5.5.0":
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/@ionic/react/-/react-5.5.0.tgz#35b85af666cfda2c541855f46af2dc797e38cab6"
-  integrity sha512-VVw6IZgD+tR2NFq79r+z07qkBQ+NCnS+AhiAphlL4REjm38LcUheqdGPumdG6rHf/H9VAJM1E+F2LJBYgBU6Lw==
+"@ionic/react@^5.5.2":
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/@ionic/react/-/react-5.5.2.tgz#18dc56ec75d9dcee765c30028e265661e04a191e"
+  integrity sha512-PNcpjNlNwCjsGQQmrF6QeDzEIOKuCzq4B0QYK1M+uWZQuGD869Nfr/66+ZfMoihjBrry692sjtELMJpIl9FHXQ==
   dependencies:
-    "@ionic/core" "5.5.0"
+    "@ionic/core" "5.5.2"
     ionicons "^5.1.2"
     tslib "*"
 
