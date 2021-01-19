@@ -1,5 +1,5 @@
 import React from 'react';
-import './HomePostView.css';
+import './HomePostView.scss';
 import { IonContent } from '@ionic/react';
 import PostContainer from '../components/PostContainer';
 

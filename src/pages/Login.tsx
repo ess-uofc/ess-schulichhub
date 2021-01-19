@@ -13,7 +13,7 @@ import {
     IonRouterLink,
     IonIcon,
 } from '@ionic/react';
-import './Login.css';
+import './Login.scss';
 import User from '../Models/User';
 
 /**

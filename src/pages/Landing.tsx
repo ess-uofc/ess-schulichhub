@@ -1,31 +1,43 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonIcon } from '@ionic/react';
+import {
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonButton,
+    IonIcon,
+} from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
-import './Tab2.css';
+import './Landing.scss';
 
-const Tab2: React.FC = () => {
+const Tab1: React.FC = () => {
     return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
                     <IonButtons slot="start">
                         <IonMenuButton auto-hide="false">
-                            <IonIcon name="reorder-three-outline"></IonIcon>
+                            <IonButton>
+                                <IonIcon name="reorder-three-outline"></IonIcon>
+                            </IonButton>
                         </IonMenuButton>
                     </IonButtons>
-                    <IonTitle>Tab 2</IonTitle>
+                    <IonTitle>Landing</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
                 <IonHeader collapse="condense">
                     <IonToolbar>
-                        <IonTitle size="large">Tab 2</IonTitle>
+                        <IonTitle size="large">Landing</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <ExploreContainer name="Tab 2 page" />
+                <ExploreContainer name="Landing page, Ratik says hello!" />
             </IonContent>
         </IonPage>
     );
 };
 
-export default Tab2;
+export default Tab1;

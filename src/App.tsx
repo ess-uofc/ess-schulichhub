@@ -14,10 +14,8 @@ import {
     IonItem,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipseOutline, squareOutline, triangleOutline, homeOutline, logInOutline } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { homeOutline, logInOutline } from 'ionicons/icons';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import RegisterLanding from './pages/RegisterLanding';
@@ -40,7 +38,7 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 /* Theme variables */
-import './theme/variables.css';
+import './theme/variables.scss';
 
 const App: React.FC = () => (
     <IonApp>
@@ -53,6 +51,10 @@ const App: React.FC = () => (
                 </IonHeader>
                 <IonContent>
                     <IonList>
+                        <IonItem routerLink="/Landing">
+                            <IonIcon icon={homeOutline} size="small" class="ion-padding"></IonIcon>
+                            <IonLabel>Landing (Dev)</IonLabel>
+                        </IonItem>
                         <IonItem routerLink="/Home">
                             <IonIcon icon={homeOutline} size="small" class="ion-padding"></IonIcon>
                             <IonLabel>Home</IonLabel>
@@ -61,32 +63,18 @@ const App: React.FC = () => (
                             <IonIcon icon={logInOutline} size="small" class="ion-padding"></IonIcon>
                             <IonLabel>Login</IonLabel>
                         </IonItem>
-                        <IonItem routerLink="/tab1">
-                            <IonIcon icon={ellipseOutline} size="small" class="ion-padding"></IonIcon>
-                            <IonLabel>Tab 1</IonLabel>
-                        </IonItem>
-                        <IonItem routerLink="/tab2">
-                            <IonIcon icon={squareOutline} size="small" class="ion-padding"></IonIcon>
-                            <IonLabel>Tab 2</IonLabel>
-                        </IonItem>
-                        <IonItem routerLink="/tab3">
-                            <IonIcon icon={triangleOutline} size="small" class="ion-padding"></IonIcon>
-                            <IonLabel>Tab 3</IonLabel>
-                        </IonItem>
                     </IonList>
                 </IonContent>
             </IonMenu>
         </div>
         <IonReactRouter>
             <IonRouterOutlet id="main">
-                <Route path="/tab1" component={Tab1} exact={true} />
-                <Route path="/tab2" component={Tab2} exact={true} />
-                <Route path="/tab3" component={Tab3} />
+                <Route path="/landing" component={Landing} />
                 <Route path="/home" component={Home} />
                 <Route path="/login" component={Login} exact={true} />
                 <Route path="/register" component={RegisterLanding} exact={true} />
-                <Route path="/emailregister" component={RegisterForm} exact={true} />
-                <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+                <Route path="/emailRegister" component={RegisterForm} exact={true} />
+                <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
             </IonRouterOutlet>
         </IonReactRouter>
     </IonApp>
