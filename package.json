@@ -30,8 +30,11 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
+        "lint-check": "eslint ./src --ext .js,.jsx,.ts,.tsx",
         "lint-fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-        "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
+        "prettier-check": "prettier --check \"src/**/*.{js,ts,tsx}\"",
+        "prettier-fix": "prettier --write \"src/**/*.{js,ts,tsx}\""
+
     },
     "eslintConfig": {
         "extends": "react-app"
