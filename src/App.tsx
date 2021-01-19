@@ -12,6 +12,7 @@ import {
     IonContent,
     IonList,
     IonItem,
+    IonMenuToggle,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { homeOutline, logInOutline } from 'ionicons/icons';
@@ -68,6 +69,41 @@ const App: React.FC = () => (
             </IonMenu>
         </div>
         <IonReactRouter>
+            <div className="navBar">
+                <IonMenu side="start" content-id="main">
+                    <IonHeader>
+                        <IonToolbar>
+                            <IonTitle>Menu</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+                    <IonContent>
+                        <IonList>
+                            <IonMenuToggle>
+                                <IonItem routerLink="/Home">
+                                    <IonIcon icon={homeOutline} size="small" class="ion-padding"></IonIcon>
+                                    <IonLabel>Home</IonLabel>
+                                </IonItem>
+                                <IonItem routerLink="/login">
+                                    <IonIcon icon={logInOutline} size="small" class="ion-padding"></IonIcon>
+                                    <IonLabel>Login</IonLabel>
+                                </IonItem>
+                                <IonItem routerLink="/tab1">
+                                    <IonIcon icon={ellipseOutline} size="small" class="ion-padding"></IonIcon>
+                                    <IonLabel>Tab 1</IonLabel>
+                                </IonItem>
+                                <IonItem routerLink="/tab2">
+                                    <IonIcon icon={squareOutline} size="small" class="ion-padding"></IonIcon>
+                                    <IonLabel>Tab 2</IonLabel>
+                                </IonItem>
+                                <IonItem routerLink="/tab3">
+                                    <IonIcon icon={triangleOutline} size="small" class="ion-padding"></IonIcon>
+                                    <IonLabel>Tab 3</IonLabel>
+                                </IonItem>
+                            </IonMenuToggle>
+                        </IonList>
+                    </IonContent>
+                </IonMenu>
+            </div>
             <IonRouterOutlet id="main">
                 <Route path="/landing" component={Landing} />
                 <Route path="/home" component={Home} />
