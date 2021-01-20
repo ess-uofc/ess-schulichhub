@@ -1,5 +1,6 @@
 import React from 'react';
 import './ExploreContainer.scss';
+import { IonItemDivider } from '@ionic/react';
 
 interface ContainerProps {
     name: string;

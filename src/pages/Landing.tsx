@@ -9,8 +9,10 @@ import {
     IonMenuButton,
     IonButton,
     IonIcon,
+    IonItemDivider,
+    IonImg,
 } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import './Landing.scss';
 
 const Tab1: React.FC = () => {
@@ -34,7 +36,10 @@ const Tab1: React.FC = () => {
                         <IonTitle size="large">Landing</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <ExploreContainer name="Landing page, Ratik says hello!" />
+                <div className="weTried">Video Placeholder</div>
+                <h2 className="hubLogoText">LG SchulichHub</h2>
+                <IonItemDivider className="footerRule" color="secondary" />
+                <p className="copyRight">© ESS Schulich School of Engineering U of C, 2020</p>
             </IonContent>
         </IonPage>
     );
