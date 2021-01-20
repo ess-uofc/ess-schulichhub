@@ -1437,6 +1437,13 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@ionic-native/youtube-video-player@^5.30.0":
+  version "5.30.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/youtube-video-player/-/youtube-video-player-5.30.0.tgz#2444d23c7dc08b918091c70180f8df821400eb57"
+  integrity sha512-+AfSCWLbZt6xMf8ZMtB4zSthhISlfza2Ui7fuxS92ega/Lzzq2xxKs36B2kM1QNYVtGLTVOO0J2Tb46A9HUCMA==
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic/core@5.5.2":
   version "5.5.2"
   resolved "https://registry.yarnpkg.com/@ionic/core/-/core-5.5.2.tgz#6a2107236ca69c149d55ac99a9aa0ca716e973de"
@@ -2016,6 +2023,11 @@
   integrity sha512-Pzh9O3sTK8V6I1olsXpCfj2k/ygO2q1X0vhhnDrEQyYLHZesWz+zMZMVcwXLCYf0U36EtmyYaFGPfXlTtDHe3A==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/cordova@latest":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/cordova/-/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
+  integrity sha1-6nrd907Ow9dimCegw54smt3HPQQ=
 
 "@types/duplexify@^3.6.0":
   version "3.6.0"
@@ -4060,6 +4072,11 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
+
+cordova-plugin-youtube-video-player@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-youtube-video-player/-/cordova-plugin-youtube-video-player-2.4.0.tgz#95bc526fa9da6264f74ab670678767aad7423eb1"
+  integrity sha512-j4//ijoZkkvbU9ryb+bPQLTYrvmOLVyrpbQiwaHHHUv4MVsaTr6hkJEKu1uTUPFI4W1sorlkwO51C32hwhJrzg==
 
 core-js-compat@^3.6.2, core-js-compat@^3.7.0:
   version "3.7.0"
