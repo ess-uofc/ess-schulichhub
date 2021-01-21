@@ -10,6 +10,7 @@ import {
     IonButton,
     IonIcon,
     IonItemDivider,
+    IonText,
 } from '@ionic/react';
 import './Landing.scss';
 
@@ -34,10 +35,10 @@ const Tab1: React.FC = () => {
                         <IonTitle size="large">Landing</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <div className="VideoPlaceholder">Video Placeholder</div>
-                <h2 className="hubLogoText">LG SchulichHub</h2>
+                <IonItemDivider className="VideoPlaceholder">Video Placeholder</IonItemDivider>
+                <IonText className="hubLogoText">LG SchulichHub</IonText>
                 <IonItemDivider className="footerRule" color="secondary" />
-                <p className="copyRight">© ESS Schulich School of Engineering U of C, 2020</p>
+                <IonText className="copyRight">© ESS Schulich School of Engineering U of C, 2020</IonText>
             </IonContent>
         </IonPage>
     );
