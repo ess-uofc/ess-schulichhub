@@ -34,7 +34,7 @@ const Tab1: React.FC = () => {
                         <IonTitle size="large">Landing</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <div className="weTried">Video Placeholder</div>
+                <div className="VideoPlaceholder">Video Placeholder</div>
                 <h2 className="hubLogoText">LG SchulichHub</h2>
                 <IonItemDivider className="footerRule" color="secondary" />
                 <p className="copyRight">© ESS Schulich School of Engineering U of C, 2020</p>
