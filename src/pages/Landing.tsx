@@ -10,9 +10,7 @@ import {
     IonButton,
     IonIcon,
     IonItemDivider,
-    IonImg,
 } from '@ionic/react';
-import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 import './Landing.scss';
 
 const Tab1: React.FC = () => {
