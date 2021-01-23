@@ -7,6 +7,7 @@ import {
     IonCardSubtitle,
     IonCardContent,
     IonIcon,
+    IonImg,
     IonButton,
 } from '@ionic/react';
 import { ellipsisVerticalOutline } from 'ionicons/icons';
@@ -19,20 +20,14 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     return (
         <IonCard>
             <IonCardHeader>
-                <div className="postInfo">
-                    <div className="image">
-                        <div className="imageDiv"></div>
-                    </div>
-                    <div className="text">
-                        <IonCardTitle>{props.StudentName}</IonCardTitle>
-                        <IonCardSubtitle>University of Calgary - 1 Day ago</IonCardSubtitle>
-                    </div>
-                    <div className="actions">
-                        <IonButton className="moreButton" href="/home">
-                            <IonIcon icon={ellipsisVerticalOutline} />
-                        </IonButton>
-                    </div>
-                </div>
+                <IonImg className="image"></IonImg>
+
+                <IonCardTitle className="postInfo text">{props.StudentName}</IonCardTitle>
+                <IonCardSubtitle className="postInfo text">University of Calgary - 1 Day ago</IonCardSubtitle>
+
+                <IonButton className="moreButton actions" href="/home">
+                    <IonIcon icon={ellipsisVerticalOutline} />
+                </IonButton>
             </IonCardHeader>
             <IonCardContent>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut mauris purus. Nunc ut lorem nec est
