@@ -1,0 +1,32 @@
+.singlePost {
+    height: 80vh;
+}
+
+.subjectChip {
+    float: left;
+    border-radius: 3%;
+    order: 12;
+}
+
+.postAvatar {
+    background-color: black;
+    margin-right: 1em;
+    order: 1;
+}
+
+.postName {
+    order: 2;
+    text-align: left;
+    flex-grow: 5;
+}
+
+.postDescription {
+    text-align: left;
+    order: 6;
+}
+
+.postInfo {
+    display: flex;
+    flex-flow: row wrap;
+    flex-direction: row;
+}
