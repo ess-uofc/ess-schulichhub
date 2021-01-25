@@ -1,0 +1,37 @@
+import { IonButton, IonInput, IonItem, IonList, IonText } from '@ionic/react';
+import React, { ReactElement, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment, incrementByAmount, incrementAsync, selectCount } from './counterSlice';
+import './Counter.scss';
+
+/**
+ * Counter is a simple example to base any future redux-dependent work off of.
+ * This should not be used in production
+ */
+export function Counter(): ReactElement {
+    const count = useSelector(selectCount);
+    const dispatch = useDispatch();
+    const [incrementAmount, setIncrementAmount] = useState<string>('2');
+
+    return (
+        <IonList className="counterList">
+            <IonItem className="counterText">
+                <IonButton onClick={() => dispatch(increment())}>+</IonButton>
+                <IonText>{count}</IonText>
+                <IonButton onClick={() => dispatch(decrement())}>-</IonButton>
+            </IonItem>
+            <IonItem>
+                <IonInput
+                    value={incrementAmount}
+                    onIonChange={(e) => setIncrementAmount(e.detail.value || '1')}
+                    clearInput={true}
+                    size={2}
+                />
+                <IonButton onClick={() => dispatch(incrementByAmount(Number(incrementAmount) || 0))}>
+                    Add Amount
+                </IonButton>
+                <IonButton onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}>Add Async</IonButton>
+            </IonItem>
+        </IonList>
+    );
+}
