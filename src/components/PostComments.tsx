@@ -1,3 +1,4 @@
+import React from 'react';
 import './PostComments.scss';
 import { IonList, IonItem, IonLabel, IonListHeader, IonAvatar, IonText } from '@ionic/react';
 
