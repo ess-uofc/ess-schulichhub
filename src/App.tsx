@@ -15,7 +15,7 @@ import {
     IonMenuToggle,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipseOutline, homeOutline, logInOutline } from 'ionicons/icons';
+import { ellipseOutline, homeOutline, logInOutline, logOutOutline } from 'ionicons/icons';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -45,9 +45,6 @@ import app from './Models/firebase';
 import User from './Models/User';
 
 const App: React.FC = () => {
-    const history = useHistory();
-    const user = app.auth().currentUser;
-
     /**
      * @author Mohamad Abdel Rida
      * Redirects user to login page
@@ -58,8 +55,15 @@ const App: React.FC = () => {
             : console.log('Already on log in page');
     }
 
+    /**
+     * @author Mohamad Abdel Rida
+     * Redirects user to login page
+     */
+    function redirectToHome() {
+        window.location.pathname !== '/home' ? (window.location.href = '/home') : console.log('Already on home page');
+    }
+
     useEffect(() => {
-        !user ? redirectToLogin() : console.log('User Logged in');
         app.auth().onAuthStateChanged((user) => {
             /**
              * @author Mohamad Rida
@@ -69,6 +73,7 @@ const App: React.FC = () => {
              */
             if (user) {
                 console.log(user);
+                redirectToHome();
                 // Redirect User here if they are logged in
                 // window.history.replaceState({},'','/home')
             } else {
@@ -76,7 +81,7 @@ const App: React.FC = () => {
                 redirectToLogin();
             }
         });
-    });
+    }, []);
     return (
         <IonApp>
             <IonReactRouter>
@@ -93,17 +98,13 @@ const App: React.FC = () => {
                                     <IonIcon icon={homeOutline} size="small" class="ion-padding"></IonIcon>
                                     <IonLabel>Home</IonLabel>
                                 </IonItem>
-                                <IonItem routerLink="/login">
-                                    <IonIcon icon={logInOutline} size="small" class="ion-padding"></IonIcon>
-                                    <IonLabel>Login</IonLabel>
-                                </IonItem>
                                 <IonItem routerLink="/landing">
                                     <IonIcon icon={ellipseOutline} size="small" class="ion-padding"></IonIcon>
                                     <IonLabel>Landing</IonLabel>
                                 </IonItem>
                                 <IonItem onClick={() => User.signOut()}>
-                                    <IonIcon icon={ellipseOutline} size="small" class="ion-padding"></IonIcon>
-                                    <IonLabel>Landing</IonLabel>
+                                    <IonIcon icon={logOutOutline} size="small" class="ion-padding"></IonIcon>
+                                    <IonLabel>Sign Out</IonLabel>
                                 </IonItem>
                             </IonMenuToggle>
                         </IonList>
