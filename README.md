@@ -7,7 +7,8 @@ Source code behind the development of the SchulichHub created by the Engineering
 Link to live website: [hub.essucalgary.com](https://hub.essucalgary.com)
 
 ### Built With
-- [Ionic React](https://ionicframework.com)
+
+-   [Ionic React](https://ionicframework.com)
 
 ## Prerequisites
 

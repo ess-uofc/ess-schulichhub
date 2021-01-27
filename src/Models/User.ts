@@ -109,7 +109,7 @@ export default class User {
      * adds user information to FireStore
      * @return returns User object if successful otherwise null
      */
-    static async signUp(
+    public static async signUp(
         firstName: string,
         lastName: string,
         email: string,
@@ -128,14 +128,28 @@ export default class User {
             console.log(e);
         }
     }
-
+    /**
+     * @author Mohamad Abdel Rida
+     * This method is to be called when a user
+     * wishes to sign out from the application.
+     * Can be called as a static on the User class
+     *
+     */
+    public static async signOut() {
+        try {
+            const res = await app.auth().signOut();
+            console.log(res);
+        } catch (e) {
+            console.log(e);
+        }
+    }
     /**
      * @param email:user's email
      * @param password:user's password
      * logs user in
      * @return User object if successful otherwise null
      */
-    static async login(email: string, password: string): Promise<User | undefined> {
+    public static async login(email: string, password: string): Promise<User | undefined> {
         try {
             const res = await app.auth().signInWithEmailAndPassword(email, password);
             if (res.user) {
