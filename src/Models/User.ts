@@ -135,7 +135,7 @@ export default class User {
      * Can be called as a static on the User class
      *
      */
-    public static async signOut() {
+    public static async signOut():Promise<void> {
         try {
             const res = await app.auth().signOut();
             console.log(res);
