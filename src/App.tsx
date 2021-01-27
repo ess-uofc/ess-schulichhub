@@ -53,7 +53,9 @@ const App: React.FC = () => {
      * Redirects user to login page
      */
     function redirectToLogin() {
-        window.location.href = '/login';
+        window.location.pathname !== '/login'
+            ? (window.location.href = '/login')
+            : console.log('Already on log in page');
     }
 
     useEffect(() => {
@@ -71,7 +73,7 @@ const App: React.FC = () => {
                 // window.history.replaceState({},'','/home')
             } else {
                 console.log('Redirecting User');
-                window.location.pathname !== '/login' ? redirectToLogin() : console.log('Already on Login Screen');
+                redirectToLogin();
             }
         });
     });
