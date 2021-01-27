@@ -60,7 +60,7 @@ const App: React.FC = () => {
      * Redirects user to login page
      */
     function redirectToHome() {
-        window.location.pathname !== '/home' ? (window.location.href = '/home') : console.log('Already on home page');
+        window.location.pathname === '/login' ? (window.location.href = '/home') : console.log('Already on home page');
     }
 
     useEffect(() => {
