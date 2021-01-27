@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect, Route, useHistory } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import {
     IonApp,
     IonIcon,
@@ -15,7 +15,7 @@ import {
     IonMenuToggle,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipseOutline, homeOutline, logInOutline, logOutOutline } from 'ionicons/icons';
+import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Home from './pages/Home';
