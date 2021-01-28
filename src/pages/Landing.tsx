@@ -16,7 +16,7 @@ import './Landing.scss';
 import LandingFeatureBox from '../components/LandingFeatureBox';
 import LandingRegisterPrompt from '../components/LandingRegisterPrompt';
 
-const Tab1: React.FC = () => {
+const Landing: React.FC = () => {
     return (
         <IonPage>
             <IonHeader>
@@ -48,4 +48,4 @@ const Tab1: React.FC = () => {
     );
 };
 
-export default Tab1;
+export default Landing;
