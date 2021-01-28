@@ -9,13 +9,20 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v1
+            - uses: creyD/prettier_action@v3.1
               with:
+                  prettier_options: --write .
                   path: node_modules
                   key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+                  ref: ${{ github.head_ref }}
                   restore-keys: |
                       ${{ runner.OS }}-build-${{ env.cache-name }}-
                       ${{ runner.OS }}-build-
                       ${{ runner.OS }}-
+              name: Prettify code
+              # This part is also where you can pass other options, for example:  
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Yarn install
               run: yarn install
             - name: ESLint checker
