@@ -22,7 +22,7 @@ import Home from './pages/Home';
 import RegisterLanding from './pages/RegisterLanding';
 import RegisterForm from './pages/RegisterForm';
 import Post from './pages/Post';
-
+import { redirectAfterAuthEvent } from './app/routing';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -45,24 +45,6 @@ import app from './Models/firebase';
 import User from './Models/User';
 
 const App: React.FC = () => {
-    /**
-     * @author Mohamad Abdel Rida
-     * Redirects user to login page
-     */
-    function redirectToLogin() {
-        window.location.pathname !== '/login'
-            ? (window.location.href = '/login')
-            : console.log('Already on log in page');
-    }
-
-    /**
-     * @author Mohamad Abdel Rida
-     * Redirects user to login page
-     */
-    function redirectToHome() {
-        window.location.pathname === '/login' ? (window.location.href = '/home') : console.log('Already on home page');
-    }
-
     useEffect(() => {
         app.auth().onAuthStateChanged((user) => {
             /**
@@ -73,12 +55,10 @@ const App: React.FC = () => {
              */
             if (user) {
                 console.log(user);
-                redirectToHome();
-                // Redirect User here if they are logged in
-                // window.history.replaceState({},'','/home')
+                redirectAfterAuthEvent('/home');
             } else {
                 console.log('Redirecting User');
-                redirectToLogin();
+                redirectAfterAuthEvent('/login');
             }
         });
     }, []);

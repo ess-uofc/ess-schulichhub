@@ -15,6 +15,7 @@ import {
 } from '@ionic/react';
 import './Login.scss';
 import User from '../Models/User';
+import { redirectAfterAuthEvent } from '../app/routing';
 
 /**
  * @author Carter Zimmer
@@ -24,7 +25,7 @@ import User from '../Models/User';
 async function handleSubmit(email: string, password: string) {
     if (await User.login(email, password)) {
         alert('login success');
-        window.history.replaceState({}, '', '/home'); //TODO Redirect use to the homepage
+        redirectAfterAuthEvent('/home'); //TODO Redirect use to the homepage
     } else {
         alert('login failed');
     }
