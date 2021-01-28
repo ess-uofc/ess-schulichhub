@@ -1,3 +1,4 @@
+<<<<<<< refs/remotes/origin/feat/dennis/landing
 <<<<<<< main
 .VideoPlaceholder {
     margin: auto;
@@ -140,13 +141,16 @@
 }
 =======
 .VideoPlaceholder{
+=======
+.VideoPlaceholder {
+>>>>>>> Added a component
     margin: auto;
-    width:50%;
+    width: 50%;
     height: 60%;
     background-color: #999999;
 }
 
-.ImagePlaceHolder{
+.ImagePlaceHolder {
     margin: auto;
     margin-top: 25px;
     width: 100%;
@@ -154,8 +158,8 @@
     background-color: #999999;
 }
 
-.FeatureBoxLeft{
-    float:left;
+.FeatureBoxLeft {
+    float: left;
     margin-top: 25px;
     margin-left: 25%;
     padding-right: 1%;
@@ -165,7 +169,7 @@
     --background: rgba(0, 0, 0, 0);
 }
 
-.FeatureBoxRight{
+.FeatureBoxRight {
     display: flex;
     margin-top: 25px;
     margin-left: 50%;
@@ -176,34 +180,34 @@
     --background: rgba(0, 0, 0, 0);
 }
 
-.FeatureTitle{
+.FeatureTitle {
     display: flex;
     font-size: 20px;
 }
-.FeatureDesc{
+.FeatureDesc {
     font-size: 15px;
 }
 
-.ListBackRight{
+.ListBackRight {
     margin-top: 35px;
     background-color: rgba(0, 0, 0, 0);
 }
 
-.ListBackLeft{
+.ListBackLeft {
     margin-bottom: 15px;
     background-color: rgba(0, 0, 0, 0);
 }
 
-.ItemBackground{
+.ItemBackground {
     --background: rgba(0, 0, 0, 0);
 }
 
-.RegisterTextSpot{
+.RegisterTextSpot {
     --background: rgba(0, 0, 0, 0);
-    width:50%;
+    width: 50%;
 }
 
-.RegisterPrompt{
+.RegisterPrompt {
     margin-left: 25%;
     padding-top: 100px;
     padding-bottom: 100px;
@@ -211,17 +215,16 @@
     background-color: rgba(0, 0, 0, 0);
 }
 
-.RegisterPromptText{
+.RegisterPromptText {
     font-size: 20px;
 }
 
-.RegisterPromptButton{
+.RegisterPromptButton {
     margin-left: 15px;
     width: 10%;
     height: 40px;
     font-size: 15px;
 }
-
 
 .hubLogoText {
     display: flex;
@@ -232,7 +235,6 @@
     padding-top: 10px;
     padding-left: 3px;
     padding-bottom: 5px;
-
 }
 
 .footerRule {
@@ -240,7 +242,6 @@
     margin-bottom: 25px;
     min-height: 1px;
 }
->>>>>>> Auto stash before merge of "main" and "origin/main"
 
 .VideoPlaceholder {
     margin: auto;
