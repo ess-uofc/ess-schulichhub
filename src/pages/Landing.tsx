@@ -13,6 +13,8 @@ import {
     IonText,
 } from '@ionic/react';
 import './Landing.scss';
+import LandingFeatureBox from '../components/LandingFeatureBox';
+import LandingRegisterPrompt from '../components/LandingRegisterPrompt';
 
 const Tab1: React.FC = () => {
     return (
@@ -36,6 +38,8 @@ const Tab1: React.FC = () => {
                     </IonToolbar>
                 </IonHeader>
                 <IonItemDivider className="VideoPlaceholder">Video Placeholder</IonItemDivider>
+                <LandingFeatureBox />
+                <LandingRegisterPrompt />
                 <IonText className="hubLogoText">LG SchulichHub</IonText>
                 <IonItemDivider className="footerRule" color="secondary" />
                 <IonText className="copyRight">© ESS Schulich School of Engineering U of C, 2020</IonText>
