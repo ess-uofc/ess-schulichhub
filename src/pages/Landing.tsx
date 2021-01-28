@@ -15,6 +15,7 @@ import {
 import './Landing.scss';
 import LandingFeatureBox from '../components/LandingFeatureBox';
 import LandingRegisterPrompt from '../components/LandingRegisterPrompt';
+import LandingInfo from '../components/LandingInfo';
 
 const Landing: React.FC = () => {
     return (
@@ -38,6 +39,7 @@ const Landing: React.FC = () => {
                     </IonToolbar>
                 </IonHeader>
                 <IonItemDivider className="VideoPlaceholder">Video Placeholder</IonItemDivider>
+                <LandingInfo />
                 <LandingFeatureBox />
                 <LandingRegisterPrompt />
                 <IonText className="hubLogoText">LG SchulichHub</IonText>
