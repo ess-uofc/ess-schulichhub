@@ -20,7 +20,7 @@ module.exports = {
     ],
     rules: {
         'prettier/prettier': [
-            'error',
+            'warn',
             {
                 endOfLine: 'auto',
                 // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
