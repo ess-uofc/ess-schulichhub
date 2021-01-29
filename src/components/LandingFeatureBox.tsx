@@ -1,45 +1,36 @@
 import React from 'react';
-import { IonItemDivider, IonText, IonItem, IonList } from '@ionic/react';
+import { IonButton, IonGrid, IonRow, IonCol, IonText, IonHeader, IonImg } from '@ionic/react';
 import '../pages/Landing.scss';
+import './LandingInfo.scss';
 
 const LandingFeatureBox: React.FC = () => {
     return (
-        <>
-            <IonItem className="FeatureBoxLeft" lines="none">
-                <IonItemDivider className="ImagePlaceHolder"></IonItemDivider>
-            </IonItem>
-            <IonItem className="FeatureBoxRight" lines="none">
-                <IonList className="ListBackLeft" color="secondary" lines="none">
-                    <IonItem className="ItemBackground">
-                        <IonText className="FeatureTitle">Get Special ESS Perks!</IonText>
-                    </IonItem>
-                    <IonItem className="ItemBackground">
-                        <IonText className="FeatureDesc">
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,sed quia
-                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.Neque porroquisquam
-                            est, qui dolorem.
-                        </IonText>
-                    </IonItem>
-                </IonList>
-            </IonItem>
-            <IonItem className="FeatureBoxLeft" lines="none">
-                <IonList className="ListBackRight" lines="none">
-                    <IonItem className="ItemBackground">
-                        <IonText className="FeatureTitle">Get Special ESS Perks!</IonText>
-                    </IonItem>
-                    <IonItem className="ItemBackground">
-                        <IonText>
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,sed quia
-                            consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.Neque porro quisquam
-                            est, qui dolorem.
-                        </IonText>
-                    </IonItem>
-                </IonList>
-            </IonItem>
-            <IonItem className="FeatureBoxRight" lines="none">
-                <IonItemDivider className="ImagePlaceHolder"></IonItemDivider>
-            </IonItem>
-        </>
+        <IonGrid>
+            <IonRow>
+                <IonCol>
+                    <IonImg className="placeholderBlock" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
+                </IonCol>
+                <IonCol>
+                    <IonHeader className="ion-margin">Get Special ESS Perks!</IonHeader>
+                    <IonText className="ion-margin">
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,sed quia consequuntur
+                        magni dolores eos qui ratione voluptatem sequi nesciunt.Neque porroquisquam est, qui dolorem.
+                    </IonText>
+                </IonCol>
+            </IonRow>
+            <IonRow>
+                <IonCol>
+                    <IonHeader className="ion-margin">Get Special ESS Perks!</IonHeader>
+                    <IonText className="ion-margin">
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit,sed quia consequuntur
+                        magni dolores eos qui ratione voluptatem sequi nesciunt.Neque porroquisquam est, qui dolorem.
+                    </IonText>
+                </IonCol>
+                <IonCol>
+                    <IonImg className="placeholderBlock" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
+                </IonCol>
+            </IonRow>
+        </IonGrid>
     );
 };
 
