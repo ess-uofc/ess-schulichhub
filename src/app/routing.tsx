@@ -1,4 +1,4 @@
-const unAuthedRoutes = ['/landing','/login', '/register', '/emailregister', '/passwordreset'];
+const unAuthedRoutes = ['/landing', '/login', '/register', '/emailregister', '/passwordreset'];
 
 /**
  * @author Mohamad Abdel Rida
@@ -6,7 +6,9 @@ const unAuthedRoutes = ['/landing','/login', '/register', '/emailregister', '/pa
  */
 export function redirectAfterAuthEvent(target: string): void {
     if (target == '/login') {
-        !unAuthedRoutes.includes(window.location.pathname) ? (location.href = target) : console.log('Already at target');
+        !unAuthedRoutes.includes(window.location.pathname)
+            ? (location.href = target)
+            : console.log('Already at target');
     } else {
         unAuthedRoutes.includes(window.location.pathname) ? (location.href = target) : console.log('Already at target');
     }
