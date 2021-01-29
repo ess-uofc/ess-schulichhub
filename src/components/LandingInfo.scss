@@ -5,9 +5,11 @@
 }
 
 .placeholderBlock {
-    display: inline-block;
-    margin: 30px;
+    width: 240px;
+    height: 240px;
+}
+
+.learnMore {
+    display: block;
     width: 20%;
-    height: 100px;
-    background-color: #999999;
 }
