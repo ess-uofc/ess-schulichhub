@@ -15,7 +15,7 @@ import {
 } from '@ionic/react';
 import './Login.scss';
 import User from '../Models/User';
-import { redirectAfterAuthEvent } from '../app/routing';
+import redirectAfterAuthEvent from '../app/routing';
 
 /**
  * @author Carter Zimmer
