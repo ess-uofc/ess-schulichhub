@@ -7,9 +7,7 @@ jobs:
     build_and_preview:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
             - uses: actions/cache@v1
-            - uses: actions/checkout@v2
               with:
                   path: node_modules
                   key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
@@ -18,11 +16,11 @@ jobs:
                       ${{ runner.OS }}-build-
                       ${{ runner.OS }}-
             - name: Checkout
-            - uses: actions/checkout@v2
+              uses: actions/checkout@v2
               with:
                   ref: ${{ github.head_ref }}
             - name: Prettify code
-            - uses: creyD/prettier_action@v3.1
+              uses: creyD/prettier_action@v3.1
               with:
                   prettier_options: --write .
               env:
