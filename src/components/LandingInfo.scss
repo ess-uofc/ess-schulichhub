@@ -1,6 +1,12 @@
 .learnMore {
     display: block;
     width: 20%;
+    --background: transparent;
+    --color: #d50000;
+    --border-style: solid;
+    --border-color: #d50000;
+    --border-width: 2px;
+    --border-radius: 5px;
 }
 
 .landingParagraphs {
