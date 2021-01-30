@@ -21,7 +21,8 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import RegisterLanding from './pages/RegisterLanding';
 import RegisterForm from './pages/RegisterForm';
-import Post from './pages/Post';
+import PostView from './pages/PostView';
+
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -94,7 +95,7 @@ const App: React.FC = () => {
                 <IonRouterOutlet id="main">
                     <Route path="/landing" component={Landing} />
                     <Route path="/home" component={Home} />
-                    <Route path="/post" component={Post} />
+                    <Route path="/post" component={PostView} />
                     <Route path="/login" component={Login} exact={true} />
                     <Route path="/register" component={RegisterLanding} exact={true} />
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
