@@ -1,16 +1,17 @@
 import React from 'react';
 import {
-    IonContent,
-    IonHeader,
     IonPage,
-    IonTitle,
+    IonContent,
     IonToolbar,
-    IonButtons,
+    IonTitle,
+    IonHeader,
     IonMenuButton,
+    IonButtons,
     IonButton,
     IonIcon,
-    IonItemDivider,
     IonText,
+    IonItem,
+    IonImg,
 } from '@ionic/react';
 import './Landing.scss';
 import LandingFeatureBox from '../components/LandingFeatureBox';
@@ -38,13 +39,15 @@ const Landing: React.FC = () => {
                         <IonTitle size="large">Landing</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <IonItemDivider className="VideoPlaceholder">Video Placeholder</IonItemDivider>
+                <IonItem className="videoContainer" color="light">
+                    <IonImg className="videoPlaceholder" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
+                </IonItem>
                 <LandingInfo />
                 <LandingFeatureBox />
                 <LandingRegisterPrompt />
-                <IonText className="hubLogoText">LG SchulichHub</IonText>
-                <IonItemDivider className="footerRule" color="secondary" />
-                <IonText className="copyRight">© ESS Schulich School of Engineering U of C, 2020</IonText>
+                <IonText>[LOGO] SchulichHub</IonText>
+                <IonItem className="footer ion-margin" color="secondary"></IonItem>
+                <IonText>© ESS Schulich School of Engineering U of C, 2020</IonText>
             </IonContent>
         </IonPage>
     );
