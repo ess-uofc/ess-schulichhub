@@ -9,6 +9,8 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v1
+            - uses: actions/checkout@v2
+            - uses: creyD/prettier_action@v3.1
               with:
                   path: node_modules
                   key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
@@ -16,6 +18,16 @@ jobs:
                       ${{ runner.OS }}-build-${{ env.cache-name }}-
                       ${{ runner.OS }}-build-
                       ${{ runner.OS }}-
+            - name: Checkout
+              with:
+                  ref: ${{ github.head_ref }}
+            - name: Prettify code
+              with:
+                  prettier_options: --write .
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Prettify --write
+              run: yarn prettier -w .  
             - name: Yarn install
               run: yarn install
             - name: ESLint checker
