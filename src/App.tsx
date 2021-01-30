@@ -86,7 +86,7 @@ const App: React.FC = () => {
                                 <IonItem onClick={() => User.signOut()}>
                                     <IonIcon icon={logOutOutline} size="small" class="ion-padding"></IonIcon>
                                     <IonLabel>Sign Out</IonLabel>
-                                </IonItem>
+                                    </IonItem>
                             </IonMenuToggle>
                         </IonList>
                     </IonContent>
