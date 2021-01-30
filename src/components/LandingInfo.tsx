@@ -5,11 +5,13 @@ import { IonButton, IonGrid, IonRow, IonCol, IonText, IonHeader, IonImg } from '
 
 const LandingInfo: React.FC = () => {
     return (
-        <IonGrid>
+        <IonGrid className="ion-margin">
             <IonRow>
-                <IonHeader className="ion-margin">Connect with clubs and find opportunitites to get involved</IonHeader>
+                <IonHeader className="ion-margin ion-no-border">
+                    Connect with clubs and find opportunitites to get involved
+                </IonHeader>
             </IonRow>
-            <IonRow>
+            <IonRow className="ion-margin">
                 <IonCol>
                     <IonText className="ion-margin">Project Hub</IonText>
                 </IonCol>
@@ -17,23 +19,23 @@ const LandingInfo: React.FC = () => {
                     <IonText className="ion-margin">Volunteer Hub</IonText>
                 </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow className="ion-margin">
                 <IonCol>
-                    <IonText>
+                    <IonText className="landingParagraphs">
                         Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
                         consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est.
                     </IonText>
-                    <IonButton className="learnMore">Learn More</IonButton>
+                    <IonButton className="learnMore ion-margin">Learn More</IonButton>
                 </IonCol>
                 <IonCol>
-                    <IonText>
+                    <IonText className="landingParagraphs">
                         Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                         aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
                     </IonText>
-                    <IonButton className="learnMore">Learn More</IonButton>
+                    <IonButton className="learnMore ion-margin">Learn More</IonButton>
                 </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow className="ion-margin">
                 <IonCol>
                     <IonText className="ion-margin">Startup Hub</IonText>
                 </IonCol>
@@ -41,26 +43,26 @@ const LandingInfo: React.FC = () => {
                     <IonText className="ion-margin">Club Listings</IonText>
                 </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow className="ion-margin">
                 <IonCol>
-                    <IonText>
+                    <IonText className="landingParagraphs">
                         Consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
                         qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam.
                     </IonText>
-                    <IonButton className="learnMore">Learn More</IonButton>
+                    <IonButton className="learnMore ion-margin">Learn More</IonButton>
                 </IonCol>
                 <IonCol>
-                    <IonText>
+                    <IonText className="landingParagraphs">
                         Eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
                         dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.
                     </IonText>
-                    <IonButton className="learnMore">Learn More</IonButton>
+                    <IonButton className="learnMore ion-margin">Learn More</IonButton>
                 </IonCol>
             </IonRow>
-            <IonRow>
-                <IonHeader>You&apos;re in good company</IonHeader>
+            <IonRow className="ion-margin">
+                <IonHeader className="ion-margin ion-no-border">You&apos;re in good company</IonHeader>
             </IonRow>
-            <IonRow>
+            <IonRow className="ion-margin">
                 <IonCol>
                     <IonImg className="placeholderBlock" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
                 </IonCol>
@@ -74,7 +76,7 @@ const LandingInfo: React.FC = () => {
                     <IonImg className="placeholderBlock" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
                 </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow className="ion-margin">
                 <IonCol>
                     <IonImg className="placeholderBlock" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
                 </IonCol>

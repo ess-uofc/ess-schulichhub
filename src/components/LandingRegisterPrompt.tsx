@@ -5,15 +5,17 @@ import '../pages/Landing.scss';
 const LandingRegisterPrompt: React.FC = () => {
     return (
         <IonGrid className="ion-margin">
-            <IonRow>
+            <IonRow className="ion-margin">
                 <IonCol>
-                    <IonHeader>
+                    <IonHeader className="ion-margin ion-no-border">
                         There’s nothing but benefits to joining the Hub and registering your club, get started today!
                     </IonHeader>
                 </IonCol>
                 <IonCol>
-                    <IonButton href="register">Join Today</IonButton>
-                    <IonButton>Contact Us</IonButton>
+                    <IonButton className="ion-margin" href="register">
+                        Join Today
+                    </IonButton>
+                    <IonButton className="ion-margin">Contact Us</IonButton>
                 </IonCol>
             </IonRow>
         </IonGrid>
