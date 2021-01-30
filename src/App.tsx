@@ -22,7 +22,6 @@ import Home from './pages/Home';
 import RegisterLanding from './pages/RegisterLanding';
 import RegisterForm from './pages/RegisterForm';
 import Post from './pages/Post';
-import { redirectAfterAuthEvent } from './app/routing';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -43,6 +42,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.scss';
 import app from './Models/firebase';
 import User from './Models/User';
+import redirectAfterAuthEvent from './app/routing';
 
 const App: React.FC = () => {
     useEffect(() => {

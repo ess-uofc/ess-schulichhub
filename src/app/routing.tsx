@@ -1,10 +1,10 @@
-const unAuthedRoutes = ['/landing', '/login', '/register', '/emailregister', '/passwordreset'];
+export const unAuthedRoutes = ['/landing', '/login', '/register', '/emailregister', '/passwordreset'];
 
 /**
  * @author Mohamad Abdel Rida
  * Redirects user to Home/Login based on their current location page
  */
-export function redirectAfterAuthEvent(target: string): void {
+export default function redirectAfterAuthEvent(target: string): void {
     if (target == '/login') {
         !unAuthedRoutes.includes(window.location.pathname)
             ? (location.href = target)
@@ -13,4 +13,3 @@ export function redirectAfterAuthEvent(target: string): void {
         unAuthedRoutes.includes(window.location.pathname) ? (location.href = target) : console.log('Already at target');
     }
 }
-export default authRoutes;
