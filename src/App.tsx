@@ -43,7 +43,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.scss';
 import app from './Models/firebase';
 import User from './Models/User';
-import redirectAfterAuthEvent from './app/routing';
+import redirectAfterAuthEvent, { PrivateRoute } from './app/routing';
 
 const App: React.FC = () => {
     useEffect(() => {
@@ -94,7 +94,7 @@ const App: React.FC = () => {
                 </IonMenu>
                 <IonRouterOutlet id="main">
                     <Route path="/landing" component={Landing} />
-                    <Route path="/home" component={Home} />
+                    <PrivateRoute path="/home" component={Home} exact={true} />
                     <Route path="/post" component={PostView} />
                     <Route path="/login" component={Login} exact={true} />
                     <Route path="/register" component={RegisterLanding} exact={true} />
