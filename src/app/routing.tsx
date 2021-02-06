@@ -38,9 +38,8 @@ export const PrivateRoute: React.FC<{
             setIsAuthed(false);
         }
     });
-    // unsubscribe();
     console.log(isAuthed);
-    return isAuthed ? (
+    return isAuthed ?? false ? (
         <Route path={props.path} exact={props.exact} component={props.component} />
     ) : (
         <Redirect to="/login" exact={true} />
