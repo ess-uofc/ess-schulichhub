@@ -22,6 +22,7 @@ p {
 }
 .loginInputs {
     width: 20% !important;
+    min-width: 200px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 5px;
@@ -33,7 +34,9 @@ p {
 .loginButton {
     --background: #d50000;
     width: 20%;
+    min-width: 200px;
 }
 .googleLogin {
     width: 20%;
+    min-width: 200px;
 }
