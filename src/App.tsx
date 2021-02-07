@@ -43,7 +43,8 @@ import '@ionic/react/css/display.css';
 import './theme/variables.scss';
 import app from './Models/firebase';
 import User from './Models/User';
-import redirectAfterAuthEvent, { PrivateRoute } from './app/routing';
+import redirectAfterAuthEvent from './app/routing';
+import { PrivateRoute } from './components/PrivateRoute';
 
 const App: React.FC = () => {
     useEffect(() => {
