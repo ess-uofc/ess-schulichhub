@@ -21,8 +21,8 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     return (
         <IonCard>
             <IonCardHeader>
-                <IonImg className="image"></IonImg>
-                <IonButton className="moreButtonActions" href="/home">
+                <IonImg className="image" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
+                <IonButton className="moreButtonActions" href="/post">
                     <IonIcon icon={ellipsisVerticalOutline} />
                 </IonButton>
                 <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
