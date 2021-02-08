@@ -1,5 +1,15 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {
+    IonContent,
+    IonHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    IonMenuButton,
+    IonButton,
+    IonButtons,
+    IonIcon,
+} from '@ionic/react';
 import './RegisterMain.scss';
 import RegisterForm from '../components/RegisterFormComp';
 
@@ -7,15 +17,15 @@ const Tab1: React.FC = () => {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar color="light">
-                    <IonTitle className="hubLogoText">
-                        <span>LG SchulichHub</span>
-                    </IonTitle>
-                </IonToolbar>
-                <IonToolbar color="regheader">
-                    <IonTitle>
-                        <h1 className="hubRegisterHeader">Register for the Schulich Hub</h1>
-                    </IonTitle>
+                <IonToolbar className="registerToolBar">
+                    <IonButtons slot="start">
+                        <IonMenuButton auto-hide="false">
+                            <IonButton>
+                                <IonIcon name="reorder-three-outline"></IonIcon>
+                            </IonButton>
+                        </IonMenuButton>
+                    </IonButtons>
+                    <IonTitle>Register for the Schulich Hub</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
