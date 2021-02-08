@@ -22,13 +22,11 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         <IonCard>
             <IonCardHeader>
                 <IonImg className="image"></IonImg>
-
-                <IonCardTitle className="postInfo text">{props.postData.title}</IonCardTitle>
-                <IonCardSubtitle className="postInfo text">1 day ago - University of Calgary</IonCardSubtitle>
-
-                <IonButton className="moreButton actions" href="/home">
+                <IonButton className="moreButtonActions" href="/home">
                     <IonIcon icon={ellipsisVerticalOutline} />
                 </IonButton>
+                <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
+                <IonCardSubtitle className="postInfo text">1 day ago - University of Calgary </IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>{props.postData.content}</IonCardContent>
         </IonCard>
