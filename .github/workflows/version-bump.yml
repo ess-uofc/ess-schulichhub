@@ -1,26 +1,16 @@
 name: Version Bump on PR
 on:
-    pull_request_review:
+    pull_request:
         types:
-            - submitted
-        check_suite:
-            types:
-                - completed
-        status: {}
+            - opened
 jobs:
     version_bump:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - uses: actions/cache@v1
-              with:
-                  path: ./node_modules
-                  key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.OS }}-build-${{ env.cache-name }}-
-                      ${{ runner.OS }}-build-
-                      ${{ runner.OS }}-
             - name: Bump version
+              with:
+                  ref: ${{ github.event.pull_request.head.ref }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
