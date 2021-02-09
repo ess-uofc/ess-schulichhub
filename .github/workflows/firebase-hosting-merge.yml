@@ -11,18 +11,18 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - name: Create an incremental release
-              uses: aurestic/incrementarl-create-release@master
-              with:
-                  flag_branch: true
-                  message: Bump version
-                  prev_tag: 'v'
+            - name: Bump version
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git config --global user.name 'github-actions[bot]'
+                  git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+                  yarn version --patch
+                  git push
             - uses: actions/cache@v1
               with:
                   path: ./node_modules
-                  key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+                  key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
                   restore-keys: |
                       ${{ runner.OS }}-build-${{ env.cache-name }}-
                       ${{ runner.OS }}-build-
