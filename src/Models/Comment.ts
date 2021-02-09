@@ -1,3 +1,4 @@
+import { Timestamp } from './firebase';
 import User from './User';
 export default class Comment {
     /**
@@ -29,7 +30,7 @@ export default class Comment {
     ) {
         this.id = id;
         this.content = content;
-        this.timestamp = timestamp.toUTCString();
+        this.timestamp = Timestamp.now();
         this.replyTo = replyTo;
         this.user = user;
     }
