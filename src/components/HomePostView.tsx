@@ -10,7 +10,13 @@ import { DocumentData, Timestamp } from '../Models/firebase';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<Array<DocumentData>>();
     async function getPosts() {
-        const post = await FireStoreDB.query<PostDoc>('posts', 'title', '!=', '');
+        /**
+         * @author Mohamad ABdel Rida
+         * Executes a query to get posts.
+         * Gets posts that have a Timestamp
+         *
+         */
+        const post = await FireStoreDB.query<PostDoc>('posts', 'timestamp', '!=', '');
         setPosts(post);
     }
     useEffect(() => {
