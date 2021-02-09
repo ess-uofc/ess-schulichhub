@@ -1,6 +1,5 @@
 import User from './User';
-import { PostCategory } from './Enums';
-import PostAttachment from './PostAttachment';
+import { Timestamp } from '@firebase/firestore-types';
 
 /**
  * Post class for holding information about posts
@@ -9,7 +8,7 @@ import PostAttachment from './PostAttachment';
 export default class Post {
     content: string;
     title: string;
-    timestamp?: firebase.default.firestore.Timestamp;
+    timestamp?: Timestamp;
     user?: User;
 
     /**
@@ -22,7 +21,7 @@ export default class Post {
      * @param category - Category of the post
      * @param attachment - Optional attachment for the post
      */
-    constructor(title: string, content: string, timestamp?: firebase.default.firestore.Timestamp, user?: User) {
+    constructor(title: string, content: string, timestamp?: Timestamp, user?: User) {
         this.title = title;
         this.user = user;
         this.timestamp = timestamp;

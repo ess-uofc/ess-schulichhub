@@ -1,7 +1,5 @@
-import { collapseTextChangeRangesAcrossMultipleVersions, InterfaceType, TypeQueryNode } from 'typescript';
-import { PostDoc } from './DocTypes';
 import app from './firebase';
-import Post from './Post';
+import { DocumentData, WhereFilterOp,} from '@firebase/firestore-types';
 
 export default class FireStoreDB {
     /**
@@ -10,9 +8,7 @@ export default class FireStoreDB {
      */
     static db = app.firestore();
 
-    public static async fetchDoc<DocType>(
-        docID: string,
-    ): Promise<firebase.default.firestore.DocumentData | undefined | null> {
+    public static async fetchDoc<DocType>(docID: string): Promise<DocumentData | undefined | null> {
         try {
             const doc = await this.db.doc(docID).get();
             return doc.data() as DocType;
@@ -23,9 +19,9 @@ export default class FireStoreDB {
     public static async query<T>(
         collection: string,
         field: string,
-        operator: firebase.default.firestore.WhereFilterOp,
+        operator: WhereFilterOp,
         value: any,
-    ): Promise<Array<firebase.default.firestore.DocumentData>> {
+    ): Promise<Array<DocumentData>> {
         const query = await (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
             (doc) => doc.data() as T,
         );
