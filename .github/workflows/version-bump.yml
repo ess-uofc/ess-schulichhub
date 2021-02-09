@@ -12,7 +12,6 @@ jobs:
               uses: 'jrylan/github-action-reviews-counter@main'
               with:
                   repo-token: '${{ secrets.GITHUB_TOKEN }}'
-            -  # Conditionally run the next step
             - if: 'steps.reviews.outputs.approved < 2 && steps.reviews.outputs.changes_requested != 0'
               run: exit 1
             - uses: actions/checkout@v2
