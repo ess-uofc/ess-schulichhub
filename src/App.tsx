@@ -45,6 +45,7 @@ import app from './Models/firebase';
 import User from './Models/User';
 import redirectAfterAuthEvent from './app/routing';
 import { PrivateRoute } from './components/PrivateRoute';
+import WritePost from './pages/WritePost';
 
 const App: React.FC = () => {
     useEffect(() => {
@@ -100,6 +101,7 @@ const App: React.FC = () => {
                     <Route path="/login" component={Login} exact={true} />
                     <Route path="/register" component={RegisterLanding} exact={true} />
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
+                    <Route path="/writePost" component={WritePost} exact={true} />
                     <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
                 </IonRouterOutlet>
             </IonReactRouter>
