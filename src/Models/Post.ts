@@ -9,9 +9,7 @@ import PostAttachment from './PostAttachment';
 export default class Post {
     content: string;
     title: string;
-    timestamp: number;
-    category: PostCategory;
-    attachment?: PostAttachment;
+    timestamp?: firebase.default.firestore.Timestamp;
     user?: User;
 
     /**
@@ -24,14 +22,7 @@ export default class Post {
      * @param category - Category of the post
      * @param attachment - Optional attachment for the post
      */
-    constructor(
-        title: string,
-        content: string,
-        timestamp: number,
-        category: PostCategory,
-        user?: User,
-        attachment?: PostAttachment,
-    ) {
+    constructor(title: string, content: string, timestamp?: firebase.default.firestore.Timestamp, user?: User) {
         this.title = title;
         this.user = user;
         this.timestamp = timestamp;

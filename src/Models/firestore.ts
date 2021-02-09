@@ -1,5 +1,7 @@
 import { collapseTextChangeRangesAcrossMultipleVersions, InterfaceType, TypeQueryNode } from 'typescript';
+import { PostDoc } from './DocTypes';
 import app from './firebase';
+import Post from './Post';
 
 export default class FireStoreDB {
     /**
@@ -18,13 +20,15 @@ export default class FireStoreDB {
             return null;
         }
     }
-    public static async query(
+    public static async query<T>(
         collection: string,
         field: string,
         operator: firebase.default.firestore.WhereFilterOp,
         value: any,
-    ): Promise<firebase.default.firestore.QuerySnapshot<firebase.default.firestore.DocumentData>> {
-        const query = await this.db.collection(collection).where(field, operator, value).get();
+    ): Promise<Array<firebase.default.firestore.DocumentData>> {
+        const query = await (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
+            (doc) => doc.data() as T,
+        );
         return query;
     }
 
