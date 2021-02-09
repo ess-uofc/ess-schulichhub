@@ -26,13 +26,7 @@ const HomePostView: React.FC = () => {
         <IonContent>
             {posts
                 ? posts.map((v, k) => {
-                      console.log(Timestamp.fromMillis(v.timestamp));
-                      return (
-                          <PostContainer
-                              key={k}
-                              postData={new Post(v.title, v.content, Timestamp.fromMillis(v.timestamp))}
-                          />
-                      );
+                      return <PostContainer key={k} postData={new Post(v.title, v.content, v.timestamp)} />;
                   })
                 : loadingComponent}
         </IonContent>

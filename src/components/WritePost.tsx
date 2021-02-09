@@ -5,6 +5,7 @@ import app, { Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
+import firebase from 'firebase';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
@@ -20,12 +21,12 @@ const WritePost: React.FC = () => {
         setLoading(true);
 
         if (user) {
-            const _now = Timestamp.now();
+            const _now = firebase.firestore.Timestamp.now();
             await FireStoreDB.uploadDoc<PostDoc>('posts', {
                 title: title,
                 uid: user.uid,
                 content: content,
-                timestamp: _now.valueOf(),
+                timestamp: _now,
             });
             setLoading(false);
         }
