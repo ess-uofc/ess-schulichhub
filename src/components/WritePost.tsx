@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
-import { IonList, IonItem, IonLabel, IonListHeader, IonButton, IonInput } from '@ionic/react';
+import {
+    IonList,
+    IonItem,
+    IonLabel,
+    IonListHeader,
+    IonButton,
+    IonInput,
+    IonSelect,
+    IonSelectOption,
+} from '@ionic/react';
 import FireStoreDB from '../Models/firestore';
 import app, { Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
+import { PostCategory } from '../Models/Enums';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
+    const [postCategory, setPostCategory] = useState<string>(PostCategory.Discussion.toString());
     const [loading, setLoading] = useState(false);
 
     async function uploadPost() {
@@ -26,6 +37,7 @@ const WritePost: React.FC = () => {
                 uid: user.uid,
                 content: content,
                 timestamp: _now,
+                category: postCategory,
             });
             setLoading(false);
         }
@@ -44,6 +56,20 @@ const WritePost: React.FC = () => {
                     value={title}
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setTitle(e.detail.value ?? '')}
                 ></IonInput>
+            </IonItem>
+            <IonItem>
+                <IonLabel>Category</IonLabel>
+                <IonSelect
+                    value={postCategory}
+                    okText="Okay"
+                    cancelText="Dismiss"
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPostCategory(e.detail.value ?? '')}
+                >
+                    <IonSelectOption value={PostCategory.Discussion}>Discussion</IonSelectOption>
+                    <IonSelectOption value={PostCategory.Announcement}>Announcement</IonSelectOption>
+                    <IonSelectOption value={PostCategory.Event}>Event</IonSelectOption>
+                    <IonSelectOption value={PostCategory.Opportunity}>Opportunity</IonSelectOption>
+                </IonSelect>
             </IonItem>
             <IonItem>
                 <IonLabel>Content</IonLabel>

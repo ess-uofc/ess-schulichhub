@@ -1,10 +1,13 @@
 import firebase from 'firebase';
+import { PostAttachmentType, PostCategory } from './Enums';
 import User from './User';
 export default class Post {
     content: string;
     title: string;
     timestamp?: firebase.firestore.Timestamp;
     user?: User;
+    attachment?: PostAttachmentType;
+    category: PostCategory;
 
     /**
      * Default constructor
@@ -16,7 +19,14 @@ export default class Post {
      * @param category - Category of the post
      * @param attachment - Optional attachment for the post
      */
-    constructor(title: string, content: string, timestamp?: firebase.firestore.Timestamp, user?: User) {
+    constructor(
+        title: string,
+        content: string,
+        category: PostCategory,
+        timestamp: firebase.firestore.Timestamp,
+        user?: User,
+        attachment?: PostAttachmentType,
+    ) {
         this.title = title;
         this.user = user;
         this.timestamp = timestamp;

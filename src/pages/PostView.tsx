@@ -23,10 +23,13 @@ import PostComments from '../components/PostComments';
 import CommentCompose from '../components/CommentCompose';
 import Post from '../Models/Post';
 import { PostCategory } from '../Models/Enums';
+import { Timestamp } from '../Models/firebase';
 
 const testPost = new Post(
     'Test',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut mauris purus. Nunc ut lorem nec est accumsan luctus. Proin rhoncus, dolor sit amet vehicula elementum, turpis nulla sagittis velit, at auctor est urna vehicula libero. Phasellus facilisis neque non euismod rhoncus. Phasellus ipsum erat, varius id tellus a, blandit posuere elit. Donec sagittis mauris tristique urna egestas, eget placerat ligula sodales. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed ut eleifend dolor. Donec non dolor laoreet, malesuada eros ut, aliquam nu',
+    PostCategory.Event,
+    Timestamp.now(),
 );
 
 const PostView: React.FC = () => {
