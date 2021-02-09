@@ -3,7 +3,6 @@ import firebase from 'firebase';
 export const Timestamp = firebase.firestore.Timestamp;
 export type DocumentData = firebase.firestore.DocumentData;
 export type WhereFilterOp = firebase.firestore.WhereFilterOp;
-export type FieldValue = firebase.firestore.FieldValue;
 
 const firebaseConfig = {
     apiKey: 'AIzaSyD9mulwyPhAR7tUp0MdZ31_RodyAhIMdpk',

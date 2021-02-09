@@ -32,7 +32,7 @@ export default class FireStoreDB {
         collection: string,
         field: string,
         operator: WhereFilterOp,
-        value: any,
+        value: string | Map<string, string | number> | Array<string | number> | number,
     ): Promise<Array<DocumentData>> {
         const query = (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
             (doc) => doc.data() as T,
@@ -53,7 +53,7 @@ export default class FireStoreDB {
          * 
         */
         try {
-            const res = await this.db.collection(collection).doc().set(fields);
+            await this.db.collection(collection).doc().set(fields);
         } catch (e) {
             // Catch permission errors and display them to a user
             console.log(e);
