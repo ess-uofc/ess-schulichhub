@@ -9,7 +9,7 @@ export default class Comment {
 
     id: string;
     content: string;
-    timestamp: Date;
+    timestamp: string;
     replyTo?: Comment;
     user?: User;
 
@@ -24,7 +24,7 @@ export default class Comment {
     constructor(id: string, content: string, timestamp: Date, replyTo?: Comment, user?: User) {
         this.id = id;
         this.content = content;
-        this.timestamp = timestamp;
+        this.timestamp = timestamp.toUTCString();
         this.replyTo = replyTo;
         this.user = user;
     }
