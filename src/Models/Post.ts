@@ -1,11 +1,10 @@
 import User from './User';
 
+/**
+ * Post class for holding information about posts
+ * @author Robert Brown
+ */
 export default class Post {
-    /**
-     * Post class for holding information about posts
-     * @author Robert Brown
-     */
-
     content: string;
     title: string;
     timestamp: number;
