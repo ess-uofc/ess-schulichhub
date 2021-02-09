@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-    IonList,
-    IonItem,
-    IonLabel,
-    IonListHeader,
     IonButton,
-    IonInput,
     IonPage,
     IonContent,
     IonHeader,
@@ -15,13 +10,7 @@ import {
     IonButtons,
     IonTitle,
 } from '@ionic/react';
-import FireStoreDB from '../Models/firestore';
-import app from '../Models/firebase';
-import { PostDoc } from '../Models/DocTypes';
-import { InputChangeEventDetail } from '@ionic/core';
-import firebase from 'firebase';
 import WritePost from '../components/WritePost';
-import { loadingComponent } from '../components/Loading';
 
 const WritePostView: React.FC = () => {
     return (
