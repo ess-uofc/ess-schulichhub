@@ -1,17 +1,24 @@
 name: Version Bump on PR
 on:
-    pull_request:
+    pull_request_review:
         types:
-            - opened
-            - reopened
+            - submitted
+            - edited
 jobs:
-    version_bump:
+    version_bump_check:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - id: 'reviews'
+              uses: 'jrylan/github-action-reviews-counter@main'
+              with:
+                  repo-token: '${{ secrets.GITHUB_TOKEN }}'
+            -  # Conditionally run the next step
+            - if: 'steps.reviews.outputs.approved >= 2 && steps.reviews.outputs.changes_requested == 0'
+              uses: actions/checkout@v2
               with:
                   ref: ${{ github.event.pull_request.head.ref }}
-            - name: Bump version
+            - if: 'steps.reviews.outputs.approved >= 2 && steps.reviews.outputs.changes_requested == 0'
+              name: Bump version
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
