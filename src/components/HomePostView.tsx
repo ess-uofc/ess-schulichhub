@@ -6,7 +6,7 @@ import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import { PostDoc } from '../Models/DocTypes';
 import { loadingComponent } from './Loading';
-import { DocumentData, Timestamp } from '../Models/firebase';
+import { DocumentData } from '../Models/firebase';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<Array<DocumentData>>();
     async function getPosts() {
