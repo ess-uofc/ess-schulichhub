@@ -12,13 +12,13 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Create an incremental release
-                uses: aurestic/incrementarl-create-release@master
-                with:
-                    flag_branch: true
-                    message: Bump version
-                    prev_tag: 'v'
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              uses: aurestic/incrementarl-create-release@master
+              with:
+                  flag_branch: true
+                  message: Bump version
+                  prev_tag: 'v'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - uses: actions/cache@v1
               with:
                   path: ./node_modules
