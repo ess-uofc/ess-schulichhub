@@ -1,5 +1,4 @@
 import User from './User';
-
 export default class Comment {
     /**
      * Comment class for holding comments
@@ -9,7 +8,7 @@ export default class Comment {
 
     id: string;
     content: string;
-    timestamp: string;
+    timestamp?: firebase.default.firestore.Timestamp;
     replyTo?: Comment;
     user?: User;
 
@@ -21,7 +20,13 @@ export default class Comment {
      * @param replyTo (optional) if the comment is in reply, the parent comment
      * @param user (optional for development) user who posted the comment
      */
-    constructor(id: string, content: string, timestamp: Date, replyTo?: Comment, user?: User) {
+    constructor(
+        id: string,
+        content: string,
+        timestamp?: firebase.default.firestore.Timestamp,
+        replyTo?: Comment,
+        user?: User,
+    ) {
         this.id = id;
         this.content = content;
         this.timestamp = timestamp.toUTCString();

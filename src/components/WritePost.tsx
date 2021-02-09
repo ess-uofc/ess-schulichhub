@@ -5,7 +5,6 @@ import app, { Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
-import firebase from 'firebase';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
