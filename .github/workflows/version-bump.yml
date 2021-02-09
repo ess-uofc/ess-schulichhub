@@ -13,7 +13,7 @@ jobs:
               with:
                   repo-token: '${{ secrets.GITHUB_TOKEN }}'
             - if: 'steps.reviews.outputs.approved < 2 && steps.reviews.outputs.changes_requested != 0'
-              run: exit 1
+              run: echo "Status checks not passing" && exit 1
             - uses: actions/checkout@v2
               with:
                   ref: ${{ github.event.pull_request.head.ref }}
