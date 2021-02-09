@@ -1,3 +1,5 @@
+import { Timestamp } from '@firebase/firestore-types';
+
 export interface UserDoc {
     firstName: string;
     lastName: string;
@@ -12,7 +14,7 @@ export interface PostDoc {
     title: string;
     content: string;
     uid: string;
-    timestamp: firebase.default.firestore.Timestamp;
+    timestamp: Timestamp;
     comments?: Array<string>;
     [key: string]: any;
 }
@@ -20,7 +22,7 @@ export interface CommentDoc {
     replyTo: string;
     uid: string;
     content: string;
-    timestamp: firebase.default.firestore.Timestamp;
+    timestamp: Timestamp;
 
     [key: string]: any;
 }

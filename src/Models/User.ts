@@ -29,8 +29,6 @@ export class UserError extends Error {
     }
 }
 
-
-
 export default class User {
     /**
      * User class contains uid, firstName, lastName

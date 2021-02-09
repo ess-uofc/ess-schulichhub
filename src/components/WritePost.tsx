@@ -4,8 +4,8 @@ import FireStoreDB from '../Models/firestore';
 import app from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
-import firebase from 'firebase';
 import { loadingComponent } from './Loading';
+import { Timestamp } from '@firebase/firestore-types';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
@@ -25,7 +25,7 @@ const WritePost: React.FC = () => {
                 title: title,
                 uid: user.uid,
                 content: content,
-                timestamp: firebase.firestore.Timestamp.now(),
+                timestamp: Timestamp.now(),
             });
             setLoading(false);
         }
