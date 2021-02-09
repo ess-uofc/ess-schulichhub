@@ -1,21 +1,21 @@
-name: Version Bump on PR
-on:
-    pull_request:
-        types:
-            - opened
-            - reopened
-jobs:
-    version_bump:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  ref: ${{ github.event.pull_request.head.ref }}
-            - name: Bump version
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  git config --global user.name 'github-actions[bot]'
-                  git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-                  yarn version --patch
-                  git push --follow-tags
+# name: Version Bump on PR
+# on:
+#     pull_request:
+#         types:
+#             - opened
+#             - reopened
+# jobs:
+#     version_bump:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v2
+#               with:
+#                   ref: ${{ github.event.pull_request.head.ref }}
+#             - name: Bump version
+#               env:
+#                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#               run: |
+#                   git config --global user.name 'github-actions[bot]'
+#                   git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+#                   yarn version --patch
+#                   git push --follow-tags
