@@ -18,7 +18,9 @@ const Home: React.FC = () => {
                     <IonTitle>Home</IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonButton className="composeButton">Write a New Post...</IonButton>
+            <IonButton routerLink="/writePost" className="composeButton">
+                Write a New Post...
+            </IonButton>
             <HomePostView />
         </IonPage>
     );
