@@ -1,6 +1,5 @@
+import { Timestamp } from './firebase';
 import User from './User';
-import { Timestamp } from '@firebase/firestore-types';
-
 export default class Post {
     /**
      * Post class for holding information about bosts
@@ -9,7 +8,7 @@ export default class Post {
 
     content: string;
     title: string;
-    timestamp?: Timestamp;
+    timestamp?: typeof Timestamp;
     user?: User;
 
     /**
@@ -19,7 +18,7 @@ export default class Post {
      * @param timestamp time the post was created
      * @param content content of the post
      */
-    constructor(title: string, content: string, timestamp?: Timestamp, user?: User) {
+    constructor(title: string, content: string, timestamp?: typeof Timestamp, user?: User) {
         this.title = title;
         this.user = user;
         this.timestamp = timestamp;

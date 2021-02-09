@@ -5,8 +5,8 @@ import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import { PostDoc } from '../Models/DocTypes';
-import { DocumentData } from '@firebase/firestore-types';
 import { loadingComponent } from './Loading';
+import { DocumentData } from '../Models/firebase';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<Array<DocumentData>>();
     async function getPosts() {

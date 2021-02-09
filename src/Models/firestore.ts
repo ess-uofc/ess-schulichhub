@@ -1,5 +1,4 @@
-import app from './firebase';
-import { DocumentData, WhereFilterOp,} from '@firebase/firestore-types';
+import app, { DocumentData, WhereFilterOp } from './firebase';
 
 export default class FireStoreDB {
     /**
@@ -22,7 +21,7 @@ export default class FireStoreDB {
         operator: WhereFilterOp,
         value: any,
     ): Promise<Array<DocumentData>> {
-        const query = await (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
+        const query = (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
             (doc) => doc.data() as T,
         );
         return query;

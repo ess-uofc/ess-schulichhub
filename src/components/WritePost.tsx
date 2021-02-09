@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { IonList, IonItem, IonLabel, IonListHeader, IonButton, IonInput } from '@ionic/react';
 import FireStoreDB from '../Models/firestore';
-import app from '../Models/firebase';
+import app, { Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
-import { Timestamp } from '@firebase/firestore-types';
+import firebase from 'firebase';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
@@ -21,11 +21,12 @@ const WritePost: React.FC = () => {
         setLoading(true);
 
         if (user) {
+            const _now = Timestamp.now();
             await FireStoreDB.uploadDoc<PostDoc>('posts', {
                 title: title,
                 uid: user.uid,
                 content: content,
-                timestamp: Timestamp.now(),
+                timestamp: _now.valueOf(),
             });
             setLoading(false);
         }

@@ -1,5 +1,6 @@
 import { UserDoc } from './DocTypes';
 import app from './firebase';
+import FireStoreDB from './firestore';
 
 export class UserError extends Error {
     /**
@@ -37,8 +38,8 @@ export default class User {
      *
      */
 
-    firstName?: string;
-    lastName?: string;
+    firstName: string;
+    lastName: string;
     email: string;
     uid: string;
 
@@ -52,7 +53,7 @@ export default class User {
      * @param email user's email address
      */
 
-    constructor(uid: string, email: string, firstName?: string, lastName?: string) {
+    constructor(uid: string, email: string, firstName: string, lastName: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.uid = uid;
@@ -64,16 +65,6 @@ export default class User {
      * adds user fields to a unique document in FireStore using uid
      *
      */
-    private async addToDb(): Promise<void> {
-        try {
-            await app.firestore().collection('users').doc(this.uid).set({
-                firstName: this.firstName,
-                lastName: this.lastName,
-            });
-        } catch (e) {
-            console.log(e);
-        }
-    }
 
     /**
      * fetches user information from FireStore
@@ -111,7 +102,11 @@ export default class User {
             const res = await app.auth().createUserWithEmailAndPassword(email, password);
             if (res.user != null) {
                 const user = new User(res.user.uid, email, firstName, lastName);
-                user.addToDb();
+                FireStoreDB.uploadDoc<UserDoc>('users', {
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    uid: user.uid,
+                });
                 return user;
             } else {
                 console.log(res); //
@@ -145,7 +140,10 @@ export default class User {
         try {
             const res = await app.auth().signInWithEmailAndPassword(email, password);
             if (res.user) {
-                const user = new User(res.user.uid, email);
+                const userResult = res.user;
+
+                const userDoc = await FireStoreDB.fetchDoc<UserDoc>(userResult.uid);
+                const user = new User(res.user.uid, email, userDoc?.firstName, userDoc?.lastName);
                 await user.fetchUserDetails();
                 return user;
             } else {
