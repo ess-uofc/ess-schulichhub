@@ -52,8 +52,11 @@ export default class Post {
             } else {
                 if (diff > 3600) {
                     return Math.ceil(diff / 3600) + ' hours go';
+                } else if (diff >= 60) {
+                    const minutes = Math.ceil(diff / 60);
+                    return minutes == 1 ? minutes + '  minute ago' : minutes + '  minutes ago';
                 } else {
-                    return Math.ceil(diff / 60) + '  minutes ago';
+                    return 'A few seconds ago';
                 }
             }
         } else {
