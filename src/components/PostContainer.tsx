@@ -12,7 +12,6 @@ import {
 } from '@ionic/react';
 import { ellipsisVerticalOutline } from 'ionicons/icons';
 import Post from '../Models/Post';
-import { Timestamp } from '../Models/firebase';
 
 interface ContainerProps {
     postData: Post;
