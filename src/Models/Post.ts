@@ -2,7 +2,7 @@ import User from './User';
 
 export default class Post {
     /**
-     * Post class for holding information about bosts
+     * Post class for holding information about posts
      * @author Robert Brown
      */
 
