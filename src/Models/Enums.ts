@@ -29,11 +29,11 @@ export enum UserRole {
  * @author Ratik Kapoor
  */
 export enum PostCategory {
-    Discussion,
-    Opportunity,
-    Announcement,
-    Event,
-    Advertisement,
+    Discussion = 'Discussion',
+    Opportunity = 'Opportunity',
+    Announcement = 'Announcement',
+    Event = 'Event',
+    Advertisement = 'Advertisement',
 }
 
 /**

@@ -19,7 +19,7 @@ import { PostCategory } from '../Models/Enums';
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
-    const [postCategory, setPostCategory] = useState<string>(PostCategory.Discussion.toString());
+    const [postCategory, setPostCategory] = useState<string>(PostCategory.Discussion);
     const [loading, setLoading] = useState(false);
 
     async function uploadPost() {
@@ -63,12 +63,16 @@ const WritePost: React.FC = () => {
                     value={postCategory}
                     okText="Okay"
                     cancelText="Dismiss"
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPostCategory(e.detail.value ?? '')}
+                    placeholder="Post Category"
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                        setPostCategory(e.detail.value ?? PostCategory.Discussion)
+                    }
                 >
-                    <IonSelectOption value={PostCategory.Discussion}>Discussion</IonSelectOption>
-                    <IonSelectOption value={PostCategory.Announcement}>Announcement</IonSelectOption>
-                    <IonSelectOption value={PostCategory.Event}>Event</IonSelectOption>
-                    <IonSelectOption value={PostCategory.Opportunity}>Opportunity</IonSelectOption>
+                    {Object.keys(PostCategory).map((v, k) => (
+                        <IonSelectOption key={k} value={v}>
+                            {v}
+                        </IonSelectOption>
+                    ))}
                 </IonSelect>
             </IonItem>
             <IonItem>
