@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './HomePostView.scss';
 import { IonContent } from '@ionic/react';
 import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
-
+import FireStoreDB from '../Models/firestore';
+import firebase from 'firebase';
+import { loadingComponent } from './Loading';
+import { PostDoc } from '../Models/DocTypes';
+import { DocumentData} from '@firebase/firestore-types'
 const HomePostView: React.FC = () => {
-    const testPost = new Post('Test', 'testing 123', 1612037497);
+    const [posts, setPosts] = useState<Array<DocumentData>>();
+    async function getPosts() {
+        const post = await FireStoreDB.query<PostDoc>('posts', 'title', '!=', '');
+        setPosts(post);
+    }
+    useEffect(() => {
+        getPosts();
+    }, []);
     return (
         <IonContent>
-            <PostContainer postData={testPost}></PostContainer>
-            <PostContainer postData={testPost}></PostContainer>
-            <PostContainer postData={testPost}></PostContainer>
-            <PostContainer postData={testPost}></PostContainer>
+            {posts
+                ? posts.map((v, k) => {
+                      return <PostContainer key={k} postData={new Post(v.title, v.content)} />;
+                  })
+                : loadingComponent}
         </IonContent>
     );
 };
