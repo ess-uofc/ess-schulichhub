@@ -7,7 +7,7 @@ export default class Comment {
      * @since 0.0.4
      */
 
-    id: number;
+    id: string;
     content: string;
     timestamp: Date;
     replyTo?: Comment;
@@ -21,7 +21,7 @@ export default class Comment {
      * @param replyTo (optional) if the comment is in reply, the parent comment
      * @param user (optional for development) user who posted the comment
      */
-    constructor(id: number, content: string, timestamp: Date, replyTo?: Comment, user?: User) {
+    constructor(id: string, content: string, timestamp: Date, replyTo?: Comment, user?: User) {
         this.id = id;
         this.content = content;
         this.timestamp = timestamp;
