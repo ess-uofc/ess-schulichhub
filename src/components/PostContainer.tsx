@@ -12,6 +12,7 @@ import {
 } from '@ionic/react';
 import { ellipsisVerticalOutline } from 'ionicons/icons';
 import Post from '../Models/Post';
+import { Timestamp } from '../Models/firebase';
 
 interface ContainerProps {
     postData: Post;
@@ -26,7 +27,12 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                     <IonIcon icon={ellipsisVerticalOutline} />
                 </IonButton>
                 <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
-                <IonCardSubtitle className="postInfo text">1 day ago - University of Calgary </IonCardSubtitle>
+                <IonCardSubtitle className="postInfo text">
+                    {props.postData.timestamp
+                        ? props.postData.timestamp.toDate().getDate() - Timestamp.now().toDate().getDate() + ' days ago'
+                        : ''}{' '}
+                    - University of Calgary{' '}
+                </IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>{props.postData.content}</IonCardContent>
         </IonCard>
