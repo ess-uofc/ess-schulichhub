@@ -28,8 +28,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                 </IonButton>
                 <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
                 <IonCardSubtitle className="postInfo text">
-                    {props.postData.timestamp ? Timestamp.now().seconds - props.postData.timestamp.seconds : ''} -
-                    University of Calgary{' '}
+                    {props.postData.getTimePosted()} - University of Calgary{' '}
                 </IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>{props.postData.content}</IonCardContent>
