@@ -11,7 +11,7 @@ export interface PostDoc {
     title: string;
     content: string;
     uid: string;
-    comments: Array<string>;
+    // comments: Array<string>;
     [key: string]: any;
 }
 export interface CommentDoc {
