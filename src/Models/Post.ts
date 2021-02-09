@@ -1,4 +1,3 @@
-import Timestamp from './firebase';
 import User from './User';
 export default class Post {
     content: string;
