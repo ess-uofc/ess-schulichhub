@@ -1,48 +1,47 @@
 import React, { useState } from 'react';
-import { IonList, IonItem, IonLabel, IonListHeader, IonButton, IonInput } from '@ionic/react';
+import {
+    IonList,
+    IonItem,
+    IonLabel,
+    IonListHeader,
+    IonButton,
+    IonInput,
+    IonPage,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonMenuButton,
+    IonIcon,
+    IonButtons,
+    IonTitle,
+} from '@ionic/react';
 import FireStoreDB from '../Models/firestore';
 import app from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
+import firebase from 'firebase';
+import WritePost from '../components/WritePost';
+import { loadingComponent } from '../components/Loading';
 
-const WritePost: React.FC = () => {
-    const [content, setContent] = useState('');
-    const [title, setTitle] = useState('');
-    async function uploadPost() {
-        const user = app.auth().currentUser;
-        if (user) {
-            await FireStoreDB.uploadDoc<PostDoc>('posts', {
-                title: title,
-                uid: user.uid,
-                content: content,
-            });
-        }
-    }
+const WritePostView: React.FC = () => {
     return (
-        <IonList>
-            <IonListHeader>
-                <IonLabel>Write Post</IonLabel>
-            </IonListHeader>
-            <IonItem>
-                <IonLabel>Title</IonLabel>
-                <IonInput
-                    type="text"
-                    value={title}
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setTitle(e.detail.value ?? '')}
-                ></IonInput>
-            </IonItem>
-            <IonItem>
-                <IonLabel>Content</IonLabel>
-                <IonInput
-                    type="text"
-                    value={content}
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setContent(e.detail.value ?? '')}
-                ></IonInput>
-            </IonItem>
-            <IonButton color="danger" onClick={uploadPost}>
-                Upload Post
-            </IonButton>
-        </IonList>
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton auto-hide="false">
+                            <IonButton>
+                                <IonIcon name="reorder-three-outline"></IonIcon>
+                            </IonButton>
+                        </IonMenuButton>
+                    </IonButtons>
+                    <IonTitle>Write A Post</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent>
+                <WritePost />
+            </IonContent>
+        </IonPage>
     );
 };
-export default WritePost;
+export default WritePostView;
