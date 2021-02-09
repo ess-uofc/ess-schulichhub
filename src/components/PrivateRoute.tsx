@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import app from '../Models/firebase';
 import PropTypes from 'prop-types';
-import { IonLoading } from '@ionic/react';
+import { loadingComponent } from './Loading';
 
 export const PrivateRoute: React.FC<{
     /**
@@ -28,9 +28,6 @@ export const PrivateRoute: React.FC<{
         <Route path={props.path} exact={props.exact} component={props.component} />
     ) : (
         <Redirect to="/login" exact={true} />
-    );
-    const loadingComponent = (
-        <IonLoading cssClass="my-custom-class" isOpen={true} message={'Please wait...'} duration={5000} />
     );
     return loading ? loadingComponent : loadedComponent;
 };
