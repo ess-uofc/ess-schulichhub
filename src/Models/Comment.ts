@@ -1,4 +1,4 @@
-import User from "./User";
+import User from './User';
 
 export default class Comment {
     /**
@@ -28,5 +28,4 @@ export default class Comment {
         this.replyTo = replyTo;
         this.user = user;
     }
-
 }
