@@ -65,7 +65,7 @@ const WritePost: React.FC = () => {
                     cancelText="Dismiss"
                     placeholder="Post Category"
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
-                        setPostCategory(e.detail.value ?? PostCategory.Discussion)
+                        setPostCategory(e.detail.value ?? PostCategory.Announcement)
                     }
                 >
                     {Object.keys(PostCategory).map((v, k) => (
