@@ -4,7 +4,7 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
-    'Build and Preview PR':
+    build_and_preview:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/cache@v1
