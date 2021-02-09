@@ -1,3 +1,4 @@
+import { UserDoc } from './DocTypes';
 import app from './firebase';
 
 export class UserError extends Error {
@@ -28,14 +29,7 @@ export class UserError extends Error {
     }
 }
 
-interface UserDoc {
-    firstName: string;
-    lastName: string;
 
-    //[key: string]: any;
-
-    // Add other user fields here
-}
 
 export default class User {
     /**
