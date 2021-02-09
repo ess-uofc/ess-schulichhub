@@ -12,7 +12,7 @@ export interface PostDoc {
     title: string;
     content: string;
     uid: string;
-    timestamp: string;
+    timestamp: firebase.default.firestore.Timestamp;
     comments?: Array<string>;
     [key: string]: any;
 }
