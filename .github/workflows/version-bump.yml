@@ -3,14 +3,15 @@ on:
     pull_request:
         types:
             - opened
+            - reopened
 jobs:
     version_bump:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - name: Bump version
               with:
                   ref: ${{ github.event.pull_request.head.ref }}
+            - name: Bump version
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
