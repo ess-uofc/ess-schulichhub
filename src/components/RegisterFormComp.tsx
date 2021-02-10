@@ -4,16 +4,22 @@ import { IonButton, IonInput, IonItemDivider, IonTitle } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import '../pages/RegisterMain.scss';
+import userEvent from '@testing-library/user-event';
+import User from '../Models/User';
 
 const RegisterForm: React.FC = () => {
     const [Email, setEmail] = useState<string>('');
-    const [Username, setUsername] = useState<string>('');
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
     const [Password, setPassword] = useState<string>('');
     const [Cpassword, setCpassword] = useState<string>('');
 
-    function RegisterUser() {
+    async function RegisterUser() {
         if (Password == Cpassword) {
-            console.log(Email, Username, Password, Cpassword);
+            if (await User.signUp(firstName, lastName, Email, Password)) {
+            } else {
+                alert('Sign up failed');
+            }
         } else {
             console.log('Password and confirm password do not match');
         }
@@ -33,7 +39,12 @@ const RegisterForm: React.FC = () => {
             <IonInput
                 className="registerInput"
                 placeholder="Username"
-                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setUsername(e.detail.value ?? '')}
+                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setFirstName(e.detail.value ?? '')}
+            />
+            <IonInput
+                className="registerInput"
+                placeholder="Username"
+                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setLastName(e.detail.value ?? '')}
             />
             <IonInput
                 type="password"
