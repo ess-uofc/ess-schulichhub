@@ -4,7 +4,6 @@ import { IonButton, IonInput, IonItemDivider, IonTitle } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import '../pages/RegisterMain.scss';
-import userEvent from '@testing-library/user-event';
 import User from '../Models/User';
 
 const RegisterForm: React.FC = () => {
