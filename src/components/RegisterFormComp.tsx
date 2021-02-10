@@ -37,12 +37,12 @@ const RegisterForm: React.FC = () => {
             />
             <IonInput
                 className="registerInput"
-                placeholder="Username"
+                placeholder="First Name"
                 onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setFirstName(e.detail.value ?? '')}
             />
             <IonInput
                 className="registerInput"
-                placeholder="Username"
+                placeholder="Last Name"
                 onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setLastName(e.detail.value ?? '')}
             />
             <IonInput
