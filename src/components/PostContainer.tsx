@@ -14,7 +14,6 @@ import { ellipsisVerticalOutline, trashBin } from 'ionicons/icons';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import app from '../Models/firebase';
-import { PostDoc } from '../Models/DocTypes';
 
 interface ContainerProps {
     postData: Post;
@@ -22,7 +21,6 @@ interface ContainerProps {
 const db = new FireStoreDB();
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
-    const [loading, setLoading] = useState<boolean>(false);
     async function handleDelete(postData: Post) {
         /**
          * @author Mohamad Abdel Rida

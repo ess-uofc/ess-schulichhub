@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import { PostAttachmentType, PostCategory } from './Enums';
-import User from './User';
 export default class Post {
     id: string;
     content: string;
