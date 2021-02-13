@@ -99,10 +99,11 @@ export default class User {
         password: string,
     ): Promise<User | undefined> {
         try {
+            const db = new FireStoreDB();
             const res = await app.auth().createUserWithEmailAndPassword(email, password);
             if (res.user != null) {
                 const user = new User(res.user.uid, email, firstName, lastName);
-                FireStoreDB.uploadDoc<UserDoc>('users', {
+                db.uploadDoc<UserDoc>('users', {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     uid: user.uid,
@@ -141,8 +142,8 @@ export default class User {
             const res = await app.auth().signInWithEmailAndPassword(email, password);
             if (res.user) {
                 const userResult = res.user;
-
-                const userDoc = await FireStoreDB.fetchDoc<UserDoc>(userResult.uid);
+                const db = new FireStoreDB();
+                const userDoc = await db.fetchDoc<UserDoc>(userResult.uid);
                 const user = new User(res.user.uid, email, userDoc?.firstName, userDoc?.lastName);
                 await user.fetchUserDetails();
                 return user;

@@ -21,6 +21,7 @@ const WritePost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [postCategory, setPostCategory] = useState<string>(PostCategory.Discussion);
     const [loading, setLoading] = useState(false);
+    const db = new FireStoreDB();
 
     async function uploadPost() {
         /**
@@ -32,7 +33,7 @@ const WritePost: React.FC = () => {
 
         if (user) {
             const _now = Timestamp.now();
-            await FireStoreDB.uploadDoc<PostDoc>('posts', {
+            await db.uploadDoc<PostDoc>('posts', {
                 title: title,
                 uid: user.uid,
                 content: content,

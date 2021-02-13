@@ -4,9 +4,17 @@ export default class FireStoreDB {
     /**
      * @author Mohamad Abdel Rida
      */
-    static db = app.firestore();
+    db;
 
-    public static async fetchDoc<DocType>(path: string): Promise<DocumentData | undefined | null> {
+    constructor() {
+        this.db = app.firestore();
+    }
+
+    public async deleteDoc(id: string): Promise<void> {
+        await this.db.doc(id).delete();
+    }
+
+    public async fetchDoc<DocType>(path: string): Promise<DocumentData | undefined | null> {
         /**
          * Fetches a document from the given id or path
          */
@@ -28,19 +36,19 @@ export default class FireStoreDB {
      * Executes a query on a given collection and maps a DocType onto the results
      * Map
      */
-    public static async query<T>(
+    public async query<T>(
         collection: string,
         field: string,
         operator: WhereFilterOp,
         value: string | Map<string, string | number> | Array<string | number> | number,
     ): Promise<Array<DocumentData>> {
         const query = (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
-            (doc) => doc.data() as T,
+            (doc: DocumentData) => doc.data() as T,
         );
         return query;
     }
 
-    public static async uploadDoc<DocType>(collection: string, fields: DocType): Promise<void> {
+    public async uploadDoc<DocType>(collection: string, fields: DocType): Promise<void> {
         /**
          * @author Mohamad Abdel Rida
          * @param collection the collection to add the document to 
