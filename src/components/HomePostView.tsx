@@ -9,6 +9,7 @@ import { loadingComponent } from './Loading';
 import { DocumentData, Timestamp } from '../Models/firebase';
 import { PostCategory } from '../Models/Enums';
 import { key } from 'ionicons/icons';
+import { textChangeRangeNewSpan } from 'typescript';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<Array<{ id: string; data: PostDoc }>>();
     const db = new FireStoreDB();
@@ -20,7 +21,7 @@ const HomePostView: React.FC = () => {
          *
          */
         // const post = await db.query<PostDoc>('posts', 'timestamp', '!=', '');
-        const changes = db.db
+        const unsub = db.db
             .collection('posts')
             .orderBy('timestamp', 'desc')
             .onSnapshot({
@@ -33,10 +34,19 @@ const HomePostView: React.FC = () => {
                     setPosts(docs);
                 },
             });
+        return unsub;
     }
+
     useEffect(() => {
-        getPosts();
-    }, []);
+        const unsub = getPosts();
+        return () => {
+            unsub
+                .then((v) => v())
+                .catch((e) => {
+                    console.log(e);
+                });
+        };
+    }, [posts]);
     return (
         <IonContent>
             {posts
