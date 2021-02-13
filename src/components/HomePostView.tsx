@@ -6,10 +6,7 @@ import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import { PostDoc } from '../Models/DocTypes';
 import { loadingComponent } from './Loading';
-import { DocumentData, Timestamp } from '../Models/firebase';
 import { PostCategory } from '../Models/Enums';
-import { key } from 'ionicons/icons';
-import { textChangeRangeNewSpan } from 'typescript';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<Array<{ id: string; data: PostDoc }>>();
     const db = new FireStoreDB();

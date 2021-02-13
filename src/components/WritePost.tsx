@@ -41,6 +41,7 @@ const WritePost: React.FC = () => {
                 category: postCategory,
             });
             setLoading(false);
+            location.href = '/home';
         }
     }
     return loading ? (
