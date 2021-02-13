@@ -16,4 +16,9 @@ const firebaseConfig = {
 };
 const app: firebase.app.App = firebase.initializeApp(firebaseConfig);
 
+firebase.firestore().settings({
+    cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
+});
+firebase.firestore().enablePersistence({ synchronizeTabs: true });
+
 export default app;

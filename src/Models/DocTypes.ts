@@ -11,6 +11,7 @@ export interface UserDoc {
     // Add other user fields here
 }
 export interface PostDoc {
+    id?: string;
     title: string;
     content: string;
     uid: string;
