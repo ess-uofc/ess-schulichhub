@@ -11,6 +11,15 @@ export default class FireStoreDB {
     }
 
     public async deleteDoc(id: string): Promise<void> {
+        /**
+         * @author Mohamad Abdel Rida
+         * @param id: Absolute id to the document
+         * Deletes a document with a given id. May fail due to
+         * firebase rules so handle errors accordingly.
+         * For posts, ensure that the users uid matches the uid field in the post
+         * being deleted.
+         *
+         */
         await this.db.doc(id).delete();
     }
 
