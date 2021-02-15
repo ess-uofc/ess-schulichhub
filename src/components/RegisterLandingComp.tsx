@@ -17,7 +17,7 @@ const RegisterLanding: React.FC = () => {
                 <span className="ButtonText">Sign in with Google</span>
             </IonButton>
             <div>
-                <IonButton className="custombutton" color="primary" href="/emailregister">
+                <IonButton className="custombutton" color="primary" routerLink="/emailregister">
                     <span className="ButtonText">Sign Up With Email</span>
                 </IonButton>
             </div>
@@ -25,7 +25,7 @@ const RegisterLanding: React.FC = () => {
                 Already have an account with the <span className="accentText">Hub</span>?
             </IonText>
             <div>
-                <IonButton className="custombutton" color="primary" href="/login">
+                <IonButton className="custombutton" color="primary" routerLink="/login">
                     <span className="ButtonText">Sign In</span>
                 </IonButton>
             </div>
