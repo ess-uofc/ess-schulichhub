@@ -12,7 +12,7 @@ const LandingRegisterPrompt: React.FC = () => {
                     </IonHeader>
                 </IonCol>
                 <IonCol>
-                    <IonButton className="ion-margin" href="register">
+                    <IonButton className="ion-margin" routerLink="/register">
                         Join Today
                     </IonButton>
                     <IonButton className="ion-margin">Contact Us</IonButton>

@@ -73,7 +73,8 @@ const Login: React.FC = () => {
                     <IonButton className="googleLogin">Sign in with Google</IonButton>
                 </div>
                 <p>
-                    New here? <IonRouterLink href="/register">Join the Hub</IonRouterLink>
+                    New here?
+                    <IonRouterLink routerLink="/register"> Join the Hub</IonRouterLink>
                 </p>
                 <IonRouterLink>Forgot Password?</IonRouterLink>
             </IonContent>
