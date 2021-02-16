@@ -1,6 +1,4 @@
 .learnMore {
-    display: block;
-    width: 20%;
     --background: transparent;
     --color: #d50000;
     --border-style: solid;
@@ -10,5 +8,6 @@
 }
 
 .landingParagraphs {
+    display: block;
     text-align: left;
 }
