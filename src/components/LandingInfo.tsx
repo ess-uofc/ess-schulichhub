@@ -14,21 +14,15 @@ const LandingInfo: React.FC = () => {
             <IonRow className="ion-margin">
                 <IonCol>
                     <IonText className="ion-margin">Project Hub</IonText>
-                </IonCol>
-                <IonCol>
-                    <IonText className="ion-margin">Volunteer Hub</IonText>
-                </IonCol>
-            </IonRow>
-            <IonRow className="ion-margin">
-                <IonCol>
-                    <IonText className="landingParagraphs">
+                    <IonText className="landingParagraphs ion-margin">
                         Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
                         consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est.
                     </IonText>
                     <IonButton className="learnMore ion-margin">Learn More</IonButton>
                 </IonCol>
                 <IonCol>
-                    <IonText className="landingParagraphs">
+                    <IonText className="ion-margin">Volunteer Hub</IonText>
+                    <IonText className="landingParagraphs ion-margin">
                         Amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                         aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
                     </IonText>
@@ -38,21 +32,15 @@ const LandingInfo: React.FC = () => {
             <IonRow className="ion-margin">
                 <IonCol>
                     <IonText className="ion-margin">Startup Hub</IonText>
-                </IonCol>
-                <IonCol>
-                    <IonText className="ion-margin">Club Listings</IonText>
-                </IonCol>
-            </IonRow>
-            <IonRow className="ion-margin">
-                <IonCol>
-                    <IonText className="landingParagraphs">
+                    <IonText className="landingParagraphs ion-margin">
                         Consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
                         qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam.
                     </IonText>
                     <IonButton className="learnMore ion-margin">Learn More</IonButton>
                 </IonCol>
                 <IonCol>
-                    <IonText className="landingParagraphs">
+                    <IonText className="ion-margin">Club Listings</IonText>
+                    <IonText className="landingParagraphs ion-margin">
                         Eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
                         dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.
                     </IonText>
