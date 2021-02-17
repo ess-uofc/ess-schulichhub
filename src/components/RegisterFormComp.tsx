@@ -30,9 +30,7 @@ const RegisterForm: React.FC = () => {
 
     return (
         <>
-            <IonTitle className="wrapper">
-                Join The <span className="accentTextBig">Hub</span>.
-            </IonTitle>
+            <IonTitle className="ion-margin">Join The Hub</IonTitle>
             <IonInput
                 type="email"
                 className="registerInput"
@@ -74,7 +72,7 @@ const RegisterForm: React.FC = () => {
             <IonButton className="custombutton" onClick={RegisterUser}>
                 <span className="ButtonText">Sign Up</span>
             </IonButton>
-            <IonTitle className="hubLogoText">LG SchulichHub</IonTitle>
+            <IonTitle className="hubLogoText ion-margin">LG SchulichHub</IonTitle>
             <IonItemDivider className="footerRule" color="secondary" />
             <p className="copyRight">© ESS Schulich School of Engineering U of C, 2020</p>
         </>
