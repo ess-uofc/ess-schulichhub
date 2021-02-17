@@ -1,6 +1,15 @@
 import React from 'react';
 import './RegisterLanding.scss';
-import { IonButton, IonInput, IonItemDivider, IonTitle } from '@ionic/react';
+import {
+    IonButton,
+    IonInput,
+    IonItemDivider,
+    IonSelect,
+    IonSelectOption,
+    IonTitle,
+    IonItem,
+    IonLabel,
+} from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import '../pages/RegisterMain.scss';
@@ -69,6 +78,25 @@ const RegisterForm: React.FC = () => {
                     setUserState({ ...userState, cPassword: e.detail.value ?? '' })
                 }
             />
+            <IonItem className="majorSelect">
+                <IonLabel>Faculty</IonLabel>
+                <IonSelect>
+                    <IonSelectOption>Engineering</IonSelectOption>
+                </IonSelect>
+            </IonItem>
+            <IonItem className="majorSelect">
+                <IonLabel>Major</IonLabel>
+                <IonSelect>
+                    <IonSelectOption>Electrical</IonSelectOption>
+                    <IonSelectOption>Chemical</IonSelectOption>
+                    <IonSelectOption>Software</IonSelectOption>
+                    <IonSelectOption>Mechanical</IonSelectOption>
+                    <IonSelectOption>Civil</IonSelectOption>
+                    <IonSelectOption>Geomatics</IonSelectOption>
+                    <IonSelectOption>Oil & Gas</IonSelectOption>
+                    <IonSelectOption>Energy</IonSelectOption>
+                </IonSelect>
+            </IonItem>
             <IonButton className="custombutton" onClick={RegisterUser}>
                 <span className="ButtonText">Sign Up</span>
             </IonButton>
