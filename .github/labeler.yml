@@ -1,0 +1,15 @@
+automerge:
+    - '*'
+
+integration:
+    - 'src/Models/**/*'
+
+front-end:
+    - 'src/pages/**/*'
+    - 'src/components/**/*'
+
+redux:
+    - 'src/features/**/*'
+
+scss:
+    - 'src/**/*.scss'
