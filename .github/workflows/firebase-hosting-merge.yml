@@ -8,7 +8,7 @@ name: Deploy to Firebase Hosting on merge and increment version
             - main
 jobs:
     build_and_deploy:
-        if: "!contains(github.event.commits[0].message, '[Bot')"
+        if: "!contains(github.event.commits[0].message, '[Bot]')"
         runs-on: ubuntu-latest
         steps:
             # - name: Check if version bump
