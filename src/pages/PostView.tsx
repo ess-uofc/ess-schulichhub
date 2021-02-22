@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
     IonAvatar,
-    IonButton,
-    IonButtons,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -10,14 +8,10 @@ import {
     IonCardTitle,
     IonChip,
     IonContent,
-    IonHeader,
-    IonIcon,
     IonLabel,
-    IonMenuButton,
     IonPage,
     IonSkeletonText,
     IonTextarea,
-    IonToolbar,
 } from '@ionic/react';
 import './PostView.scss';
 import PostComments from '../components/PostComments';
@@ -58,19 +52,8 @@ const PostView: React.FC = () => {
     }, [post?.id]);
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton auto-hide="false">
-                            <IonButton>
-                                <IonIcon name="reorder-three-outline"></IonIcon>
-                            </IonButton>
-                        </IonMenuButton>
-                    </IonButtons>
-                </IonToolbar>
-            </IonHeader>
             <IonContent>
-                <IonCard className="singlePost">
+                <IonCard className="singlePost wrapper">
                     <IonCardHeader className="postInfo">
                         <IonAvatar className="postAvatar"></IonAvatar>
                         {post ? (

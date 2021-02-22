@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
 import { InputChangeEventDetail } from '@ionic/core';
-import {
-    IonContent,
-    IonHeader,
-    IonPage,
-    IonTitle,
-    IonToolbar,
-    IonInput,
-    IonButton,
-    IonButtons,
-    IonMenuButton,
-    IonRouterLink,
-    IonIcon,
-} from '@ionic/react';
+import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import './Login.scss';
 import User from '../Models/User';
 import redirectAfterAuthEvent from '../app/routing';
@@ -42,18 +30,6 @@ const Login: React.FC = () => {
 
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar className="loginToolbar">
-                    <IonButtons slot="start">
-                        <IonMenuButton auto-hide="false">
-                            <IonButton>
-                                <IonIcon name="reorder-three-outline"></IonIcon>
-                            </IonButton>
-                        </IonMenuButton>
-                    </IonButtons>
-                    <IonTitle className="loginTitle">Login to the Schulich Hub</IonTitle>
-                </IonToolbar>
-            </IonHeader>
             <IonContent fullscreen className="loginContent">
                 <IonInput
                     placeholder="Email"
