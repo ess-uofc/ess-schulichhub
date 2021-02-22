@@ -39,7 +39,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         <IonCard>
             <IonCardHeader>
                 <IonImg className="image" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
-                <IonButton className="moreButtonActions" href={`/post/${props.postData.id}`}>
+                <IonButton className="moreButtonActions" href={`/post/${props.postData.id.split('/')[1]}`}>
                     <IonIcon icon={ellipsisVerticalOutline} />
                 </IonButton>
                 <IonButton onClick={() => handleDelete(props.postData)} className="moreButtonActions">

@@ -40,20 +40,21 @@ const PostView: React.FC = () => {
             .doc(id)
             .onSnapshot({
                 next: (snapshot) => {
-                    const _id = snapshot.id;
+                    console.log('Updated');
                     const doc = snapshot.data() as PostDoc;
                     const _post = new Post(
-                        _id,
+                        id,
                         doc.title,
                         doc.content,
                         doc.category as PostCategory,
                         doc.timestamp,
                         doc.uid,
                     );
+                    setPost(_post);
                 },
             });
         return unSubscribe;
-    }, [post]);
+    }, [post?.id]);
     return (
         <IonPage>
             <IonHeader>
@@ -76,17 +77,17 @@ const PostView: React.FC = () => {
                         ) : (
                             <IonSkeletonText animated />
                         )}
-                        <IonCardSubtitle className="postDescription">University of Calgary - 1 Day ago</IonCardSubtitle>
+                        {post ? (
+                            <IonCardSubtitle className="postDescription">
+                                University of Calgary - {post.getTimePosted()}
+                            </IonCardSubtitle>
+                        ) : (
+                            <IonSkeletonText animated />
+                        )}
                     </IonCardHeader>
                     <IonCardContent>
                         <IonChip className="subjectChip">
-                            <IonLabel>Subject</IonLabel>
-                        </IonChip>
-                        <IonChip className="subjectChip">
-                            <IonLabel>Subject</IonLabel>
-                        </IonChip>
-                        <IonChip className="subjectChip">
-                            <IonLabel>Subject</IonLabel>
+                            {post ? <IonLabel>{post.category}</IonLabel> : <IonSkeletonText animated />}
                         </IonChip>
                         {post ? (
                             <IonTextarea auto-grow="true" value={post.content}></IonTextarea>
@@ -97,6 +98,7 @@ const PostView: React.FC = () => {
                 </IonCard>
                 <PostComments> </PostComments>
                 <CommentCompose />
+                <IonButton> Submit </IonButton>
             </IonContent>
         </IonPage>
     );
