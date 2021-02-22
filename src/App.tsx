@@ -97,11 +97,12 @@ const App: React.FC = () => {
                 <IonRouterOutlet id="main">
                     <Route path="/landing" component={Landing} />
                     <PrivateRoute path="/home" component={Home} exact={true} />
-                    <Route path="/post" component={PostView} />
+                    <Route path="/post/:id" component={PostView} />
                     <Route path="/login" component={Login} exact={true} />
                     <Route path="/register" component={RegisterLanding} exact={true} />
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
                     <Route path="/writePost" component={WritePostView} exact={true} />
+                    
                     <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
                 </IonRouterOutlet>
             </IonReactRouter>
