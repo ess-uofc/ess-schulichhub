@@ -15,6 +15,7 @@ import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
 import { PostCategory } from '../Models/Enums';
+import { useHistory } from 'react-router';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
@@ -22,6 +23,7 @@ const WritePost: React.FC = () => {
     const [postCategory, setPostCategory] = useState<string>(PostCategory.Discussion);
     const [loading, setLoading] = useState(false);
     const db = new FireStoreDB();
+    const history = useHistory();
 
     async function uploadPost() {
         /**
@@ -41,7 +43,7 @@ const WritePost: React.FC = () => {
                 category: postCategory,
             });
             setLoading(false);
-            location.href = '/home';
+            history.push('/home');
         }
     }
     return loading ? (

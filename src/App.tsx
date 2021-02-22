@@ -68,7 +68,7 @@ const App: React.FC = () => {
         return () => {
             unSubscribe();
         };
-    }, [location.href]);
+    }, [location.pathname]);
     return (
         <IonApp>
             <IonReactRouter>

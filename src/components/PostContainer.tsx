@@ -14,6 +14,7 @@ import { ellipsisVerticalOutline, trashBin } from 'ionicons/icons';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import app from '../Models/firebase';
+import { useHistory } from 'react-router';
 
 interface ContainerProps {
     postData: Post;
@@ -21,6 +22,7 @@ interface ContainerProps {
 const db = new FireStoreDB();
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
+    const history = useHistory();
     async function handleDelete(postData: Post) {
         /**
          * @author Mohamad Abdel Rida
@@ -37,11 +39,8 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     }
     return (
         <IonCard>
-            <IonCardHeader>
+            <IonCardHeader onClick={() => history.push(`/post/${props.postData.id.split('/')[1]}`)}>
                 <IonImg className="image" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
-                <IonButton className="moreButtonActions" href={`/post/${props.postData.id.split('/')[1]}`}>
-                    <IonIcon icon={ellipsisVerticalOutline} />
-                </IonButton>
                 <IonButton onClick={() => handleDelete(props.postData)} className="moreButtonActions">
                     <IonIcon icon={trashBin} />
                 </IonButton>
