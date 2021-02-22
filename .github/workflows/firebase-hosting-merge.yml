@@ -28,11 +28,6 @@ jobs:
                   git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
                   yarn version --patch --message "[Bot] v%s" --git-tag-version=true
                   git push https://${{ secrets.PUSH_TO_PROTECTED_BRANCH }}@github.com/ess-uofc/ess-schulichhub HEAD:main --follow-tags
-            # - uses: CasperWA/push-protected@v2
-            #   with:
-            #       token: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
-            #       branch: main
-            #       tags: True
             - run: yarn install && yarn run build
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
