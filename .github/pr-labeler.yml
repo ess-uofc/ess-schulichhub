@@ -2,3 +2,4 @@ feature: ['feature/*', 'feat/*']
 bug: ['fix/*', 'hotfix/*', 'bug/*']
 documentation: ['docs/*', 'doc/*']
 devops: ['chore/*', 'test/*']
+automerge: '**/*'

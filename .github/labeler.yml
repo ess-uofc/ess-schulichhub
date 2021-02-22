@@ -1,5 +1,3 @@
-automerge: '**/*'
-
 integration: 'src/Models/**/*'
 
 front-end:
