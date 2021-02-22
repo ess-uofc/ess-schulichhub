@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     IonAvatar,
     IonButton,
@@ -15,6 +15,7 @@ import {
     IonLabel,
     IonMenuButton,
     IonPage,
+    IonSkeletonText,
     IonTextarea,
     IonToolbar,
 } from '@ionic/react';
@@ -24,17 +25,35 @@ import CommentCompose from '../components/CommentCompose';
 import Post from '../Models/Post';
 import { PostCategory } from '../Models/Enums';
 import { Timestamp } from '../Models/firebase';
-
-const testPost = new Post(
-    's',
-    '',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut mauris purus. Nunc ut lorem nec est accumsan luctus. Proin rhoncus, dolor sit amet vehicula elementum, turpis nulla sagittis velit, at auctor est urna vehicula libero. Phasellus facilisis neque non euismod rhoncus. Phasellus ipsum erat, varius id tellus a, blandit posuere elit. Donec sagittis mauris tristique urna egestas, eget placerat ligula sodales. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed ut eleifend dolor. Donec non dolor laoreet, malesuada eros ut, aliquam nu',
-    PostCategory.Event,
-    Timestamp.now(),
-    '',
-);
+import FireStoreDB from '../Models/firestore';
+import { useParams } from 'react-router-dom';
+import { PostDoc } from '../Models/DocTypes';
 
 const PostView: React.FC = () => {
+    const [post, setPost] = useState<Post>();
+    const db = new FireStoreDB();
+    const { id } = useParams<{ id: string }>();
+
+    useEffect(() => {
+        const unSubscribe = db.db
+            .collection('posts')
+            .doc(id)
+            .onSnapshot({
+                next: (snapshot) => {
+                    const _id = snapshot.id;
+                    const doc = snapshot.data() as PostDoc;
+                    const _post = new Post(
+                        _id,
+                        doc.title,
+                        doc.content,
+                        doc.category as PostCategory,
+                        doc.timestamp,
+                        doc.uid,
+                    );
+                },
+            });
+        return unSubscribe;
+    }, [post]);
     return (
         <IonPage>
             <IonHeader>
@@ -52,7 +71,11 @@ const PostView: React.FC = () => {
                 <IonCard className="singlePost">
                     <IonCardHeader className="postInfo">
                         <IonAvatar className="postAvatar"></IonAvatar>
-                        <IonCardTitle className="postName">{testPost.title}</IonCardTitle>
+                        {post ? (
+                            <IonCardTitle className="postName">{post.title}</IonCardTitle>
+                        ) : (
+                            <IonSkeletonText animated />
+                        )}
                         <IonCardSubtitle className="postDescription">University of Calgary - 1 Day ago</IonCardSubtitle>
                     </IonCardHeader>
                     <IonCardContent>
@@ -65,7 +88,11 @@ const PostView: React.FC = () => {
                         <IonChip className="subjectChip">
                             <IonLabel>Subject</IonLabel>
                         </IonChip>
-                        <IonTextarea auto-grow="true" value={testPost.content}></IonTextarea>
+                        {post ? (
+                            <IonTextarea auto-grow="true" value={post.content}></IonTextarea>
+                        ) : (
+                            <IonSkeletonText animated />
+                        )}
                     </IonCardContent>
                 </IonCard>
                 <PostComments> </PostComments>
