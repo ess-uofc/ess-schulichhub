@@ -1,6 +1,6 @@
 {
     "name": "ess-schulichhub",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "private": true,
     "dependencies": {
         "@ionic-native/youtube-video-player": "^5.30.0",
