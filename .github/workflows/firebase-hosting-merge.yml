@@ -19,6 +19,17 @@ jobs:
                       ${{ runner.OS }}-build-${{ env.cache-name }}-
                       ${{ runner.OS }}-build-
                       ${{ runner.OS }}-
+            - name: Increment version and push to main
+              run: |
+                  git config --global user.name 'github-actions[bot]'
+                  git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+                  yarn version --patch
+              uses: CasperWA/push-protected@v2
+              with:
+                  token: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
+                  branch: main
+                  tags: True
+                  unprotected_reviews: True
             - run: yarn install && yarn run build
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
