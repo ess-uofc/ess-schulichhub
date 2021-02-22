@@ -8,11 +8,12 @@ name: Deploy to Firebase Hosting on merge and increment version
             - main
 jobs:
     build_and_deploy:
+        if: "!contains(github.event.commits[0].message, '[Bot')"
         runs-on: ubuntu-latest
         steps:
-            - name: Check if version bump
-              if: "contains(github.event.head_commit.message, '[Bot]')"
-              run: echo "Continuous deployment not needed" && exit 0
+            # - name: Check if version bump
+            #   if: "contains(github.event.head_commit.message, '[Bot]')"
+            #   run: echo "Continuous deployment not needed" && exit 0
             - uses: actions/checkout@v2
             - uses: actions/cache@v1
               with:
@@ -27,11 +28,11 @@ jobs:
                   git config --global user.name 'github-actions[bot]'
                   git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
                   yarn version --patch --message "[Bot] %s"
-            # - uses: CasperWA/push-protected@v2
-            #   with:
-            #       token: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
-            #       branch: main
-            #       tags: True
+            - uses: CasperWA/push-protected@v2
+              with:
+                  token: ${{ secrets.PUSH_TO_PROTECTED_BRANCH }}
+                  branch: main
+                  tags: True
             - run: yarn install && yarn run build
             - uses: FirebaseExtended/action-hosting-deploy@v0
               with:
