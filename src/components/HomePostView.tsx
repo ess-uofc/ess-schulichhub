@@ -12,6 +12,14 @@ const HomePostView: React.FC = () => {
     const db = new FireStoreDB();
     const [postCategory, SetPostCategory] = useState<PostCategory>();
     function handleSnapshot(snapshot: firebase.default.firestore.QuerySnapshot) {
+        /**
+         * @author Mohamad Abdel Rida
+         * @param snapshot firebase query snapshot - post snapshot in this case
+         *
+         * transforms post collection into an array of objects of type {id:string, data:PostDoc}
+         * to serve frontend
+         *
+         */
         console.log('Updated');
         const snapshots = snapshot.docs;
         const docs = snapshots.map((docSnapshot) => {
