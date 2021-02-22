@@ -65,7 +65,9 @@ const App: React.FC = () => {
                 redirectAfterAuthEvent('/login');
             }
         });
-        return unSubscribe;
+        return () => {
+            unSubscribe();
+        };
     }, [location.href]);
     return (
         <IonApp>
