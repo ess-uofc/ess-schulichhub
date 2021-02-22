@@ -49,7 +49,7 @@ import WritePostView from './pages/WritePost';
 
 const App: React.FC = () => {
     useEffect(() => {
-        app.auth().onAuthStateChanged((user) => {
+        const unSubscribe = app.auth().onAuthStateChanged((user) => {
             /**
              * @author Mohamad Rida
              * @param user Firebase User
@@ -65,7 +65,8 @@ const App: React.FC = () => {
                 redirectAfterAuthEvent('/login');
             }
         });
-    }, []);
+        return unSubscribe;
+    }, [location.href]);
     return (
         <IonApp>
             <IonReactRouter>
@@ -102,7 +103,7 @@ const App: React.FC = () => {
                     <Route path="/register" component={RegisterLanding} exact={true} />
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
                     <Route path="/writePost" component={WritePostView} exact={true} />
-                    
+
                     <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
                 </IonRouterOutlet>
             </IonReactRouter>

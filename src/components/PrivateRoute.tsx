@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import app from '../Models/firebase';
 import PropTypes from 'prop-types';
@@ -18,10 +18,14 @@ export const PrivateRoute: React.FC<{
     const [loading, setLoading] = useState(true);
 
     const [authed, setAuthed] = useState<boolean | null>();
-    app.auth().onAuthStateChanged(function (user) {
-        setAuthed(Boolean(user));
-        setLoading(authed == null);
-    });
+    useEffect(() => {
+        const unSubscribe = app.auth().onAuthStateChanged(function (user) {
+            setAuthed(Boolean(user));
+            setLoading(authed == null);
+        });
+        console.log('Authenticated');
+        return unSubscribe;
+    }, [authed]);
 
     console.log(authed);
     const loadedComponent = authed ? (
