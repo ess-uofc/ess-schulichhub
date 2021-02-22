@@ -24,7 +24,6 @@ import PostComments from '../components/PostComments';
 import CommentCompose from '../components/CommentCompose';
 import Post from '../Models/Post';
 import { PostCategory } from '../Models/Enums';
-import { Timestamp } from '../Models/firebase';
 import FireStoreDB from '../Models/firestore';
 import { useParams } from 'react-router-dom';
 import { PostDoc } from '../Models/DocTypes';
