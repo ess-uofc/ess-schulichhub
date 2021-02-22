@@ -52,7 +52,9 @@ const PostView: React.FC = () => {
                     setPost(_post);
                 },
             });
-        return unSubscribe;
+        return () => {
+            unSubscribe();
+        };
     }, [post?.id]);
     return (
         <IonPage>

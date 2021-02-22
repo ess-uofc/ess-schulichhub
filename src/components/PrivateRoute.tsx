@@ -24,7 +24,9 @@ export const PrivateRoute: React.FC<{
             setLoading(authed == null);
         });
         console.log('Authenticated');
-        return unSubscribe;
+        return () => {
+            unSubscribe();
+        };
     }, [authed]);
 
     console.log(authed);

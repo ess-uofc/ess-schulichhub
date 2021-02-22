@@ -47,7 +47,9 @@ const HomePostView: React.FC = () => {
 
     useEffect(() => {
         const unSubscribe = getPosts();
-        return unSubscribe;
+        return () => {
+            unSubscribe();
+        };
     }, [posts?.length, postCategory]);
     return (
         <IonContent>
