@@ -23,6 +23,7 @@ const HomePostView: React.FC = () => {
             .orderBy('timestamp', 'desc')
             .onSnapshot({
                 next: (snapshot: firebase.default.firestore.QuerySnapshot) => {
+                    console.log('Updated');
                     const snapshots = snapshot.docs;
                     const docs = snapshots.map((docSnapshot) => {
                         return { id: docSnapshot.id, data: docSnapshot.data() as PostDoc };
@@ -43,7 +44,7 @@ const HomePostView: React.FC = () => {
                     console.log(e);
                 });
         };
-    }, [posts]);
+    }, [posts?.length]);
     return (
         <IonContent>
             {posts

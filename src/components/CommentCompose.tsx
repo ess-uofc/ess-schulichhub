@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonAvatar, IonCard, IonCardContent, IonTextarea } from '@ionic/react';
+import { IonAvatar, IonButton, IonCard, IonCardContent, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
 
 const CommentCompose: React.FC = () => {
