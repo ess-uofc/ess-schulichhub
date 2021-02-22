@@ -1,8 +1,6 @@
-automerge:
-    - '*'
+automerge: './**/*'
 
-integration:
-    - 'src/Models/**/*'
+integration: 'src/Models/**/*'
 
 front-end:
     - 'src/pages/**/*'
