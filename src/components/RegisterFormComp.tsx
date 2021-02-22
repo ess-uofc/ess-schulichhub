@@ -26,7 +26,7 @@ const RegisterForm: React.FC = () => {
 
     return (
         <>
-            <IonTitle>
+            <IonTitle className="wrapper">
                 Join The <span className="accentTextBig">Hub</span>.
             </IonTitle>
             <IonInput

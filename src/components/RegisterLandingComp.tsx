@@ -5,7 +5,7 @@ import '../pages/RegisterMain.scss';
 
 const RegisterLanding: React.FC = () => {
     return (
-        <div className="container">
+        <div className="wrapper">
             <IonRow>
                 <IonText className="registerText">
                     <span>There’s nothing but </span>

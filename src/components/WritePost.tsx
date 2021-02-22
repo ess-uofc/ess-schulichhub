@@ -16,6 +16,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
 import { PostCategory } from '../Models/Enums';
 import { useHistory } from 'react-router';
+import './HomePostView.scss';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
@@ -49,7 +50,7 @@ const WritePost: React.FC = () => {
     return loading ? (
         loadingComponent
     ) : (
-        <IonList>
+        <IonList className="wrapper">
             <IonListHeader>
                 <IonLabel>Write Post</IonLabel>
             </IonListHeader>
