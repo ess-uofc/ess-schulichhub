@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PostContainer.scss';
 import {
     IonCard,
@@ -9,8 +9,9 @@ import {
     IonIcon,
     IonImg,
     IonButton,
+    IonPopover,
 } from '@ionic/react';
-import { trashBin } from 'ionicons/icons';
+import { ellipseOutline, trashBin } from 'ionicons/icons';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import app from '../Models/firebase';
@@ -24,6 +25,7 @@ const db = new FireStoreDB();
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     const history = useHistory();
+    const [popOver, setPopOver] = useState<bool>();
     async function handleDelete(postData: Post) {
         /**
          * @author Mohamad Abdel Rida
@@ -42,8 +44,11 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         <IonCard>
             <IonCardHeader onClick={() => history.push(`/post/${props.postData.id.split('/')[1]}`)}>
                 <IonImg className="image" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
-                <IonButton onClick={() => handleDelete(props.postData)} className="moreButtonActions">
-                    <IonIcon icon={trashBin} />
+                <IonPopover cssClass="my-custom-class" isOpen={popOver} onDidDismiss={() => setPopOver(false)}>
+                    <p>This is popover content</p>
+                </IonPopover>
+                <IonButton onClick={() => setPopOver(true)}>
+                    <IonIcon icon={ellipseOutline}></IonIcon>
                 </IonButton>
                 <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
                 <IonCardSubtitle className="postInfo text">
