@@ -24,7 +24,7 @@ jobs:
               with:
                   prettier_options: --write .
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_HUB_116D7 }}
             - name: Yarn install
               run: yarn install
             - name: ESLint checker
