@@ -10,8 +10,12 @@ import {
     IonImg,
     IonButton,
     IonPopover,
+    IonList,
+    IonListHeader,
+    IonItem,
+    IonLabel,
 } from '@ionic/react';
-import { ellipseOutline, trashBin } from 'ionicons/icons';
+import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import app from '../Models/firebase';
@@ -25,7 +29,7 @@ const db = new FireStoreDB();
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     const history = useHistory();
-    const [popOver, setPopOver] = useState<bool>();
+    const [popOver, setPopOver] = useState<boolean>(false);
     async function handleDelete(postData: Post) {
         /**
          * @author Mohamad Abdel Rida
@@ -42,20 +46,30 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     }
     return (
         <IonCard>
-            <IonCardHeader onClick={() => history.push(`/post/${props.postData.id.split('/')[1]}`)}>
-                <IonImg className="image" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
-                <IonPopover cssClass="my-custom-class" isOpen={popOver} onDidDismiss={() => setPopOver(false)}>
-                    <p>This is popover content</p>
+            <IonCardHeader>
+                <IonPopover cssClass="" isOpen={popOver} onDidDismiss={() => setPopOver(false)}>
+                    <IonList lines="none">
+                        <IonListHeader className="listHeader">Options</IonListHeader>
+                        <IonItem>
+                            <IonLabel>Share</IonLabel> <IonIcon className="stickRight" icon={share}></IonIcon>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel>Delete</IonLabel> <IonIcon className="stickRight" icon={trash}></IonIcon>
+                        </IonItem>
+                    </IonList>
                 </IonPopover>
-                <IonButton onClick={() => setPopOver(true)}>
-                    <IonIcon icon={ellipseOutline}></IonIcon>
+                <IonButton className="stickRight" onClick={() => setPopOver(true)}>
+                    <IonIcon icon={ellipsisVertical}></IonIcon>
                 </IonButton>
                 <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
                 <IonCardSubtitle className="postInfo text">
                     {props.postData.getTimePosted()} - University of Calgary{' '}
                 </IonCardSubtitle>
             </IonCardHeader>
-            <IonCardContent>{props.postData.content}</IonCardContent>
+            <IonCardContent onClick={() => history.push(`/post/${props.postData.id.split('/')[1]}`)}>
+                <IonImg className="image" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
+                {props.postData.content}
+            </IonCardContent>
         </IonCard>
     );
 };
