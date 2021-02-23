@@ -9,3 +9,6 @@ redux:
 
 scss:
     - 'src/**/*.scss'
+
+devops:
+    - '.github/**/*'

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     IonAvatar,
+    IonButton,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -82,7 +83,7 @@ const PostView: React.FC = () => {
                 </IonCard>
                 <PostComments> </PostComments>
                 <CommentCompose />
-                <IonButton> Submit </IonButton>
+                <IonButton>Submit</IonButton>
             </IonContent>
         </IonPage>
     );
