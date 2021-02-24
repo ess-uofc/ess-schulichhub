@@ -55,6 +55,9 @@ const App: React.FC = () => {
                     : console.log('No routing needed');
             }
         });
+        return () => {
+            unSubscribe();
+        };
     }, []);
     return (
         <IonApp>
