@@ -46,12 +46,12 @@ const App: React.FC = () => {
             if (user) {
                 console.log(user);
                 unProtectedRoutes.includes(location.pathname)
-                    ? (location.href = '/home')
+                    ? history.push('/home')
                     : console.log('No routing needed');
             } else {
                 console.log('Redirecting User');
                 !unProtectedRoutes.includes(location.pathname)
-                    ? (location.href = '/login')
+                    ? history.push('/login')
                     : console.log('No routing needed');
             }
         });
