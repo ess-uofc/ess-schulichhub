@@ -4,7 +4,6 @@ import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/
 import './Login.scss';
 import User from '../Models/User';
 import { toast } from '../app/toast';
-import { useHistory } from 'react-router';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
@@ -14,7 +13,6 @@ import { useHistory } from 'react-router';
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory();
 
     /**
      * @author Carter Zimmer
