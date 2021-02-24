@@ -1,5 +1,7 @@
-.stickRight {
+.options {
     float: right;
+    border-color: black;
+    border: 2px;
 }
 
 .image {
@@ -10,4 +12,7 @@
 .listHeader {
     font-weight: bold;
     font-size: 1.5em;
+}
+.item {
+    --color-hover: black;
 }
