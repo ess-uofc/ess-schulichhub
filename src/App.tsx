@@ -44,7 +44,6 @@ const App: React.FC = () => {
              */
             if (user) {
                 console.log(user);
-
                 redirectAfterAuthEvent('/home');
             } else {
                 console.log('Redirecting User');

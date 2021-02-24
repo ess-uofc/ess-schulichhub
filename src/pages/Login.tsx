@@ -3,7 +3,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import './Login.scss';
 import User from '../Models/User';
-import redirectAfterAuthEvent from '../app/routing';
+import { toast } from '../app/toast';
 
 /**
  * @author Carter Zimmer
@@ -12,10 +12,9 @@ import redirectAfterAuthEvent from '../app/routing';
  */
 async function handleSubmit(email: string, password: string) {
     if (await User.login(email, password)) {
-        alert('login success');
-        redirectAfterAuthEvent('/home'); //TODO Redirect use to the homepage
+        toast('Yay!', 'login success');
     } else {
-        alert('login failed');
+        toast('Oh no.. :(', 'login failed');
     }
 }
 

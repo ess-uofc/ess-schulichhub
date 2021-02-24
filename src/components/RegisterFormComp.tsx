@@ -5,6 +5,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import '../pages/RegisterMain.scss';
 import User from '../Models/User';
+import { toast } from '../app/toast';
 
 const RegisterForm: React.FC = () => {
     const [Email, setEmail] = useState<string>('');
@@ -17,10 +18,10 @@ const RegisterForm: React.FC = () => {
         if (Password == Cpassword) {
             if (await User.signUp(firstName, lastName, Email, Password)) {
             } else {
-                alert('Sign up failed');
+                toast('Oops...','Sign up failed');
             }
         } else {
-            console.log('Password and confirm password do not match');
+            toast('Oh no...','Password and confirm password do not match');
         }
     }
 
