@@ -4,7 +4,7 @@ export async function toast(
     position: 'top' | 'bottom' | 'middle' = 'top',
     duration = 2000,
     buttons?: { text: string; role: string; handler: () => void }[],
-) {
+): Promise<void> {
     const toast = document.createElement('ion-toast');
     toast.header = header;
     toast.message = message;
