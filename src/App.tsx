@@ -45,19 +45,16 @@ const App: React.FC = () => {
              */
             if (user) {
                 console.log(user);
-                unProtectedRoutes.includes(location.pathname)
-                    ? history.push('/home')
+                unProtectedRoutes.includes(window.location.pathname)
+                    ? (location.href = '/home')
                     : console.log('No routing needed');
             } else {
                 console.log('Redirecting User');
-                !unProtectedRoutes.includes(location.pathname)
+                !unProtectedRoutes.includes(window.location.pathname)
                     ? history.push('/login')
                     : console.log('No routing needed');
             }
         });
-        return () => {
-            unSubscribe();
-        };
     }, []);
     return (
         <IonApp>
