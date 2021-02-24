@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import app from '../Models/firebase';
 import PropTypes from 'prop-types';
 import { loadingComponent } from './Loading';
