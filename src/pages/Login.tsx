@@ -4,19 +4,7 @@ import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/
 import './Login.scss';
 import User from '../Models/User';
 import { toast } from '../app/toast';
-
-/**
- * @author Carter Zimmer
- * @param email the user's email aka username
- * @param password the user's password
- */
-async function handleSubmit(email: string, password: string) {
-    if (await User.login(email, password)) {
-        toast('Yay!', 'login success');
-    } else {
-        toast('Oh no.. :(', 'login failed');
-    }
-}
+import { useHistory } from 'react-router';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
@@ -26,6 +14,20 @@ async function handleSubmit(email: string, password: string) {
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
+
+    /**
+     * @author Carter Zimmer
+     * @param email the user's email aka username
+     * @param password the user's password
+     */
+    async function handleSubmit(email: string, password: string) {
+        if (await User.login(email, password)) {
+            toast('Yay!', 'login success');
+        } else {
+            toast('Oh no.. :(', 'login failed');
+        }
+    }
 
     return (
         <IonPage>

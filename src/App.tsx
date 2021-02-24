@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Landing from './pages/Landing';
@@ -28,12 +28,13 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.scss';
 import app from './Models/firebase';
-import redirectAfterAuthEvent from './app/routing';
 import { PrivateRoute } from './components/PrivateRoute';
 import WritePostView from './pages/WritePost';
 import TitleBar from './components/TitleBar';
+import unProtectedRoutes from './app/routing';
 
 const App: React.FC = () => {
+    const history = useHistory();
     useEffect(() => {
         const unSubscribe = app.auth().onAuthStateChanged((user) => {
             /**
@@ -44,16 +45,20 @@ const App: React.FC = () => {
              */
             if (user) {
                 console.log(user);
-                redirectAfterAuthEvent('/home');
+                unProtectedRoutes.includes(location.pathname)
+                    ? (location.href = '/home')
+                    : console.log('No routing needed');
             } else {
                 console.log('Redirecting User');
-                redirectAfterAuthEvent('/login');
+                !unProtectedRoutes.includes(location.pathname)
+                    ? (location.href = '/login')
+                    : console.log('No routing needed');
             }
         });
         return () => {
             unSubscribe();
         };
-    }, [location.pathname]);
+    }, []);
     return (
         <IonApp>
             <IonReactRouter>
@@ -66,7 +71,6 @@ const App: React.FC = () => {
                     <Route path="/register" component={RegisterLanding} exact={true} />
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
                     <Route path="/writePost" component={WritePostView} exact={true} />
-
                     <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
                 </IonRouterOutlet>
             </IonReactRouter>

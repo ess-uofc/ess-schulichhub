@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import app from '../Models/firebase';
 import PropTypes from 'prop-types';
 import { loadingComponent } from './Loading';
+import Login from '../pages/Login';
 
 export const PrivateRoute: React.FC<{
     /**
@@ -16,26 +17,30 @@ export const PrivateRoute: React.FC<{
     exact: boolean;
 }> = (props) => {
     const [loading, setLoading] = useState(true);
+    const [authenticated, setAuthenticatedState] = useState<boolean | null>();
+    console.log('Authenticated');
 
-    const [authed, setAuthed] = useState<boolean | null>();
     useEffect(() => {
         const unSubscribe = app.auth().onAuthStateChanged(function (user) {
-            setAuthed(Boolean(user));
-            setLoading(authed == null);
+            setAuthenticatedState(Boolean(user));
+            setLoading(authenticated == null);
         });
         console.log('Authenticated');
         return () => {
             unSubscribe();
         };
-    }, [authed]);
+    }, [authenticated]);
 
-    console.log(authed);
-    const loadedComponent = authed ? (
-        <Route path={props.path} exact={props.exact} component={props.component} />
-    ) : (
-        <Redirect to="/login" exact={true} />
-    );
-    return loading ? loadingComponent : loadedComponent;
+    function handleAuthState() {
+        if (authenticated) {
+            return <Route path={props.path} exact={props.exact} component={props.component} />;
+        } else if (loading) {
+            return loadingComponent;
+        } else {
+            return <Login />;
+        }
+    }
+    return handleAuthState();
 };
 
 PrivateRoute.propTypes = {
