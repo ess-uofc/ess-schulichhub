@@ -29,12 +29,17 @@ const db = new FireStoreDB();
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     const history = useHistory();
-    const [popOver, setPopOver] = useState<boolean>(false);
+    const [popOver, setPopOver] = useState<{
+        event: React.MouseEvent<HTMLIonIconElement, MouseEvent> | undefined;
+        show: boolean;
+    }>({ show: false, event: undefined });
     async function handleDelete(postData: Post) {
         /**
          * @author Mohamad Abdel Rida
          * @param postId, the post to be deleted
          */
+        setPopOver({ show: false, event: undefined });
+
         try {
             const user = app.auth().currentUser;
             if (user) {
@@ -47,20 +52,33 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     return (
         <IonCard>
             <IonCardHeader>
-                <IonPopover cssClass="" isOpen={popOver} onDidDismiss={() => setPopOver(false)}>
+                <IonPopover
+                    cssClass=""
+                    event={popOver.event?.nativeEvent}
+                    isOpen={popOver.show}
+                    onDidDismiss={() => setPopOver({ show: false, event: undefined })}
+                >
                     <IonList lines="none">
                         <IonListHeader className="listHeader">Options</IonListHeader>
-                        <IonItem>
+                        <IonItem className="item">
                             <IonLabel>Share</IonLabel> <IonIcon className="stickRight" icon={share}></IonIcon>
                         </IonItem>
-                        <IonItem>
+                        <IonItem onClick={() => handleDelete(props.postData)}>
                             <IonLabel>Delete</IonLabel> <IonIcon className="stickRight" icon={trash}></IonIcon>
                         </IonItem>
                     </IonList>
                 </IonPopover>
-                <IonButton className="stickRight" onClick={() => setPopOver(true)}>
-                    <IonIcon icon={ellipsisVertical}></IonIcon>
-                </IonButton>
+                <IonIcon
+                    onClick={(e: React.MouseEvent<HTMLIonIconElement, MouseEvent>) => {
+                        e.persist();
+                        setPopOver({
+                            show: true,
+                            event: e,
+                        });
+                    }}
+                    className="options"
+                    icon={ellipsisVertical}
+                ></IonIcon>
                 <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
                 <IonCardSubtitle className="postInfo text">
                     {props.postData.getTimePosted()} - University of Calgary{' '}
