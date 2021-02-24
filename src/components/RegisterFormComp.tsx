@@ -18,10 +18,10 @@ const RegisterForm: React.FC = () => {
         if (Password == Cpassword) {
             if (await User.signUp(firstName, lastName, Email, Password)) {
             } else {
-                toast('Oops...','Sign up failed');
+                toast('Oops...', 'Sign up failed');
             }
         } else {
-            toast('Oh no...','Password and confirm password do not match');
+            toast('Oh no...', 'Password and confirm password do not match');
         }
     }
 
