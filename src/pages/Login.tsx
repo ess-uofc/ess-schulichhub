@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { InputChangeEventDetail } from '@ionic/core';
-import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/react';
+import { IonContent, IonPage, IonInput, IonButton, IonRouterLink, IonButtons } from '@ionic/react';
 import './Login.scss';
 import User from '../Models/User';
 import { toast } from '../app/toast';
@@ -47,6 +47,9 @@ const Login: React.FC = () => {
                 <div>
                     <IonButton className="googleLogin">Sign in with Google</IonButton>
                 </div>
+                <IonButton className="testLogin" onClick={() => handleSubmit('test@test.com', 'Testing')}>
+                    Test Sign in
+                </IonButton>
                 <p>
                     New here?
                     <IonRouterLink routerLink="/register"> Join the Hub</IonRouterLink>
