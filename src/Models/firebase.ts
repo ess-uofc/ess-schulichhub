@@ -21,4 +21,6 @@ firebase.firestore().settings({
 });
 firebase.firestore().enablePersistence({ synchronizeTabs: true });
 
+export const Auth = app.auth();
+export const Firestore = app.firestore();
 export default app;
