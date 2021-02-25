@@ -34,12 +34,12 @@ import app from './Models/firebase';
 import unProtectedRoutes from './app/routing';
 
 const App: React.FC = () => {
-    const [, setUser] = useState<firebase.default.User | undefined | null>();
+    // const [, setUser] = useState<firebase.default.User | undefined | null>();
 
     useEffect(() => {
         const unSubscribe = app.auth().onAuthStateChanged((user) => {
             if (user) {
-                setUser(user);
+                // setUser(user);
                 //Create redux state here
                 unProtectedRoutes.includes(location.pathname) ? (location.href = '/home') : console.log('At home');
             } else {
