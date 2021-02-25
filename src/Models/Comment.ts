@@ -1,6 +1,6 @@
-import { Timestamp } from './firebase';
+import FirebaseDocument from './FirebaseDocument';
 import User from './User';
-export default class Comment {
+export default class Comment extends FirebaseDocument {
     /**
      * Comment class for holding comments
      * @author Robert Brown
@@ -9,8 +9,8 @@ export default class Comment {
 
     id: string;
     content: string;
-    timestamp?: Timestamp;
-    replyTo?: Comment;
+    timestamp?: firebase.default.firestore.Timestamp;
+    replyTo?: string;
     user?: User;
 
     /**
@@ -25,12 +25,13 @@ export default class Comment {
         id: string,
         content: string,
         timestamp?: firebase.default.firestore.Timestamp,
-        replyTo?: Comment,
+        replyTo?: string,
         user?: User,
     ) {
+        super();
         this.id = id;
         this.content = content;
-        this.timestamp = Timestamp.now();
+        this.timestamp = timestamp;
         this.replyTo = replyTo;
         this.user = user;
     }

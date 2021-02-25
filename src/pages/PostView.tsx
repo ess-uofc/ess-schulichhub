@@ -21,15 +21,20 @@ import Post from '../Models/Post';
 import { PostCategory } from '../Models/Enums';
 import FireStoreDB from '../Models/firestore';
 import { useParams } from 'react-router-dom';
-import { PostDoc } from '../Models/DocTypes';
+import { CommentDoc, PostDoc } from '../Models/DocTypes';
+import Comment from '../Models/Comment';
+import app, { Timestamp } from '../Models/firebase';
 
 const PostView: React.FC = () => {
     const [post, setPost] = useState<Post>();
+    const [comments, setComments] = useState<{ id: string; comment: Comment }[]>();
     const db = new FireStoreDB();
+    const [userId, setUserId] = useState<string>();
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
-        const unSubscribe = db.db
+        console.log('Adding event listeners...');
+        const unSubscribeFromPosts = db.db
             .collection('posts')
             .doc(id)
             .onSnapshot({
@@ -49,10 +54,35 @@ const PostView: React.FC = () => {
                     }
                 },
             });
+        const unSubscribeFromComments = db.db
+            .collection('comments')
+            .where('replyTo', '==', id)
+            .orderBy('timestamp', 'desc')
+            .onSnapshot({
+                next: (snapshot) => {
+                    const commentDocs = snapshot.docs;
+                    const Comments = commentDocs.map((e) => {
+                        const commentData = e.data() as CommentDoc;
+                        return {
+                            id: e.id,
+                            comment: new Comment(e.id, commentData.content, commentData.timestamp, commentData.replyTo),
+                        };
+                    });
+                    setComments(Comments);
+                    console.log(Comments[0].comment.timestamp);
+                    console.log(Timestamp.now());
+                },
+            });
+        const UserAuthListener = app.auth().onAuthStateChanged((user) => {
+            user && setUserId(user?.uid);
+        });
         return () => {
-            unSubscribe();
+            unSubscribeFromPosts();
+            UserAuthListener();
+            unSubscribeFromComments();
+            console.log('Unsubscribed...');
         };
-    }, [post?.id]);
+    }, []);
     return (
         <IonPage>
             <IonContent>
@@ -83,8 +113,8 @@ const PostView: React.FC = () => {
                         )}
                     </IonCardContent>
                 </IonCard>
-                <PostComments> </PostComments>
-                <CommentCompose />
+                <PostComments comments={comments}> </PostComments>
+                {userId && <CommentCompose userId={userId} postId={id} />}
                 <IonButton>Submit</IonButton>
             </IonContent>
         </IonPage>
