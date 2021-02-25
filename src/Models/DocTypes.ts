@@ -5,6 +5,7 @@ export interface UserDoc {
     lastName: string;
     uid: string;
     major?: string;
+    timeOfCreation: firebase.default.firestore.Timestamp;
     [key: string]: any;
 
     // Add other user fields here
@@ -25,6 +26,6 @@ export interface CommentDoc {
     replyTo: string;
     uid: string;
     content: string;
-    timestamp: string;
+    timestamp: firebase.default.firestore.Timestamp;
     [key: string]: any;
 }

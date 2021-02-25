@@ -107,6 +107,7 @@ export default class User implements UserDoc {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     uid: user.uid,
+                    timeOfCreation: Timestamp.now(),
                 });
                 return user;
             } else {
