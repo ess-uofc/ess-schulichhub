@@ -36,15 +36,17 @@ const PostView: React.FC = () => {
                 next: (snapshot) => {
                     console.log('Updated');
                     const doc = snapshot.data() as PostDoc;
-                    const _post = new Post(
-                        id,
-                        doc.title,
-                        doc.content,
-                        doc.category as PostCategory,
-                        doc.timestamp,
-                        doc.uid,
-                    );
-                    setPost(_post);
+                    if (doc) {
+                        const _post = new Post(
+                            id,
+                            doc.title,
+                            doc.content,
+                            doc.category as PostCategory,
+                            doc.timestamp,
+                            doc.uid,
+                        );
+                        setPost(_post);
+                    }
                 },
             });
         return () => {

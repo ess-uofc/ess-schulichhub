@@ -22,6 +22,7 @@ const Login: React.FC = () => {
     async function handleSubmit(email: string, password: string) {
         if (await User.login(email, password)) {
             toast('Yay!', 'login success');
+            // history.push('/home');
         } else {
             toast('Oh no.. :(', 'login failed');
         }
@@ -47,7 +48,7 @@ const Login: React.FC = () => {
                 <div>
                     <IonButton className="googleLogin">Sign in with Google</IonButton>
                 </div>
-                <IonButton className="testLogin" onClick={() => handleSubmit('test@test.com', 'Testing')}>
+                <IonButton className="testLogin" onClick={() => handleSubmit('test1@test.com', '123456')}>
                     Test Sign in
                 </IonButton>
                 <p>

@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Redirect, Route, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Landing from './pages/Landing';
@@ -27,32 +27,23 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.scss';
-import app from './Models/firebase';
 import { PrivateRoute } from './components/PrivateRoute';
 import WritePostView from './pages/WritePost';
 import TitleBar from './components/TitleBar';
+import app from './Models/firebase';
 import unProtectedRoutes from './app/routing';
 
 const App: React.FC = () => {
-    const history = useHistory();
+    const [, setUser] = useState<firebase.default.User | undefined | null>();
+
     useEffect(() => {
         const unSubscribe = app.auth().onAuthStateChanged((user) => {
-            /**
-             * @author Mohamad Rida
-             * @param user Firebase User
-             * Redirects user to login page on top level
-             * Once an auth state change has occurred
-             */
             if (user) {
-                console.log(user);
-                unProtectedRoutes.includes(window.location.pathname)
-                    ? (location.href = '/home')
-                    : console.log('No routing needed');
+                setUser(user);
+                //Create redux state here
+                unProtectedRoutes.includes(location.pathname) ? (location.href = '/home') : console.log('At home');
             } else {
-                console.log('Redirecting User');
-                !unProtectedRoutes.includes(window.location.pathname)
-                    ? history.push('/login')
-                    : console.log('No routing needed');
+                !unProtectedRoutes.includes(location.pathname) ? (location.href = '/login') : console.log('Safe');
             }
         });
         return () => {

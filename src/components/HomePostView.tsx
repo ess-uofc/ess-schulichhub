@@ -5,8 +5,8 @@ import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
 import { PostDoc } from '../Models/DocTypes';
-import { loadingComponent } from './Loading';
 import { PostCategory } from '../Models/Enums';
+import PostSkeleton from './PostContainerSkeleton';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<Array<{ id: string; data: PostDoc }>>();
     const db = new FireStoreDB();
@@ -88,7 +88,7 @@ const HomePostView: React.FC = () => {
                           />
                       );
                   })
-                : loadingComponent}
+                : PostSkeleton}
         </IonContent>
     );
 };
