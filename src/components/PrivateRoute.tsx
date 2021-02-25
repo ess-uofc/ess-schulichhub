@@ -1,50 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { Route } from 'react-router-dom';
 import app from '../Models/firebase';
 import PropTypes from 'prop-types';
-import { loadingComponent } from './Loading';
 import Login from '../pages/Login';
 
-export const PrivateRoute: React.FC<{
-    /**
-     * @author Mohamad Abdel Rida
-     * @param component -> The protected Component being routed to
-     * @param path the path corresponding to the protected component
-     * @param exact A boolean flag that toggles exact path matching
-     */
+type PrivateRouteTypes = {
     component: React.FC;
     path: string;
     exact: boolean;
-}> = (props) => {
-    const [loading, setLoading] = useState(true);
-    const [authenticated, setAuthenticatedState] = useState<boolean | null>();
-    console.log('Authenticated');
+    fallback?: React.FC;
+};
 
+/**
+ * @author Mohamad Abdel Rida
+ * @param component -> The protected Component being routed to
+ * @param path the path corresponding to the protected component
+ * @param exact A boolean flag that toggles exact path matching
+ * @param fallback  The component to render if user is not allow to access
+ * are allowed access to route
+ */
+export const PrivateRoute: React.FC<PrivateRouteTypes> = (props) => {
+    const [condition, setCondition] = useState<boolean>();
     useEffect(() => {
-        const unSubscribe = app.auth().onAuthStateChanged(function (user) {
-            setAuthenticatedState(Boolean(user));
-            setLoading(authenticated == null);
+        const unSubscribe = app.auth().onAuthStateChanged((user) => {
+            setCondition(Boolean(user));
         });
-        console.log('Authenticated');
-        return () => {
-            unSubscribe();
-        };
-    }, [authenticated]);
-
-    function handleAuthState() {
-        if (authenticated) {
-            return <Route path={props.path} exact={props.exact} component={props.component} />;
-        } else if (loading) {
-            return loadingComponent;
-        } else {
-            return <Login />;
-        }
-    }
-    return handleAuthState();
+        return unSubscribe;
+    }, [location.pathname]);
+    return condition ? props.component({}) : props.fallback ? props.component({}) : <Login />;
 };
 
 PrivateRoute.propTypes = {
     component: PropTypes.func.isRequired,
     path: PropTypes.string.isRequired,
+    fallback: PropTypes.func,
     exact: PropTypes.bool.isRequired,
 };

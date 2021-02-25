@@ -2,7 +2,7 @@ export async function toast(
     header: string,
     message: string,
     position: 'top' | 'bottom' | 'middle' = 'top',
-    duration = 2000,
+    duration = 800,
     buttons?: { text: string; role: string; handler: () => void }[],
 ): Promise<void> {
     const toast = document.createElement('ion-toast');
