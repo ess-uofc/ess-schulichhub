@@ -1,12 +1,13 @@
 import firebase from 'firebase';
-import { PostAttachmentType, PostCategory } from './Enums';
+import { PostCategory } from './Enums';
+import PostAttachment from './PostAttachment';
 export default class Post {
     id: string;
     content: string;
     title: string;
     timestamp?: firebase.firestore.Timestamp;
     uid: string;
-    attachment?: PostAttachmentType;
+    attachment?: PostAttachment;
     category: PostCategory;
 
     /**
@@ -26,7 +27,7 @@ export default class Post {
         category: PostCategory,
         timestamp: firebase.firestore.Timestamp,
         uid: string,
-        attachment?: PostAttachmentType,
+        attachment?: PostAttachment,
     ) {
         this.id = id;
         this.title = title;

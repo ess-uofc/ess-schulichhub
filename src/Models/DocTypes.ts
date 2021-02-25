@@ -1,11 +1,10 @@
-import { PostCategory } from './Enums';
+import { PostAttachmentType } from './Enums';
 
 export interface UserDoc {
     firstName: string;
     lastName: string;
     uid: string;
     major?: string;
-
     [key: string]: any;
 
     // Add other user fields here
@@ -18,6 +17,8 @@ export interface PostDoc {
     timestamp: firebase.default.firestore.Timestamp;
     comments?: Array<string>;
     category: string;
+    attachmentUrl?: string;
+    attachmentType?: PostAttachmentType;
     [key: string]: any;
 }
 export interface CommentDoc {
@@ -25,6 +26,5 @@ export interface CommentDoc {
     uid: string;
     content: string;
     timestamp: string;
-
     [key: string]: any;
 }

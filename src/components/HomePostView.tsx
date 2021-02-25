@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './HomePostView.scss';
-import { IonContent, IonItem, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonContent, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
 import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
@@ -8,9 +8,9 @@ import { PostDoc } from '../Models/DocTypes';
 import { PostCategory } from '../Models/Enums';
 import PostSkeleton from './PostContainerSkeleton';
 const HomePostView: React.FC = () => {
-    const [posts, setPosts] = useState<Array<{ id: string; data: PostDoc }>>();
+    const [posts, setPosts] = useState<{ id: string; data: PostDoc }[]>();
     const db = new FireStoreDB();
-    const [postCategory, SetPostCategory] = useState<PostCategory>();
+    const [postFilters, SetPostFilters] = useState<PostCategory[]>([]);
     function handleSnapshot(snapshot: firebase.default.firestore.QuerySnapshot) {
         /**
          * @author Mohamad Abdel Rida
@@ -36,8 +36,9 @@ const HomePostView: React.FC = () => {
          *
          */
         const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc');
-        if (postCategory) {
-            return postsCollection.where('category', '==', postCategory).onSnapshot({ next: handleSnapshot });
+
+        if (postFilters.length != 0) {
+            return postsCollection.where('category', 'in', postFilters).onSnapshot({ next: handleSnapshot });
         } else {
             return postsCollection.onSnapshot({
                 next: handleSnapshot,
@@ -46,30 +47,30 @@ const HomePostView: React.FC = () => {
     }
 
     useEffect(() => {
+        console.log('Fetching Posts');
         const unSubscribe = getPosts();
         return () => {
             unSubscribe();
         };
-    }, [posts?.length, postCategory]);
+    }, [posts?.length, postFilters.length]);
     return (
         <IonContent>
-            <IonItem>
-                <IonLabel>Post Category</IonLabel>
-                <IonSelect
-                    value={postCategory}
-                    okText="Okay"
-                    cancelText="Dismiss"
-                    onIonChange={(e) => SetPostCategory(e.detail.value as PostCategory)}
-                >
-                    {Object.keys(PostCategory).map((v, e) => {
-                        return (
-                            <IonSelectOption key={e} value={v}>
-                                {v}
-                            </IonSelectOption>
-                        );
-                    })}
-                </IonSelect>
-            </IonItem>
+            <IonLabel>Post Category</IonLabel>
+            <IonSelect
+                value={postFilters}
+                multiple={true}
+                cancelText="Nope"
+                okText="Okay!"
+                onIonChange={(e) => SetPostFilters(e.detail.value)}
+            >
+                {Object.keys(PostCategory).map((v, k) => {
+                    return (
+                        <IonSelectOption key={k} value={v}>
+                            {v}
+                        </IonSelectOption>
+                    );
+                })}
+            </IonSelect>
             {posts
                 ? posts.map((v, k) => {
                       return (

@@ -8,7 +8,6 @@ import {
     IonCardContent,
     IonIcon,
     IonImg,
-    IonButton,
     IonPopover,
     IonList,
     IonListHeader,
@@ -85,7 +84,10 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                 </IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent onClick={() => history.push(`/post/${props.postData.id.split('/')[1]}`)}>
-                <IonImg className="image" src="https://essucalgary.com/images/ess-logo.png"></IonImg>
+                <IonImg
+                    className="image"
+                    src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
+                ></IonImg>
                 {props.postData.content}
             </IonCardContent>
         </IonCard>
