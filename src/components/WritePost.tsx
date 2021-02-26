@@ -10,7 +10,7 @@ import {
     IonSelectOption,
 } from '@ionic/react';
 import FireStoreDB from '../Models/firestore';
-import app, { Auth, Timestamp } from '../Models/firebase';
+import { Auth, Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';

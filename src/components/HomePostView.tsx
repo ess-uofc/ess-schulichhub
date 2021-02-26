@@ -7,11 +7,12 @@ import FireStoreDB from '../Models/firestore';
 import { PostDoc } from '../Models/DocTypes';
 import { PostCategory } from '../Models/Enums';
 import PostSkeleton from './PostContainerSkeleton';
+import { DocumentData, QuerySnapshot } from '../Models/firebase';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<{ id: string; data: PostDoc }[]>();
     const db = new FireStoreDB();
     const [postFilters, SetPostFilters] = useState<PostCategory[]>([]);
-    function handleSnapshot(snapshot: firebase.default.firestore.QuerySnapshot) {
+    function handleSnapshot(snapshot: QuerySnapshot) {
         /**
          * @author Mohamad Abdel Rida
          * @param snapshot firebase query snapshot - post snapshot in this case

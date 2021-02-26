@@ -34,7 +34,7 @@ import './theme/variables.scss';
 import { PrivateRoute } from './components/PrivateRoute';
 import WritePostView from './pages/WritePost';
 import TitleBar from './components/TitleBar';
-import app, { Auth } from './Models/firebase';
+import app, { Auth, FirebaseUser } from './Models/firebase';
 import unProtectedRoutes from './app/routing';
 
 const App: React.FC = () => {
