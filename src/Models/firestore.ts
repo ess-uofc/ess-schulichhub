@@ -1,14 +1,10 @@
-import app, { DocumentData, WhereFilterOp } from './firebase';
+import app, { DocumentData, Firestore, WhereFilterOp } from './firebase';
 
 export default class FireStoreDB {
     /**
      * @author Mohamad Abdel Rida
      */
-    db;
-
-    constructor() {
-        this.db = app.firestore();
-    }
+    db = Firestore;
 
     public async deleteDoc(id: string): Promise<void> {
         /**

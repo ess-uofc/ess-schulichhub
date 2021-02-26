@@ -1,5 +1,5 @@
 import { UserDoc } from './DocTypes';
-import app from './firebase';
+import app, { Auth, Firestore } from './firebase';
 import FireStoreDB from './firestore';
 
 export class UserError extends Error {
@@ -72,7 +72,7 @@ export default class User {
      *
      */
     private async fetchUserDetails(): Promise<void> {
-        const doc = await app.firestore().collection('users').doc(this.uid).get();
+        const doc = await Firestore.collection('users').doc(this.uid).get();
         try {
             const data = doc.data() as UserDoc;
 
@@ -100,7 +100,7 @@ export default class User {
     ): Promise<User | undefined> {
         try {
             const db = new FireStoreDB();
-            const res = await app.auth().createUserWithEmailAndPassword(email, password);
+            const res = await Auth.createUserWithEmailAndPassword(email, password);
             if (res.user != null) {
                 const user = new User(res.user.uid, email, firstName, lastName);
                 db.uploadDoc<UserDoc>('users', {
@@ -125,7 +125,7 @@ export default class User {
      */
     public static async signOut(): Promise<void> {
         try {
-            const res = await app.auth().signOut();
+            const res = await Auth.signOut();
             console.log(res);
         } catch (e) {
             console.log(e);
@@ -139,7 +139,7 @@ export default class User {
      */
     public static async login(email: string, password: string): Promise<User | undefined> {
         try {
-            const res = await app.auth().signInWithEmailAndPassword(email, password);
+            const res = await Auth.signInWithEmailAndPassword(email, password);
             if (res.user) {
                 const userResult = res.user;
                 const db = new FireStoreDB();

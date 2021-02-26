@@ -10,7 +10,7 @@ import {
     IonSelectOption,
 } from '@ionic/react';
 import FireStoreDB from '../Models/firestore';
-import { Timestamp } from '../Models/firebase';
+import app, { Auth, Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
@@ -36,8 +36,7 @@ const WritePost: React.FC = () => {
          * @author Mohamad Abdel Rida
          *  Uploads a post
          */
-        // const user = app.auth().currentUser;
-
+        const user = app.auth().currentUser;
         setLoading(true);
 
         if (user) {
