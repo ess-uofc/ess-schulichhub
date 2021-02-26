@@ -21,7 +21,7 @@ type PrivateRouteTypes = {
 export const PrivateRoute: React.FC<PrivateRouteTypes> = (props) => {
     const [condition, setCondition] = useState<boolean>();
     useEffect(() => {
-        const unSubscribe = Auth.onAuthStateChanged((user) => {
+        const unSubscribe = Auth.auth.onAuthStateChanged((user) => {
             setCondition(Boolean(user));
         });
         return unSubscribe;

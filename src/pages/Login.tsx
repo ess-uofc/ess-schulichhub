@@ -4,6 +4,7 @@ import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/
 import './Login.scss';
 import User from '../Models/User';
 import { toast } from '../app/toast';
+import { Auth } from '../Models/firebase';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
@@ -46,7 +47,9 @@ const Login: React.FC = () => {
                     Sign In
                 </IonButton>
                 <div>
-                    <IonButton className="googleLogin">Sign in with Google</IonButton>
+                    <IonButton onClick={Auth.signInWithGoogle} className="googleLogin">
+                        Sign in with Google
+                    </IonButton>
                 </div>
                 <IonButton className="testLogin" onClick={() => handleSubmit('test1@test.com', '123456')}>
                     Test Sign in

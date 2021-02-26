@@ -1,9 +1,8 @@
 import firebase from 'firebase';
-import { type } from 'os';
+import PrimaryUser from './PrimaryUser';
 
 export const Timestamp = firebase.firestore.Timestamp;
 export type Timestamp = firebase.firestore.Timestamp;
-
 export type DocumentData = firebase.firestore.DocumentData;
 export type WhereFilterOp = firebase.firestore.WhereFilterOp;
 export type FirebaseUser = firebase.User;
@@ -25,6 +24,62 @@ firebase.firestore().settings({
 });
 firebase.firestore().enablePersistence({ synchronizeTabs: true });
 
-export const Auth = app.auth();
+export class Auth {
+    private static auth = app.auth();
+    static user = Auth.auth.currentUser;
+
+    static signInWithGoogle = async () => {
+        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        try {
+            const res = await Auth.auth.signInWithPopup(googleProvider);
+            if (res.user) {
+                return new PrimaryUser(res.user);
+            } else {
+            }
+        } catch (e) {}
+    };
+    static async signInWithEmail(email: string, password: string): Promise<PrimaryUser | undefined> {
+        try {
+            const res = await this.auth.signInWithEmailAndPassword(email, password);
+            const user = res.user;
+            if (user) {
+                return new PrimaryUser(user);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    static async signOut() {
+        try {
+            await this.auth.signOut();
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    static async createWithEmail(
+        email: string,
+        password: string,
+        displayNames: { firstName: string; lastName: string },
+    ): Promise<PrimaryUser | undefined> {
+        try {
+            const res = await this.auth.createUserWithEmailAndPassword(email, password);
+            if (res.user) {
+                const user = res.user;
+                user.updateProfile({ displayName: [displayNames.firstName, displayNames.lastName].join(' ') });
+                return new PrimaryUser(user);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    onAuthStateChange(
+        callback: (user: FirebaseUser | null) => void,
+        error?: (e: firebase.auth.Error) => void,
+        completed?:(firebase.Unsubscribe),
+    ) {
+        return Auth.auth.onAuthStateChanged(callback, error, completed);
+    }
+}
+
 export const Firestore = app.firestore();
 export default app;
