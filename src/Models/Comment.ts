@@ -9,7 +9,7 @@ export default class Comment {
 
     id: string;
     content: string;
-    timestamp?: firebase.default.firestore.Timestamp;
+    timestamp?: Timestamp;
     replyTo?: Comment;
     user?: User;
 

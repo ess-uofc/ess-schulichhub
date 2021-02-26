@@ -1,5 +1,5 @@
 import { UserDoc } from './DocTypes';
-import app, { Auth, Firestore } from './firebase';
+import  { Auth, Firestore } from './firebase';
 import FireStoreDB from './firestore';
 
 export class UserError extends Error {
@@ -30,7 +30,7 @@ export class UserError extends Error {
     }
 }
 
-export default class User {
+export default class User implements UserDoc {
     /**
      * User class contains uid, firstName, lastName
      * @author Mohamad Abdel Rida

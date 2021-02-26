@@ -1,9 +1,13 @@
 import firebase from 'firebase';
+import { type } from 'os';
 
 export const Timestamp = firebase.firestore.Timestamp;
+export type Timestamp = firebase.firestore.Timestamp;
+
 export type DocumentData = firebase.firestore.DocumentData;
 export type WhereFilterOp = firebase.firestore.WhereFilterOp;
-
+export type FirebaseUser = firebase.User;
+export type QuerySnapshot = firebase.firestore.QuerySnapshot;
 const firebaseConfig = {
     apiKey: 'AIzaSyD9mulwyPhAR7tUp0MdZ31_RodyAhIMdpk',
     authDomain: 'project-hub-116d7.firebaseapp.com',
