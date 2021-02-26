@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -8,6 +8,10 @@ import Home from './pages/Home';
 import RegisterLanding from './pages/RegisterLanding';
 import RegisterForm from './pages/RegisterForm';
 import PostView from './pages/PostView';
+
+/* Redux for User */
+import { clearUser, setUser } from './features/User/UserStore';
+import { useDispatch } from 'react-redux';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -34,15 +38,16 @@ import app from './Models/firebase';
 import unProtectedRoutes from './app/routing';
 
 const App: React.FC = () => {
-    // const [, setUser] = useState<firebase.default.User | undefined | null>();
+    // const user = useSelector(selectUser); NOTE: Enable this if User needs to be accessed within this file
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const unSubscribe = app.auth().onAuthStateChanged((user) => {
             if (user) {
-                // setUser(user);
-                //Create redux state here
+                dispatch(setUser(user)); // Push user to redux
                 unProtectedRoutes.includes(location.pathname) ? (location.href = '/home') : console.log('At home');
             } else {
+                dispatch(clearUser()); // Clear user from redux
                 !unProtectedRoutes.includes(location.pathname) ? (location.href = '/login') : console.log('Safe');
             }
         });
