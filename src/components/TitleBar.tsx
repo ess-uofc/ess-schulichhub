@@ -21,6 +21,10 @@ import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
 import User from '../Models/User';
 
 const TitleBar: React.FC = () => {
+    const handleSignOut = () => {
+        User.signOut();
+    };
+
     return (
         <>
             <IonMenu side="start" content-id="main">
@@ -40,7 +44,7 @@ const TitleBar: React.FC = () => {
                                 <IonIcon icon={ellipseOutline} size="small" class="ion-padding"></IonIcon>
                                 <IonLabel>Landing</IonLabel>
                             </IonItem>
-                            <IonItem onClick={() => User.signOut()}>
+                            <IonItem onClick={() => handleSignOut()}>
                                 <IonIcon icon={logOutOutline} size="small" class="ion-padding"></IonIcon>
                                 <IonLabel>Sign Out</IonLabel>
                             </IonItem>
