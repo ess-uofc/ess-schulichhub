@@ -34,14 +34,14 @@ import './theme/variables.scss';
 import { PrivateRoute } from './components/PrivateRoute';
 import WritePostView from './pages/WritePost';
 import TitleBar from './components/TitleBar';
-import app from './Models/firebase';
+import app, { Auth } from './Models/firebase';
 import unProtectedRoutes from './app/routing';
 
 const App: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const unSubscribe = app.auth().onAuthStateChanged((user) => {
+        const unSubscribe = Auth.onAuthStateChanged((user) => {
             if (user) {
                 console.log('Signed in');
                 dispatch(setUser(user)); // Push user to redux

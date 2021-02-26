@@ -17,7 +17,7 @@ import {
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
-import app from '../Models/firebase';
+import app, { Auth } from '../Models/firebase';
 import { useHistory } from 'react-router';
 import { toast } from '../app/toast';
 
@@ -40,7 +40,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         setPopOver({ show: false, event: undefined });
 
         try {
-            const user = app.auth().currentUser;
+            const user = Auth.currentUser;
             if (user) {
                 user.uid == postData.uid
                     ? await db.deleteDoc(postData.id)
