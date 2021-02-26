@@ -40,7 +40,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         setPopOver({ show: false, event: undefined });
 
         try {
-            const user = Auth.currentUser;
+            const user = Auth.user   ;
             if (user) {
                 user.uid == postData.uid
                     ? await db.deleteDoc(postData.id)

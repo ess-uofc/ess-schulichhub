@@ -1,5 +1,5 @@
 import { UserDoc } from './DocTypes';
-import  { Auth, Firestore } from './firebase';
+import { Auth, Firestore } from './firebase';
 import FireStoreDB from './firestore';
 
 export class UserError extends Error {
@@ -40,7 +40,7 @@ export default class User implements UserDoc {
 
     firstName: string;
     lastName: string;
-    email: string;
+    email?: string;
     uid: string;
 
     // Add user attributes here
@@ -53,7 +53,7 @@ export default class User implements UserDoc {
      * @param email user's email address
      */
 
-    constructor(uid: string, email: string, firstName: string, lastName: string) {
+    constructor(uid: string, firstName: string, lastName: string, email?: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.uid = uid;
@@ -100,7 +100,7 @@ export default class User implements UserDoc {
     ): Promise<User | undefined> {
         try {
             const db = new FireStoreDB();
-            const res = await Auth.createUserWithEmailAndPassword(email, password);
+            const res = await Auth.auth.createUserWithEmailAndPassword(email, password);
             if (res.user != null) {
                 const user = new User(res.user.uid, email, firstName, lastName);
                 db.uploadDoc<UserDoc>('users', {
@@ -125,7 +125,7 @@ export default class User implements UserDoc {
      */
     public static async signOut(): Promise<void> {
         try {
-            const res = await Auth.signOut();
+            const res = await Auth.auth.signOut();
             console.log(res);
         } catch (e) {
             console.log(e);
@@ -139,7 +139,7 @@ export default class User implements UserDoc {
      */
     public static async login(email: string, password: string): Promise<User | undefined> {
         try {
-            const res = await Auth.signInWithEmailAndPassword(email, password);
+            const res = await Auth.auth.signInWithEmailAndPassword(email, password);
             if (res.user) {
                 const userResult = res.user;
                 const db = new FireStoreDB();
