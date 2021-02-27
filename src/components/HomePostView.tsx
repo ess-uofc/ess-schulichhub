@@ -73,25 +73,27 @@ const HomePostView: React.FC = () => {
                     );
                 })}
             </IonSelect>
-            {posts
-                ? posts.map((v, k) => {
-                      return (
-                          <PostContainer
-                              key={k}
-                              postData={
-                                  new Post(
-                                      'posts/' + v.id,
-                                      v.data.title,
-                                      v.data.content,
-                                      PostCategory.Discussion,
-                                      v.data.timestamp,
-                                      v.data.uid,
-                                  )
-                              }
-                          />
-                      );
-                  })
-                : PostSkeleton}
+            {posts ? (
+                posts.map((v, k) => {
+                    return (
+                        <PostContainer
+                            key={k}
+                            postData={
+                                new Post(
+                                    'posts/' + v.id,
+                                    v.data.title,
+                                    v.data.content,
+                                    PostCategory.Discussion,
+                                    v.data.timestamp,
+                                    v.data.uid,
+                                )
+                            }
+                        />
+                    );
+                })
+            ) : (
+                <PostSkeleton />
+            )}
         </IonContent>
     );
 };
