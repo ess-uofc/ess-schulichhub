@@ -4,9 +4,6 @@ import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/
 import './Login.scss';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/firebase';
-import { setUser } from '../features/User/UserStore';
-import { useDispatch } from 'react-redux';
-import { EEXIST } from 'constants';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
@@ -18,8 +15,6 @@ const Login: React.FC = () => {
 
     /**
      * @author Carter Zimmer
-     * @param email the user's email aka username
-     * @param password the user's password
      */
     async function handleSubmit() {
         const user = await Auth.signInWithEmail(userState.email, userState.password);
@@ -60,8 +55,7 @@ const Login: React.FC = () => {
                 <IonButton
                     className="testLogin"
                     onClick={() => {
-                        setUserState({ email: 'testUser@gmail.com', password: '123456' });
-                        handleSubmit();
+                        Auth.signInWithEmail('testUser@test.com', '123456');
                     }}
                 >
                     Test Sign in

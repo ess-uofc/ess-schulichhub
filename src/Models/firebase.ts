@@ -1,7 +1,8 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
 import { UserDoc } from './DocTypes';
 import PrimaryUser from './PrimaryUser';
-
 export const Timestamp = firebase.firestore.Timestamp;
 export type Timestamp = firebase.firestore.Timestamp;
 export type DocumentData = firebase.firestore.DocumentData;

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import app, { Auth, FirebaseUser } from '../Models/firebase';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Login from '../pages/Login';
+import PrimaryUser from '../Models/PrimaryUser';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/User/UserStore';
 
 type PrivateRouteTypes = {
     component: React.FC;
@@ -19,14 +21,8 @@ type PrivateRouteTypes = {
  * are allowed access to route
  */
 export const PrivateRoute: React.FC<PrivateRouteTypes> = (props) => {
-    const [condition, setCondition] = useState<boolean>();
-    useEffect(() => {
-        const unSubscribe = Auth.onAuthStateChange((user) => {
-            setCondition(Boolean(user));
-        });
-        return unSubscribe;
-    }, []);
-    return condition ? <>{props.component({})}</> : <Login />;
+    const user = useSelector(selectUser);
+    return user ? <props.component /> : <Login />;
 };
 
 PrivateRoute.propTypes = {
