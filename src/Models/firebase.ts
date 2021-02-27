@@ -75,7 +75,7 @@ export class Auth {
     static async createWithEmail(
         email: string,
         password: string,
-        details: { firstName: string; lastName: string; major: string },
+        details: { firstName: string; lastName: string; major: string; [key: string]: string },
     ): Promise<PrimaryUser | undefined> {
         try {
             const res = await this.auth.createUserWithEmailAndPassword(email, password);
