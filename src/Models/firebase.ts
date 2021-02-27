@@ -11,6 +11,7 @@ export type QuerySnapshot = firebase.firestore.QuerySnapshot;
 export type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
 export type SnapshotOptions = firebase.firestore.SnapshotOptions;
 export type FirestoreDataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
+
 const firebaseConfig = {
     apiKey: 'AIzaSyD9mulwyPhAR7tUp0MdZ31_RodyAhIMdpk',
     authDomain: 'project-hub-116d7.firebaseapp.com',

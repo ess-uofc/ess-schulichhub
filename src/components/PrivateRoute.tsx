@@ -25,7 +25,7 @@ export const PrivateRoute: React.FC<PrivateRouteTypes> = (props) => {
             setCondition(Boolean(user));
         });
         return unSubscribe;
-    }, [location.pathname]);
+    }, []);
     return condition ? <>{props.component({})}</> : <Login />;
 };
 

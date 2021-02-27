@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { QueryDocumentSnapshot, SnapshotOptions } from './firebase';
 
 export default class FirebaseDocument {
     /**
@@ -11,10 +12,6 @@ export default class FirebaseDocument {
      */
 
     timestamp: firebase.firestore.Timestamp;
-
-    constructor(timestamp: firebase.firestore.Timestamp) { 
-        this.timestamp =timestamp
-    }
 
     public getTimePosted(): string {
         /**
@@ -44,5 +41,14 @@ export default class FirebaseDocument {
         } else {
             return 'Some time Somewhere in the cosmic web';
         }
+    }
+    fromFirestore = () => {
+        throw new Error('Not implemented');
+    };
+    toFirestore = () => {
+        throw new Error('Not implemented');
+    };
+    constructor(timestamp: firebase.firestore.Timestamp) {
+        this.timestamp = timestamp;
     }
 }
