@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import app, { Auth } from '../Models/firebase';
+import app, { Auth, FirebaseUser } from '../Models/firebase';
 import PropTypes from 'prop-types';
 import Login from '../pages/Login';
 
@@ -21,7 +21,7 @@ type PrivateRouteTypes = {
 export const PrivateRoute: React.FC<PrivateRouteTypes> = (props) => {
     const [condition, setCondition] = useState<boolean>();
     useEffect(() => {
-        const unSubscribe = Auth.auth.onAuthStateChanged((user) => {
+        const unSubscribe = Auth.onAuthStateChange((user:FirebaseUser|null) => {
             setCondition(Boolean(user));
         });
         return unSubscribe;

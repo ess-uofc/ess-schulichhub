@@ -1,5 +1,5 @@
 import { UserDoc } from './DocTypes';
-import { Auth, Firestore } from './firebase';
+import { Auth, FirebaseUser, Firestore, Timestamp } from './firebase';
 import FireStoreDB from './firestore';
 
 export class UserError extends Error {
@@ -40,7 +40,7 @@ export default class User implements UserDoc {
 
     firstName: string;
     lastName: string;
-    email?: string;
+    email: string;
     uid: string;
 
     // Add user attributes here
@@ -53,106 +53,12 @@ export default class User implements UserDoc {
      * @param email user's email address
      */
 
-    constructor(uid: string, firstName: string, lastName: string, email?: string) {
+    constructor(uid: string, firstName: string, lastName: string, email: string,) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.uid = uid;
         this.email = email;
     }
 
-    /**
-     * method on User
-     * adds user fields to a unique document in FireStore using uid
-     *
-     */
 
-    /**
-     * fetches user information from FireStore
-     * private as its only used in the static login method
-     *
-     */
-    private async fetchUserDetails(): Promise<void> {
-        const doc = await Firestore.collection('users').doc(this.uid).get();
-        try {
-            const data = doc.data() as UserDoc;
-
-            this.firstName = data.firstName;
-            this.lastName = data.lastName;
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    /**
-     * @param firstName: user's first name
-     * @param lastName:user's last name
-     * @param email: user's email
-     * @param password: user's password
-     * creates a new user from email and password.
-     * adds user information to FireStore
-     * @return returns User object if successful otherwise null
-     */
-    public static async signUp(
-        firstName: string,
-        lastName: string,
-        email: string,
-        password: string,
-    ): Promise<User | undefined> {
-        try {
-            const db = new FireStoreDB();
-            const res = await Auth.auth.createUserWithEmailAndPassword(email, password);
-            if (res.user != null) {
-                const user = new User(res.user.uid, email, firstName, lastName);
-                db.uploadDoc<UserDoc>('users', {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    uid: user.uid,
-                    timeOfCreation: Timestamp.now(),
-                });
-                return user;
-            } else {
-                console.log(res); //
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    /**
-     * @author Mohamad Abdel Rida
-     * This method is to be called when a user
-     * wishes to sign out from the application.
-     * Can be called as a static on the User class
-     *
-     */
-    public static async signOut(): Promise<void> {
-        try {
-            const res = await Auth.auth.signOut();
-            console.log(res);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-    /**
-     * @param email:user's email
-     * @param password:user's password
-     * logs user in
-     * @return User object if successful otherwise null
-     */
-    public static async login(email: string, password: string): Promise<User | undefined> {
-        try {
-            const res = await Auth.auth.signInWithEmailAndPassword(email, password);
-            if (res.user) {
-                const userResult = res.user;
-                const db = new FireStoreDB();
-                const userDoc = await db.fetchDoc<UserDoc>(userResult.uid);
-                const user = new User(res.user.uid, email, userDoc?.firstName, userDoc?.lastName);
-                await user.fetchUserDetails();
-                return user;
-            } else {
-                console.log(res); //
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    }
 }

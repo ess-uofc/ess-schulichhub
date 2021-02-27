@@ -21,7 +21,7 @@ const Login: React.FC = () => {
      * @param password the user's password
      */
     async function handleSubmit(email: string, password: string) {
-        if (await User.login(email, password)) {
+        if (await Auth.login(email, password)) {
             toast('Yay!', 'login success');
             // history.push('/home');
         } else {

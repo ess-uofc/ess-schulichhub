@@ -72,10 +72,10 @@ export class Auth {
             console.log(e);
         }
     }
-    onAuthStateChange(
+    static onAuthStateChange(
         callback: (user: FirebaseUser | null) => void,
         error?: (e: firebase.auth.Error) => void,
-        completed?:(firebase.Unsubscribe),
+        completed?: firebase.Unsubscribe,
     ) {
         return Auth.auth.onAuthStateChanged(callback, error, completed);
     }
