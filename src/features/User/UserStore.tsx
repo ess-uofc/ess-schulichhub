@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import firebase from 'firebase';
 import { RootState } from '../../app/store';
 import User from '../../Models/User';
