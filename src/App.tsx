@@ -41,7 +41,7 @@ const App: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const unSubscribe = Auth.auth.onAuthStateChanged((user) => {
+        const unSubscribe = Auth.onAuthStateChange((user) => {
             if (user) {
                 console.log('Signed in');
                 dispatch(setUser(user)); // Push user to redux

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import './Login.scss';
-import User from '../Models/User';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/firebase';
+import { setUser } from '../features/User/UserStore';
+import { useDispatch } from 'react-redux';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
@@ -12,6 +13,8 @@ import { Auth } from '../Models/firebase';
  * are used when the login button is clicked
  */
 const Login: React.FC = () => {
+    const dispatch = useDispatch();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -21,9 +24,10 @@ const Login: React.FC = () => {
      * @param password the user's password
      */
     async function handleSubmit(email: string, password: string) {
-        if (await Auth.login(email, password)) {
+        const user = await Auth.signInWithEmail(email, password);
+        console.log(user);
+        if (user) {
             toast('Yay!', 'login success');
-            // history.push('/home');
         } else {
             toast('Oh no.. :(', 'login failed');
         }

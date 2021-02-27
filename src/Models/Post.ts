@@ -6,7 +6,7 @@ export default class Post extends FirebaseDocument {
     id: string;
     content: string;
     title: string;
-    timestamp?: firebase.firestore.Timestamp;
+    timestamp: firebase.firestore.Timestamp;
     uid: string;
     attachment?: PostAttachment;
     category: PostCategory;
@@ -30,7 +30,7 @@ export default class Post extends FirebaseDocument {
         uid: string,
         attachment?: PostAttachment,
     ) {
-        super();
+        super(timestamp);
         this.id = id;
         this.title = title;
         this.uid = uid;
@@ -38,6 +38,5 @@ export default class Post extends FirebaseDocument {
         this.content = content;
         this.category = category;
         this.attachment = attachment;
-        
     }
 }

@@ -69,8 +69,6 @@ const PostView: React.FC = () => {
                         };
                     });
                     setComments(Comments);
-                    console.log(Comments[0].comment.timestamp);
-                    console.log(Timestamp.now());
                 },
             });
         const UserAuthListener = app.auth().onAuthStateChanged((user) => {

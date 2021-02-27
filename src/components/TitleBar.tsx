@@ -18,11 +18,11 @@ import {
     IonImg,
 } from '@ionic/react';
 import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
-import User from '../Models/User';
+import { Auth } from '../Models/firebase';
 
 const TitleBar: React.FC = () => {
     const handleSignOut = () => {
-        User.signOut();
+        Auth.signOut();
     };
 
     return (

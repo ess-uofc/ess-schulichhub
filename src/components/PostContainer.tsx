@@ -13,6 +13,7 @@ import {
     IonListHeader,
     IonItem,
     IonLabel,
+    IonRouterLink,
 } from '@ionic/react';
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import Post from '../Models/Post';
@@ -20,6 +21,8 @@ import FireStoreDB from '../Models/firestore';
 import app, { Auth } from '../Models/firebase';
 import { useHistory } from 'react-router';
 import { toast } from '../app/toast';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/User/UserStore';
 
 interface ContainerProps {
     postData: Post;
@@ -38,9 +41,9 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
          * @param postId, the post to be deleted
          */
         setPopOver({ show: false, event: undefined });
+        const user = useSelector(selectUser);
 
         try {
-            const user = Auth.user   ;
             if (user) {
                 user.uid == postData.uid
                     ? await db.deleteDoc(postData.id)
@@ -83,13 +86,15 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                     {props.postData.getTimePosted()} - University of Calgary{' '}
                 </IonCardSubtitle>
             </IonCardHeader>
-            <IonCardContent onClick={() => history.push(`/post/${props.postData.id.split('/')[1]}`)}>
-                <IonImg
-                    className="image"
-                    src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
-                ></IonImg>
-                {props.postData.content}
-            </IonCardContent>
+            <IonRouterLink routerLink={`/post/${props.postData.id.split('/')[1]}`}>
+                <IonCardContent>
+                    <IonImg
+                        className="image"
+                        src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
+                    ></IonImg>
+                    {props.postData.content}
+                </IonCardContent>
+            </IonRouterLink>
         </IonCard>
     );
 };

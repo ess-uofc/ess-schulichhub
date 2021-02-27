@@ -28,7 +28,6 @@ const WritePost: React.FC = () => {
     const db = new FireStoreDB();
     const history = useHistory();
     const user = useSelector(selectUser);
-    // NOTE: Enable this if User needs to be accessed within this file
     console.log(user);
 
     async function uploadPost() {
@@ -36,7 +35,6 @@ const WritePost: React.FC = () => {
          * @author Mohamad Abdel Rida
          *  Uploads a post
          */
-        const user = app.auth().currentUser;
         setLoading(true);
 
         if (user) {

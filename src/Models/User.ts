@@ -1,6 +1,6 @@
 import { UserDoc } from './DocTypes';
-import { Auth, FirebaseUser, Firestore, Timestamp } from './firebase';
-import FireStoreDB from './firestore';
+import { QueryDocumentSnapshot, SnapshotOptions } from './firebase';
+import PrimaryUser from './PrimaryUser';
 
 export class UserError extends Error {
     /**
@@ -42,6 +42,7 @@ export default class User implements UserDoc {
     lastName: string;
     email: string;
     uid: string;
+    major: string;
 
     // Add user attributes here
 
@@ -53,12 +54,25 @@ export default class User implements UserDoc {
      * @param email user's email address
      */
 
-    constructor(uid: string, firstName: string, lastName: string, email: string,) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.uid = uid;
-        this.email = email;
+    constructor (doc:UserDoc) {
+        this.firstName = doc.firstName;
+        this.lastName = doc.lastName;
+        this.uid = doc.uid;
+        this.email = doc.email;
+        this.major = doc.major;
     }
 
-
+    public static toFirestore = (user: User | PrimaryUser) => {
+        return {
+            uid: user.uid,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            major: user.major,
+        };
+    };
+    public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions) {
+        const doc = snapshot.data() as UserDoc;
+        return new this(doc);
+    }
 }

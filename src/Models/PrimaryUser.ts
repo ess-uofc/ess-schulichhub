@@ -1,35 +1,27 @@
 import firebase from 'firebase';
 import { UserDoc } from './DocTypes';
-import { FirebaseUser } from './firebase';
+import { Auth, FirebaseUser, Firestore, QueryDocumentSnapshot, SnapshotOptions } from './firebase';
 import User from './User';
 
 export default class PrimaryUser extends User {
-    firstName: string;
-    lastName: string;
-    uid: string;
-    major?: string;
-    private user: FirebaseUser;
+    private user?: FirebaseUser;
 
-    constructor(user: FirebaseUser) {
-        if (user.displayName) {
-            const [firstName, ...lastName] = user.displayName.split(' ');
-            super(user.uid, firstName, lastName.join(), user?.email ?? '');
-
-            this.firstName = firstName;
-            this.lastName = lastName.join();
-        } else {
-            super(user.uid, '', '', user?.email ?? '');
-            this.firstName = '';
-            this.lastName = '';
-        }
-        this.uid = user.uid;
+    constructor(user: FirebaseUser, details: UserDoc) {
+        super(details);
         this.user = user;
     }
 
+    static async fromUser(user: FirebaseUser): Promise<PrimaryUser | void> {
+        try {
+            const details = (await Firestore.collection('users').doc(user.uid).get()).data() as UserDoc;
+            return new PrimaryUser(user, details);
+        } catch (e) {}
+    }
+
     public async delete() {
-        await this.user.delete();
+        await this.user?.delete();
     }
     public async verifyEmail() {
-        await this.user.sendEmailVerification();
+        await this.user?.sendEmailVerification();
     }
 }
