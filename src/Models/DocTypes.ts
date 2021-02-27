@@ -5,7 +5,6 @@ export interface UserDoc {
     lastName: string;
     uid: string;
     major?: string;
-    timeOfCreation: firebase.default.firestore.Timestamp;
     [key: string]: any;
 
     // Add other user fields here
