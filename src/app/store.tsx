@@ -1,10 +1,4 @@
-import {
-    configureStore,
-    ThunkAction,
-    Action,
-    getDefaultMiddleware,
-    createImmutableStateInvariantMiddleware,
-} from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, createImmutableStateInvariantMiddleware } from '@reduxjs/toolkit';
 // import counterReducer from '../features/counter/counterSlice';
 import userReducer from '../features/User/UserStore';
 export const store = configureStore({
