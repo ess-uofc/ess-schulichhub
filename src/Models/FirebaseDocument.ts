@@ -10,7 +10,11 @@ export default class FirebaseDocument {
      *
      */
 
-    timestamp?: firebase.firestore.Timestamp;
+    timestamp: firebase.firestore.Timestamp;
+
+    constructor(timestamp: firebase.firestore.Timestamp) { 
+        this.timestamp =timestamp
+    }
 
     public getTimePosted(): string {
         /**

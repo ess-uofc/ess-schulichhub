@@ -9,7 +9,7 @@ export default class Comment extends FirebaseDocument {
 
     id: string;
     content: string;
-    timestamp?: firebase.default.firestore.Timestamp;
+    timestamp: firebase.default.firestore.Timestamp;
     replyTo?: string;
     user?: User;
 
@@ -24,11 +24,11 @@ export default class Comment extends FirebaseDocument {
     constructor(
         id: string,
         content: string,
-        timestamp?: firebase.default.firestore.Timestamp,
+        timestamp: firebase.default.firestore.Timestamp,
         replyTo?: string,
         user?: User,
     ) {
-        super();
+        super(timestamp);
         this.id = id;
         this.content = content;
         this.timestamp = timestamp;

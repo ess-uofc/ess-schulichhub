@@ -6,6 +6,7 @@ import { useState } from 'react';
 import '../pages/RegisterMain.scss';
 import User from '../Models/User';
 import { toast } from '../app/toast';
+import { Auth } from '../Models/firebase';
 
 const RegisterForm: React.FC = () => {
     const [Email, setEmail] = useState<string>('');
@@ -16,7 +17,7 @@ const RegisterForm: React.FC = () => {
 
     async function RegisterUser() {
         if (Password == Cpassword) {
-            if (await User.signUp(firstName, lastName, Email, Password)) {
+            if (await Auth.createWithEmail(Email, Password, { firstName: firstName, lastName: lastName, major: '' })) {
             } else {
                 toast('Oops...', 'Sign up failed');
             }
