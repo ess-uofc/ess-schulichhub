@@ -4,20 +4,29 @@ import { IonButton, IonInput, IonItemDivider, IonTitle } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import '../pages/RegisterMain.scss';
-import User from '../Models/User';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/firebase';
 
 const RegisterForm: React.FC = () => {
-    const [Email, setEmail] = useState<string>('');
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
-    const [Password, setPassword] = useState<string>('');
-    const [Cpassword, setCpassword] = useState<string>('');
+    const [userState, setUserState] = useState<{
+        email: string;
+        password: string;
+        cPassword: string;
+        firstName: string;
+        lastName: string;
+        major: string;
+    }>({
+        email: '',
+        password: '',
+        cPassword: '',
+        firstName: '',
+        lastName: '',
+        major: '',
+    });
 
     async function RegisterUser() {
-        if (Password == Cpassword) {
-            if (await Auth.createWithEmail(Email, Password, { firstName: firstName, lastName: lastName, major: '' })) {
+        if (userState.password == userState.cPassword) {
+            if (await Auth.createWithEmail(userState.email, userState.password, userState)) {
             } else {
                 toast('Oops...', 'Sign up failed');
             }
@@ -35,29 +44,39 @@ const RegisterForm: React.FC = () => {
                 type="email"
                 className="registerInput"
                 placeholder="Email"
-                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setEmail(e.detail.value ?? '')}
+                onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                    setUserState({ ...userState, email: e.detail.value ?? '' })
+                }
             />
             <IonInput
                 className="registerInput"
                 placeholder="First Name"
-                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setFirstName(e.detail.value ?? '')}
+                onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                    setUserState({ ...userState, firstName: e.detail.value ?? '' })
+                }
             />
             <IonInput
                 className="registerInput"
                 placeholder="Last Name"
-                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setLastName(e.detail.value ?? '')}
+                onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                    setUserState({ ...userState, lastName: e.detail.value ?? '' })
+                }
             />
             <IonInput
                 type="password"
                 className="registerInput"
                 placeholder="Password"
-                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value ?? '')}
+                onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                    setUserState({ ...userState, password: e.detail.value ?? '' })
+                }
             />
             <IonInput
                 type="password"
                 className="registerInput"
                 placeholder="Confirm Password"
-                onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setCpassword(e.detail.value ?? '')}
+                onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                    setUserState({ ...userState, cPassword: e.detail.value ?? '' })
+                }
             />
             <IonButton className="custombutton" onClick={RegisterUser}>
                 <span className="ButtonText">Sign Up</span>
