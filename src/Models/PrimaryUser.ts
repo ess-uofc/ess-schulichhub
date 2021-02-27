@@ -1,6 +1,5 @@
-import firebase from 'firebase';
 import { UserDoc } from './DocTypes';
-import { Auth, FirebaseUser, Firestore, QueryDocumentSnapshot, SnapshotOptions } from './firebase';
+import { FirebaseUser, Firestore } from './firebase';
 import User from './User';
 
 export default class PrimaryUser extends User {

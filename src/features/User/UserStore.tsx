@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import firebase from 'firebase';
 import { RootState } from '../../app/store';
 import PrimaryUser from '../../Models/PrimaryUser';
 import User from '../../Models/User';

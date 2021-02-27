@@ -19,10 +19,14 @@ import {
 } from '@ionic/react';
 import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
 import { Auth } from '../Models/firebase';
+import { toast } from '../app/toast';
 
 const TitleBar: React.FC = () => {
-    const handleSignOut = () => {
-        Auth.signOut();
+    const handleSignOut = async () => {
+        await Auth.signOut();
+        toast('You have signed out :(', 'Signed out...');
+
+        location.href = '/login';
     };
 
     return (

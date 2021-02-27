@@ -30,18 +30,18 @@ interface ContainerProps {
 const db = new FireStoreDB();
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
-    const history = useHistory();
     const [popOver, setPopOver] = useState<{
         event: React.MouseEvent<HTMLIonIconElement, MouseEvent> | undefined;
         show: boolean;
     }>({ show: false, event: undefined });
+    const user = useSelector(selectUser);
+
     async function handleDelete(postData: Post) {
         /**
          * @author Mohamad Abdel Rida
          * @param postId, the post to be deleted
          */
         setPopOver({ show: false, event: undefined });
-        const user = useSelector(selectUser);
 
         try {
             if (user) {

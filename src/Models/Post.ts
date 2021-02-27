@@ -1,4 +1,3 @@
-import firebase from 'firebase';
 import { PostCategory } from './Enums';
 import { FirestoreDataConverter, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
@@ -27,7 +26,7 @@ export default class Post extends FirebaseDocument implements FirestoreDataConve
         title: string,
         content: string,
         category: PostCategory,
-        timestamp: firebase.firestore.Timestamp,
+        timestamp: Timestamp,
         uid: string,
         attachment?: PostAttachment,
     ) {
