@@ -11,7 +11,7 @@ export default class PrimaryUser extends User {
         this.user = user;
     }
 
-    static async fromUser(user: FirebaseUser): Promise<PrimaryUser | void> {
+    static async fromUser(user: FirebaseUser): Promise<PrimaryUser | undefined> {
         try {
             const details = (await Firestore.collection('users').doc(user.uid).get()).data() as UserDoc;
             return new PrimaryUser(user, details);

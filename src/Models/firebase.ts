@@ -95,7 +95,7 @@ export class Auth {
         }
     }
     static onAuthStateChange(
-        callback: (user: PrimaryUser | null) => void,
+        callback: (user: PrimaryUser | undefined) => void,
         error?: (e: firebase.auth.Error) => void,
         completed?: firebase.Unsubscribe,
     ): firebase.Unsubscribe {
@@ -104,9 +104,7 @@ export class Auth {
                 if (user) {
                     const primaryUser = await PrimaryUser.fromUser(user);
                     console.log(primaryUser);
-                    if (primaryUser) {
-                        callback(primaryUser);
-                    }
+                    callback(primaryUser);
                 }
             },
             error,
