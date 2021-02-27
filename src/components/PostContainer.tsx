@@ -18,8 +18,6 @@ import {
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
-import app, { Auth } from '../Models/firebase';
-import { useHistory } from 'react-router';
 import { toast } from '../app/toast';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
@@ -36,17 +34,16 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     }>({ show: false, event: undefined });
     const user = useSelector(selectUser);
 
-    async function handleDelete(postData: Post) {
+    async function handleDelete() {
         /**
          * @author Mohamad Abdel Rida
-         * @param postId, the post to be deleted
          */
         setPopOver({ show: false, event: undefined });
 
         try {
             if (user) {
-                user.uid == postData.uid
-                    ? await db.deleteDoc(postData.id)
+                user.uid == props.postData.uid
+                    ? await db.deleteDoc(props.postData.id)
                     : toast('Oops...', 'You can not delete this post because it does not belong to you.');
             }
         } catch (e) {}
@@ -65,7 +62,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                         <IonItem className="item">
                             <IonLabel>Share</IonLabel> <IonIcon className="stickRight" icon={share}></IonIcon>
                         </IonItem>
-                        <IonItem onClick={() => handleDelete(props.postData)}>
+                        <IonItem onClick={() => handleDelete()}>
                             <IonLabel>Delete</IonLabel> <IonIcon className="stickRight" icon={trash}></IonIcon>
                         </IonItem>
                     </IonList>
@@ -86,7 +83,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                     {props.postData.getTimePosted()} - University of Calgary{' '}
                 </IonCardSubtitle>
             </IonCardHeader>
-            <IonRouterLink routerLink={`/post/${props.postData.id.split('/')[1]}`}>
+            <IonRouterLink routerLink={`/post/${props.postData.id}`}>
                 <IonCardContent>
                     <IonImg
                         className="image"

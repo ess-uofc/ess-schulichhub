@@ -54,7 +54,7 @@ export default class User implements UserDoc {
      * @param email user's email address
      */
 
-    constructor (doc:UserDoc) {
+    constructor(doc: UserDoc) {
         this.firstName = doc.firstName;
         this.lastName = doc.lastName;
         this.uid = doc.uid;
@@ -71,6 +71,16 @@ export default class User implements UserDoc {
             major: user.major,
         };
     };
+
+    public toJson(): UserDoc {
+        return {
+            uid: this.uid,
+            major: this.major,
+            email: this.email,
+            firstName: this.firstName,
+            lastName: this.lastName,
+        };
+    }
     public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions) {
         const doc = snapshot.data() as UserDoc;
         return new this(doc);

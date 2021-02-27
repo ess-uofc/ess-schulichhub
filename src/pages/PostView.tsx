@@ -18,12 +18,9 @@ import './PostView.scss';
 import PostComments from '../components/PostComments';
 import CommentCompose from '../components/CommentCompose';
 import Post from '../Models/Post';
-import { PostCategory } from '../Models/Enums';
 import FireStoreDB from '../Models/firestore';
 import { useParams } from 'react-router-dom';
-import { CommentDoc, PostDoc } from '../Models/DocTypes';
 import Comment from '../Models/Comment';
-import app, { Timestamp } from '../Models/firebase';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
 
@@ -32,46 +29,40 @@ const PostView: React.FC = () => {
     const [comments, setComments] = useState<{ id: string; comment: Comment }[]>();
     const db = new FireStoreDB();
     const user = useSelector(selectUser);
-
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
         console.log('Adding event listeners...');
         const unSubscribeFromPosts = db.db
             .collection('posts')
+            .withConverter(Post)
             .doc(id)
             .onSnapshot({
                 next: (snapshot) => {
-                    console.log('Updated');
-                    const doc = snapshot.data() as PostDoc;
-                    if (doc) {
-                        const _post = new Post(
-                            id,
-                            doc.title,
-                            doc.content,
-                            doc.category as PostCategory,
-                            doc.timestamp,
-                            doc.uid,
-                        );
-                        setPost(_post);
-                    }
+                    console.log('Fetched Post');
+                    const doc = snapshot.data() as Post;
+                    setPost(doc);
                 },
             });
         const unSubscribeFromComments = db.db
             .collection('comments')
             .where('replyTo', '==', id)
             .orderBy('timestamp', 'desc')
+            .withConverter(Comment)
             .onSnapshot({
                 next: (snapshot) => {
+                    console.log('Fetched Comments');
+
                     const commentDocs = snapshot.docs;
                     const Comments = commentDocs.map((e) => {
-                        const commentData = e.data() as CommentDoc;
+                        const comment = e.data();
                         return {
                             id: e.id,
-                            comment: new Comment(e.id, commentData.content, commentData.timestamp, commentData.replyTo),
+                            comment: comment,
                         };
                     });
                     setComments(Comments);
+                    console.log(Comments);
                 },
             });
         return () => {
@@ -111,7 +102,7 @@ const PostView: React.FC = () => {
                     </IonCardContent>
                 </IonCard>
                 <PostComments comments={comments}> </PostComments>
-                {user && <CommentCompose userId={user.uid} postId={id} />}
+                {user && <CommentCompose user={user} postId={id} />}
                 <IonButton>Submit</IonButton>
             </IonContent>
         </IonPage>

@@ -1,12 +1,12 @@
+import { PostDoc } from './DocTypes';
 import { PostCategory } from './Enums';
-import { FirestoreDataConverter, Timestamp } from './firebase';
+import { FirestoreDataConverter, QueryDocumentSnapshot, SetOptions, SnapshotOptions, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
 import PostAttachment from './PostAttachment';
 export default class Post extends FirebaseDocument implements FirestoreDataConverter<Post> {
     id: string;
     content: string;
     title: string;
-    timestamp: Timestamp;
     uid: string;
     attachment?: PostAttachment;
     category: PostCategory;
@@ -34,9 +34,45 @@ export default class Post extends FirebaseDocument implements FirestoreDataConve
         this.id = id;
         this.title = title;
         this.uid = uid;
-        this.timestamp = timestamp;
         this.content = content;
         this.category = category;
         this.attachment = attachment;
+    }
+
+    public static toFirestore(post: Post) {
+        return {
+            uid: post.uid,
+            title: post.title,
+            timestamp: post.timestamp,
+            content: post.content,
+            category: post.category,
+            attachmentUrl: post.attachment?.getHyperlink(),
+            attachmentType: post.attachment?.getAttachmentType(),
+        };
+    }
+
+    /**
+     * Called by the Firestore SDK to convert Firestore data into an object of
+     * type T. You can access your data by calling: `snapshot.data(options)`.
+     *
+     * @param snapshot A QueryDocumentSnapshot containing your data and metadata.
+     * @param options The SnapshotOptions from the initial call to `data()`.
+     */
+    public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions): Post {
+        const data = snapshot.data() as PostDoc;
+        const id = snapshot.id;
+        const attachment =
+            data.attachmentUrl && data.attachmentType
+                ? new PostAttachment(data.attachmentUrl, data.attachmentType)
+                : undefined;
+        return new this(
+            id,
+            data.title,
+            data.content,
+            data.category as PostCategory,
+            data.timestamp,
+            data.uid,
+            attachment,
+        );
     }
 }

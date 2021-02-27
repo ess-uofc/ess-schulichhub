@@ -4,12 +4,11 @@ import { IonContent, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
 import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
 import FireStoreDB from '../Models/firestore';
-import { PostDoc } from '../Models/DocTypes';
 import { PostCategory } from '../Models/Enums';
 import PostSkeleton from './PostContainerSkeleton';
-import { DocumentData, QuerySnapshot } from '../Models/firebase';
+import { QuerySnapshot } from '../Models/firebase';
 const HomePostView: React.FC = () => {
-    const [posts, setPosts] = useState<{ id: string; data: PostDoc }[]>();
+    const [posts, setPosts] = useState<{ id: string; data: Post }[]>();
     const db = new FireStoreDB();
     const [postFilters, SetPostFilters] = useState<PostCategory[]>([]);
     function handleSnapshot(snapshot: QuerySnapshot) {
@@ -24,7 +23,7 @@ const HomePostView: React.FC = () => {
         console.log('Updated');
         const snapshots = snapshot.docs;
         const docs = snapshots.map((docSnapshot) => {
-            return { id: docSnapshot.id, data: docSnapshot.data() as PostDoc };
+            return { id: docSnapshot.id, data: docSnapshot.data() as Post };
         });
 
         setPosts(docs);
@@ -36,7 +35,7 @@ const HomePostView: React.FC = () => {
          * Gets posts that have a Timestamp
          *
          */
-        const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc');
+        const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(Post);
 
         if (postFilters.length != 0) {
             return postsCollection.where('category', 'in', postFilters).onSnapshot({ next: handleSnapshot });
@@ -75,21 +74,7 @@ const HomePostView: React.FC = () => {
             </IonSelect>
             {posts ? (
                 posts.map((v, k) => {
-                    return (
-                        <PostContainer
-                            key={k}
-                            postData={
-                                new Post(
-                                    'posts/' + v.id,
-                                    v.data.title,
-                                    v.data.content,
-                                    PostCategory.Discussion,
-                                    v.data.timestamp,
-                                    v.data.uid,
-                                )
-                            }
-                        />
-                    );
+                    return <PostContainer key={k} postData={v.data} />;
                 })
             ) : (
                 <PostSkeleton />
