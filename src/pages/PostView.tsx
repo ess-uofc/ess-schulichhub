@@ -24,12 +24,15 @@ import { useParams } from 'react-router-dom';
 import { CommentDoc, PostDoc } from '../Models/DocTypes';
 import Comment from '../Models/Comment';
 import app, { Timestamp } from '../Models/firebase';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/User/UserStore';
 
 const PostView: React.FC = () => {
     const [post, setPost] = useState<Post>();
     const [comments, setComments] = useState<{ id: string; comment: Comment }[]>();
     const db = new FireStoreDB();
-    const [userId, setUserId] = useState<string>();
+    const user = useSelector(selectUser);
+
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -71,12 +74,8 @@ const PostView: React.FC = () => {
                     setComments(Comments);
                 },
             });
-        const UserAuthListener = app.auth().onAuthStateChanged((user) => {
-            user && setUserId(user?.uid);
-        });
         return () => {
             unSubscribeFromPosts();
-            UserAuthListener();
             unSubscribeFromComments();
             console.log('Unsubscribed...');
         };
@@ -112,7 +111,7 @@ const PostView: React.FC = () => {
                     </IonCardContent>
                 </IonCard>
                 <PostComments comments={comments}> </PostComments>
-                {userId && <CommentCompose userId={userId} postId={id} />}
+                {user && <CommentCompose userId={user.uid} postId={id} />}
                 <IonButton>Submit</IonButton>
             </IonContent>
         </IonPage>

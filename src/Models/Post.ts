@@ -1,12 +1,13 @@
 import firebase from 'firebase';
 import { PostCategory } from './Enums';
+import { FirestoreDataConverter, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
 import PostAttachment from './PostAttachment';
-export default class Post extends FirebaseDocument {
+export default class Post extends FirebaseDocument implements FirestoreDataConverter<Post> {
     id: string;
     content: string;
     title: string;
-    timestamp: firebase.firestore.Timestamp;
+    timestamp: Timestamp;
     uid: string;
     attachment?: PostAttachment;
     category: PostCategory;

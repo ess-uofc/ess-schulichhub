@@ -6,6 +6,7 @@ import { toast } from '../app/toast';
 import { Auth } from '../Models/firebase';
 import { setUser } from '../features/User/UserStore';
 import { useDispatch } from 'react-redux';
+import { EEXIST } from 'constants';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
@@ -13,18 +14,15 @@ import { useDispatch } from 'react-redux';
  * are used when the login button is clicked
  */
 const Login: React.FC = () => {
-    const dispatch = useDispatch();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [userState, setUserState] = useState<{ email: string; password: string }>({ email: '', password: '' });
 
     /**
      * @author Carter Zimmer
      * @param email the user's email aka username
      * @param password the user's password
      */
-    async function handleSubmit(email: string, password: string) {
-        const user = await Auth.signInWithEmail(email, password);
+    async function handleSubmit() {
+        const user = await Auth.signInWithEmail(userState.email, userState.password);
         console.log(user);
         if (user) {
             toast('Yay!', 'login success');
@@ -39,15 +37,19 @@ const Login: React.FC = () => {
                 <IonInput
                     placeholder="Email"
                     className="username loginInputs"
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setEmail(e.detail.value ?? '')}
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                        setUserState({ ...userState, email: e.detail.value ?? '' })
+                    }
                 />
                 <IonInput
                     type="password"
                     placeholder="Password"
                     className="password loginInputs"
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setPassword(e.detail.value ?? '')}
+                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) =>
+                        setUserState({ ...userState, password: e.detail.value ?? '' })
+                    }
                 />
-                <IonButton className="loginButton" onClick={async () => handleSubmit(email, password)}>
+                <IonButton className="loginButton" onClick={async () => handleSubmit()}>
                     Sign In
                 </IonButton>
                 <div>
@@ -55,7 +57,13 @@ const Login: React.FC = () => {
                         Sign in with Google
                     </IonButton>
                 </div>
-                <IonButton className="testLogin" onClick={() => handleSubmit('test1@test.com', '123456')}>
+                <IonButton
+                    className="testLogin"
+                    onClick={() => {
+                        setUserState({ email: 'testUser@gmail.com', password: '123456' });
+                        handleSubmit();
+                    }}
+                >
                     Test Sign in
                 </IonButton>
                 <p>
