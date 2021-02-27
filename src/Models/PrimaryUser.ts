@@ -12,15 +12,15 @@ export default class PrimaryUser extends User {
 
     static async fromUser(user: FirebaseUser): Promise<PrimaryUser | undefined> {
         try {
-            const details = (await Firestore.collection('users').doc(user.uid).get()).data() as UserDoc;
-            return new PrimaryUser(user, details);
+            const details = (await Firestore.collection('users').withConverter(User).doc(user.uid).get()).data();
+            return new PrimaryUser(user, details as UserDoc);
         } catch (e) {}
     }
 
-    public async delete() {
+    public async delete(): Promise<void> {
         await this.user?.delete();
     }
-    public async verifyEmail() {
+    public async verifyEmail(): Promise<void> {
         await this.user?.sendEmailVerification();
     }
 }

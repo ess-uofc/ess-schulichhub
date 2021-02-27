@@ -4,6 +4,7 @@ import Comment from '../Models/Comment';
 import { IonItem, IonAvatar, IonLabel, IonText, IonIcon } from '@ionic/react';
 import { arrowUndo } from 'ionicons/icons';
 import { Timestamp } from '../Models/firebase';
+import { CommentDoc } from '../Models/DocTypes';
 
 interface CommentProps {
     comment: Comment;

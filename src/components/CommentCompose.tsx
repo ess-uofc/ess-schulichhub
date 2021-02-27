@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
 import FireStoreDB from '../Models/firestore';
-import { CommentDoc } from '../Models/DocTypes';
-import app, { Timestamp } from '../Models/firebase';
+import { CommentDoc, UserDoc } from '../Models/DocTypes';
+import { Timestamp } from '../Models/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
+import PrimaryUser from '../Models/PrimaryUser';
 
-const CommentCompose: React.FC<{ userId: string; postId: string }> = (props) => {
+const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) => {
     const [content, setContent] = useState<string>();
     const db = new FireStoreDB();
 
@@ -15,7 +16,7 @@ const CommentCompose: React.FC<{ userId: string; postId: string }> = (props) => 
         if (content) {
             const now = Timestamp.now();
             db.uploadDoc<CommentDoc>('comments', {
-                uid: props.userId,
+                user: props.user.toJson(),
                 replyTo: props.postId,
                 content: content,
                 timestamp: now,
@@ -42,5 +43,5 @@ const CommentCompose: React.FC<{ userId: string; postId: string }> = (props) => 
 export default CommentCompose;
 CommentCompose.propTypes = {
     postId: PropTypes.string.isRequired,
-    userId: PropTypes.string.isRequired,
+    user: PropTypes.instanceOf(PrimaryUser).isRequired,
 };

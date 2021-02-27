@@ -46,9 +46,9 @@ export default class FireStoreDB {
         field: string,
         operator: WhereFilterOp,
         value: string | Map<string, string | number> | Array<string | number> | number,
-    ): Promise<Array<DocumentData>> {
+    ): Promise<Array<T>> {
         const query = (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
-            (doc: DocumentData) => doc.data() as T,
+            (doc) => doc.data() as T,
         );
         return query;
     }

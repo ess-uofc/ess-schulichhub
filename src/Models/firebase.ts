@@ -3,6 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import { UserDoc } from './DocTypes';
 import PrimaryUser from './PrimaryUser';
+import User from './User';
 export const Timestamp = firebase.firestore.Timestamp;
 export type Timestamp = firebase.firestore.Timestamp;
 export type DocumentData = firebase.firestore.DocumentData;
@@ -12,7 +13,7 @@ export type QuerySnapshot = firebase.firestore.QuerySnapshot;
 export type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
 export type SnapshotOptions = firebase.firestore.SnapshotOptions;
 export type FirestoreDataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
-
+export type SetOptions = firebase.firestore.SetOptions;
 const firebaseConfig = {
     apiKey: 'AIzaSyD9mulwyPhAR7tUp0MdZ31_RodyAhIMdpk',
     authDomain: 'project-hub-116d7.firebaseapp.com',
@@ -61,7 +62,7 @@ export class Auth {
         }
     }
     static async fetchUserDetails(user: firebase.User): Promise<UserDoc | undefined> {
-        const res = (await Firestore.collection('users').doc(user.uid).get()).data();
+        const res = (await Firestore.collection('users').withConverter(User).doc(user.uid).get()).data();
         if (res) {
             return res as UserDoc;
         }
