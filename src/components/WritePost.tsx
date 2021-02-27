@@ -17,6 +17,8 @@ import { loadingComponent } from './Loading';
 import { PostCategory } from '../Models/Enums';
 import { useHistory } from 'react-router';
 import './HomePostView.scss';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/User/UserStore';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');
@@ -25,13 +27,17 @@ const WritePost: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const db = new FireStoreDB();
     const history = useHistory();
+    const user = useSelector(selectUser);
+    // NOTE: Enable this if User needs to be accessed within this file
+    console.log(user);
 
     async function uploadPost() {
         /**
          * @author Mohamad Abdel Rida
          *  Uploads a post
          */
-        const user = app.auth().currentUser;
+        // const user = app.auth().currentUser;
+
         setLoading(true);
 
         if (user) {
