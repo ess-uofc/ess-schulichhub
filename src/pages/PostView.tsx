@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
     IonAvatar,
-    IonButton,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -18,16 +17,15 @@ import './PostView.scss';
 import PostComments from '../components/PostComments';
 import CommentCompose from '../components/CommentCompose';
 import Post from '../Models/Post';
-import FireStoreDB from '../Models/firestore';
 import { useParams } from 'react-router-dom';
 import Comment from '../Models/Comment';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
+import { db } from '../Models/firebase';
 
 const PostView: React.FC = () => {
     const [post, setPost] = useState<Post>();
     const [comments, setComments] = useState<{ id: string; comment: Comment }[]>();
-    const db = new FireStoreDB();
     const user = useSelector(selectUser);
     const { id } = useParams<{ id: string }>();
 
@@ -52,13 +50,10 @@ const PostView: React.FC = () => {
             .onSnapshot({
                 next: (snapshot) => {
                     console.log('Fetched Comments');
-
-                    const commentDocs = snapshot.docs;
-                    const Comments = commentDocs.map((e) => {
-                        const comment = e.data();
+                    const Comments = snapshot.docs.map((e) => {
                         return {
                             id: e.id,
-                            comment: comment,
+                            comment: e.data(),
                         };
                     });
                     setComments(Comments);

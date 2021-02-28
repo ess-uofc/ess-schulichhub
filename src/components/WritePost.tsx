@@ -9,8 +9,7 @@ import {
     IonSelect,
     IonSelectOption,
 } from '@ionic/react';
-import FireStoreDB from '../Models/firestore';
-import { Auth, Timestamp } from '../Models/firebase';
+import {  db, Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
@@ -25,7 +24,6 @@ const WritePost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [postCategory, setPostCategory] = useState<string>(PostCategory.Discussion);
     const [loading, setLoading] = useState(false);
-    const db = new FireStoreDB();
     const history = useHistory();
     const user = useSelector(selectUser);
     console.log(user);

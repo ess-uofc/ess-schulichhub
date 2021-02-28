@@ -18,8 +18,8 @@ import {
     IonImg,
 } from '@ionic/react';
 import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
-import { Auth } from '../Models/firebase';
 import { toast } from '../app/toast';
+import { Auth } from '../Models/Auth';
 
 const TitleBar: React.FC = () => {
     const handleSignOut = async () => {

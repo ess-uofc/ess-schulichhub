@@ -3,7 +3,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import './Login.scss';
 import { toast } from '../app/toast';
-import { Auth } from '../Models/firebase';
+import { Auth } from '../Models/Auth';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
