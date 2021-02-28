@@ -103,7 +103,6 @@ const PostView: React.FC = () => {
                 </IonCard>
                 <PostComments comments={comments}> </PostComments>
                 {user && <CommentCompose user={user} postId={id} />}
-                <IonButton>Submit</IonButton>
             </IonContent>
         </IonPage>
     );

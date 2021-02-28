@@ -1,4 +1,4 @@
-import app, { DocumentData, Firestore, WhereFilterOp } from './firebase';
+import { DocumentData, Firestore, WhereFilterOp } from './firebase';
 
 export default class FireStoreDB {
     /**

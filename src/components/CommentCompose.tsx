@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
 import FireStoreDB from '../Models/firestore';
-import { CommentDoc, UserDoc } from '../Models/DocTypes';
+import { CommentDoc } from '../Models/DocTypes';
 import { Timestamp } from '../Models/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import PrimaryUser from '../Models/PrimaryUser';
+const db = new FireStoreDB();
 
 const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) => {
-    const [content, setContent] = useState<string>();
-    const db = new FireStoreDB();
-
+    const [content, setContent] = useState<string>('');
     function handleComment() {
         if (content) {
             const now = Timestamp.now();
@@ -24,19 +23,21 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
         }
     }
     return (
-        <IonCard>
-            <IonCardContent>
-                <IonAvatar></IonAvatar>
-                <IonTextarea
-                    placeholder="Write a comment..."
-                    className="commentText"
-                    onIonChange={(e) => setContent(e.detail.value ?? '')}
-                ></IonTextarea>
-            </IonCardContent>
+        <>
+            <IonCard>
+                <IonCardContent>
+                    <IonAvatar></IonAvatar>
+                    <IonTextarea
+                        placeholder="Write a comment..."
+                        className="commentText"
+                        onIonChange={(e) => setContent(e.detail.value ?? '')}
+                    ></IonTextarea>
+                </IonCardContent>
+            </IonCard>
             <IonButton onClick={handleComment}>
                 <IonIcon icon={arrowForward}></IonIcon>
             </IonButton>
-        </IonCard>
+        </>
     );
 };
 
