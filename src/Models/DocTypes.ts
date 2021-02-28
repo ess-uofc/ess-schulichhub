@@ -7,7 +7,8 @@ export interface UserDoc {
     uid: string;
     major: string;
     email: string;
-    ref:DocumentReference
+    ref: DocumentReference;
+    photoUrl?: string;
     [key: string]: any;
 
     // Add other user fields here

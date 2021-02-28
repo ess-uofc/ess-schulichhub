@@ -56,6 +56,8 @@ export default class Comment extends FirebaseDocument {
     public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions): Comment {
         const data = snapshot.data() as CommentDoc;
         const id = snapshot.id;
+        console.log(data);
+
         return new this(id, data.content, data.timestamp, data.replyTo, new User(data.user as UserDoc));
     }
 }

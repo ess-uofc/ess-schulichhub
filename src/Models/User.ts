@@ -66,7 +66,8 @@ export default class User implements UserDoc {
         this.uid = doc.uid;
         this.email = doc.email;
         this.major = doc.major;
-        this.ref = doc.docRef;
+        this.ref = doc.ref;
+        this.photoUrl = doc.photoUrl;
     }
 
     public static toFirestore = (user: User | PrimaryUser) => {

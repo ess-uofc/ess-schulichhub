@@ -17,15 +17,14 @@ import {
 } from '@ionic/react';
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import Post from '../Models/Post';
-import FireStoreDB from '../Models/firestore';
 import { toast } from '../app/toast';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
+import { db } from '../Models/firebase';
 
 interface ContainerProps {
     postData: Post;
 }
-const db = new FireStoreDB();
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     const [popOver, setPopOver] = useState<{

@@ -34,8 +34,8 @@ import './theme/variables.scss';
 import { PrivateRoute } from './components/PrivateRoute';
 import WritePostView from './pages/WritePost';
 import TitleBar from './components/TitleBar';
-import { Auth } from './Models/firebase';
 import unProtectedRoutes from './app/routing';
+import { Auth } from './Models/Auth';
 
 const App: React.FC = () => {
     const dispatch = useDispatch();

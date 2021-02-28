@@ -4,6 +4,7 @@ import User from './User';
 
 export default class PrimaryUser extends User {
     private user: FirebaseUser;
+    getPhotoUrl = (): string | null => this.user.photoURL;
 
     constructor(user: FirebaseUser, details: UserDoc) {
         super(details);
@@ -26,7 +27,7 @@ export default class PrimaryUser extends User {
      * delete just the firebase instance of the user
      * doesn't delete any information associated with the user, such as user docs, comments posts, etc
      */
-    public async delete(): Promise<void> {
+    async delete(): Promise<void> {
         await this.user?.delete();
     }
 
@@ -34,7 +35,7 @@ export default class PrimaryUser extends User {
      * Verify user email
      * @param {string} continueUrl where to send user after verification is completed
      */
-    public async verifyEmail(continueUrl = 'https://hub.essucalgary.com/'): Promise<void> {
+    async verifyEmail(continueUrl = 'https://hub.essucalgary.com/'): Promise<void> {
         await this.user.sendEmailVerification({ url: continueUrl });
     }
 }

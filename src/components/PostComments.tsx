@@ -4,7 +4,6 @@ import Comment from '../Models/Comment';
 import SingleComment from './SingleComment';
 import { IonList, IonLabel, IonListHeader } from '@ionic/react';
 import PropTypes from 'prop-types';
-import { CommentDoc } from '../Models/DocTypes';
 
 const PostComments: React.FC<{ comments?: { id: string; comment: Comment }[] }> = (props) => {
     return (

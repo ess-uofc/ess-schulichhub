@@ -5,8 +5,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import '../pages/RegisterMain.scss';
 import { toast } from '../app/toast';
-import { Auth } from '../Models/firebase';
-import { UserDoc } from '../Models/DocTypes';
+import { Auth } from '../Models/Auth';
 
 const RegisterForm: React.FC = () => {
     const [userState, setUserState] = useState({

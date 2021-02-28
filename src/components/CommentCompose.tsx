@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
-import FireStoreDB from '../Models/firestore';
 import { CommentDoc } from '../Models/DocTypes';
-import { Timestamp } from '../Models/firebase';
+import { db, Timestamp } from '../Models/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import PrimaryUser from '../Models/PrimaryUser';
-const db = new FireStoreDB();
 
 const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) => {
     const [content, setContent] = useState<string>('');
@@ -15,7 +13,7 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
         if (content) {
             const now = Timestamp.now();
             db.uploadDoc<CommentDoc>('comments', {
-                user: props.user.toJson(),
+                user: { ...props.user.toJson(), photoUrl: props.user.getPhotoUrl() ?? '' },
                 replyTo: props.postId,
                 content: content,
                 timestamp: now,

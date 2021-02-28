@@ -3,13 +3,11 @@ import './HomePostView.scss';
 import { IonContent, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
 import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
-import FireStoreDB from '../Models/firestore';
 import { PostCategory } from '../Models/Enums';
 import PostSkeleton from './PostContainerSkeleton';
-import { QuerySnapshot } from '../Models/firebase';
+import { db, QuerySnapshot } from '../Models/firebase';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<{ id: string; data: Post }[]>();
-    const db = new FireStoreDB();
     const [postFilters, SetPostFilters] = useState<PostCategory[]>([]);
     function handleSnapshot(snapshot: QuerySnapshot) {
         /**
