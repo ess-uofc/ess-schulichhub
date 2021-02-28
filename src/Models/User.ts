@@ -1,5 +1,5 @@
 import { UserDoc } from './DocTypes';
-import { QueryDocumentSnapshot, SnapshotOptions } from './firebase';
+import { DocumentReference, QueryDocumentSnapshot, SetOptions, SnapshotOptions } from './firebase';
 import PrimaryUser from './PrimaryUser';
 
 export class UserError extends Error {
@@ -36,6 +36,13 @@ export default class User implements UserDoc {
      * @author Mohamad Abdel Rida
      *
      *
+     *
+     *@property  {string} firstName users first name.
+     *@property {string} lastName users last name.
+     *@property {string} uid UUID firebase uid
+     *@property {stirng} email user Email
+     *@property {string} major user's U of C major
+     *@property {string} photoUrl users profile picture
      */
 
     firstName: string;
@@ -43,15 +50,14 @@ export default class User implements UserDoc {
     email: string;
     uid: string;
     major: string;
+    photoUrl?: string;
+    ref: DocumentReference;
 
     // Add user attributes here
 
     /**
      *
-     * @param uid user id used in firebase
-     * @param firstName user's first name | from FireStore or user input
-     * @param lastName user's last name | from FireStore user input
-     * @param email user's email address
+     * @param doc UserDoc
      */
 
     constructor(doc: UserDoc) {
@@ -60,18 +66,16 @@ export default class User implements UserDoc {
         this.uid = doc.uid;
         this.email = doc.email;
         this.major = doc.major;
+        this.ref = doc.docRef;
     }
 
     public static toFirestore = (user: User | PrimaryUser) => {
-        return {
-            uid: user.uid,
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            major: user.major,
-        };
+        return user.toJson();
     };
-
+    /**
+     * Converts User to UserDoc primitive-ish
+     *
+     */
     public toJson(): UserDoc {
         return {
             uid: this.uid,
@@ -79,8 +83,13 @@ export default class User implements UserDoc {
             email: this.email,
             firstName: this.firstName,
             lastName: this.lastName,
+            ref: this.ref,
         };
     }
+    /**
+     * @param {QueryDocumentSnapshot} snapshot: snapshot of user document
+     * @param {SnapshotOptions} options tells firebase how to handle certain fields
+     */
     public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions) {
         const doc = snapshot.data() as UserDoc;
         return new this(doc);

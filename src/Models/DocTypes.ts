@@ -1,5 +1,5 @@
 import { PostAttachmentType } from './Enums';
-import { Timestamp } from './firebase';
+import { DocumentReference, Timestamp } from './firebase';
 
 export interface UserDoc {
     firstName: string;
@@ -7,6 +7,7 @@ export interface UserDoc {
     uid: string;
     major: string;
     email: string;
+    ref:DocumentReference
     [key: string]: any;
 
     // Add other user fields here

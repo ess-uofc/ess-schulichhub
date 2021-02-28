@@ -1,9 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { UserDoc } from './DocTypes';
 import PrimaryUser from './PrimaryUser';
-import User from './User';
 export const Timestamp = firebase.firestore.Timestamp;
 export type Timestamp = firebase.firestore.Timestamp;
 export type DocumentData = firebase.firestore.DocumentData;
@@ -14,6 +12,7 @@ export type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
 export type SnapshotOptions = firebase.firestore.SnapshotOptions;
 export type FirestoreDataConverter<T> = firebase.firestore.FirestoreDataConverter<T>;
 export type SetOptions = firebase.firestore.SetOptions;
+export type DocumentReference = firebase.firestore.DocumentReference;
 const firebaseConfig = {
     apiKey: 'AIzaSyD9mulwyPhAR7tUp0MdZ31_RodyAhIMdpk',
     authDomain: 'project-hub-116d7.firebaseapp.com',
@@ -25,48 +24,57 @@ const firebaseConfig = {
     measurementId: 'G-K08FLKLRRG',
 };
 const app: firebase.app.App = firebase.initializeApp(firebaseConfig);
-
+export const analytics = firebase.analytics(); //UserEvent analytics such as login/creation page view etc...
+export const messaging = firebase.messaging(); //Push notifications and in app messaging
 firebase.firestore().settings({
     cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
 });
 firebase.firestore().enablePersistence({ synchronizeTabs: true });
-
+export const Firestore = app.firestore();
 export class Auth {
     private static auth = app.auth();
     protected static user = Auth.auth.currentUser;
-
+    /**
+     * @author Mohamad Abdel Rida
+     * signs a user in using google redirect. Doesn't acutally work
+     * @todo implement cordova google sign in
+     */
     static signInWithGoogle = async (): Promise<PrimaryUser | void> => {
         const googleProvider = new firebase.auth.GoogleAuthProvider();
         try {
             const res = await Auth.auth.signInWithPopup(googleProvider);
             if (res.user) {
+                console.log(res.user);
                 return await PrimaryUser.fromUser(res.user);
             } else {
             }
         } catch (e) {}
     };
+    /**
+     * @author Mohamad Abdel Rida
+     *
+     * @param email:string user email address
+     * @param password:string user password
+     * @returns <PrimaryUser|undefined>: a primary user instance that has fully extended firebase functionality
+     *
+     */
     static async signInWithEmail(email: string, password: string): Promise<PrimaryUser | undefined> {
         try {
             const res = await this.auth.signInWithEmailAndPassword(email, password);
             const user = res.user;
             if (user) {
-                const details = await Auth.fetchUserDetails(user);
-                if (details) {
-                    return new PrimaryUser(user, details);
-                } else {
-                    Auth.signOut();
-                }
+                return PrimaryUser.fromUser(user);
             }
         } catch (e) {
             console.log(e);
         }
     }
-    static async fetchUserDetails(user: firebase.User): Promise<UserDoc | undefined> {
-        const res = (await Firestore.collection('users').withConverter(User).doc(user.uid).get()).data();
-        if (res) {
-            return res as UserDoc;
-        }
-    }
+
+    /**
+     * @author Mohamad Abdel Rida
+     *
+     * Sign out current primary user
+     */
     static async signOut(): Promise<void> {
         try {
             await this.auth.signOut();
@@ -74,6 +82,11 @@ export class Auth {
             console.log(e);
         }
     }
+    /**
+     * @param email:string
+     * @param password:string
+     * @param details Partial UserDocument that includes user details
+     */
     static async createWithEmail(
         email: string,
         password: string,
@@ -81,13 +94,15 @@ export class Auth {
     ): Promise<PrimaryUser | undefined> {
         try {
             const res = await this.auth.createUserWithEmailAndPassword(email, password);
+            res.additionalUserInfo;
             if (res.user) {
                 const user = res.user;
-                user.updateProfile({ displayName: [details.firstName, details.lastName].join(' ') });
-                const primaryUser = new PrimaryUser(user, { uid: user.uid, email: email, ...details });
+                await user.updateProfile({ displayName: [details.firstName, details.lastName].join(' ') });
+                const docRef = Firestore.collection('users').doc(user.uid).withConverter(PrimaryUser);
+                const primaryUser = new PrimaryUser(user, { uid: user.uid, email: email, ref: docRef, ...details });
                 console.log(primaryUser);
                 try {
-                    await Firestore.collection('users').doc(user.uid).withConverter(PrimaryUser).set(primaryUser);
+                    await docRef.set(primaryUser);
                 } catch (e) {
                     console.log(e);
                 }
@@ -97,6 +112,16 @@ export class Auth {
             console.log(e);
         }
     }
+
+    /**
+     * @author Mohamad Abdel Rida
+     *
+     * Handles auth state changes, i.e. sign in, sign out
+     * converts user
+     * @callback function that handles a user object and converts it to primary user
+     * @error function handles
+     * @completed function what to do after action is completed
+     */
     static onAuthStateChange(
         callback: (user: PrimaryUser | undefined) => void,
         error?: (e: firebase.auth.Error) => void,
@@ -115,6 +140,3 @@ export class Auth {
         );
     }
 }
-
-export const Firestore = app.firestore();
-export default app;

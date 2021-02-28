@@ -6,16 +6,10 @@ import { useState } from 'react';
 import '../pages/RegisterMain.scss';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/firebase';
+import { UserDoc } from '../Models/DocTypes';
 
 const RegisterForm: React.FC = () => {
-    const [userState, setUserState] = useState<{
-        email: string;
-        password: string;
-        cPassword: string;
-        firstName: string;
-        lastName: string;
-        major: string;
-    }>({
+    const [userState, setUserState] = useState({
         email: '',
         password: '',
         cPassword: '',

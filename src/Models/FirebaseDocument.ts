@@ -6,7 +6,7 @@ export default class FirebaseDocument {
      *@author Mohamad Abdel Rida
      *  A class to rule them all,
      * this class allows us to pass down functions to all
-     * models that are related to firebase
+     * models that are related to firebase documents
      *
      */
 
