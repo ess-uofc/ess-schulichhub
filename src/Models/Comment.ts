@@ -53,8 +53,8 @@ export default class Comment extends FirebaseDocument {
      * @param snapshot A QueryDocumentSnapshot containing your data and metadata.
      * @param options The SnapshotOptions from the initial call to `data()`.
      */
-    public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions): Comment {
-        const data = snapshot.data() as CommentDoc;
+    public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Comment {
+        const data = snapshot.data(options) as CommentDoc;
         const id = snapshot.id;
         console.log(data);
 

@@ -1,5 +1,5 @@
 import { UserDoc } from './DocTypes';
-import { DocumentReference, QueryDocumentSnapshot, SetOptions, SnapshotOptions } from './firebase';
+import { DocumentReference, QueryDocumentSnapshot, SnapshotOptions } from './firebase';
 import PrimaryUser from './PrimaryUser';
 
 export class UserError extends Error {
@@ -40,7 +40,7 @@ export default class User implements UserDoc {
      *@property  {string} firstName users first name.
      *@property {string} lastName users last name.
      *@property {string} uid UUID firebase uid
-     *@property {stirng} email user Email
+     *@property {string} email user Email
      *@property {string} major user's U of C major
      *@property {string} photoUrl users profile picture
      */
@@ -70,7 +70,7 @@ export default class User implements UserDoc {
         this.photoUrl = doc.photoUrl;
     }
 
-    public static toFirestore = (user: User | PrimaryUser) => {
+    public static toFirestore = (user: User | PrimaryUser): UserDoc => {
         return user.toJson();
     };
     /**
@@ -91,8 +91,8 @@ export default class User implements UserDoc {
      * @param {QueryDocumentSnapshot} snapshot: snapshot of user document
      * @param {SnapshotOptions} options tells firebase how to handle certain fields
      */
-    public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions) {
-        const doc = snapshot.data() as UserDoc;
+    public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): User {
+        const doc = snapshot.data(options) as UserDoc;
         return new this(doc);
     }
 }

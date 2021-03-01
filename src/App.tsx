@@ -10,8 +10,8 @@ import RegisterForm from './pages/RegisterForm';
 import PostView from './pages/PostView';
 
 /* Redux for User */
-import { clearUser, selectUser, setUser } from './features/User/UserStore';
-import { useDispatch, useSelector } from 'react-redux';
+import { clearUser, setUser } from './features/User/UserStore';
+import { useDispatch } from 'react-redux';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

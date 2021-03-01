@@ -1,9 +1,9 @@
 import { PostDoc } from './DocTypes';
 import { PostCategory } from './Enums';
-import { FirestoreDataConverter, QueryDocumentSnapshot, SetOptions, SnapshotOptions, Timestamp } from './firebase';
+import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
 import PostAttachment from './PostAttachment';
-export default class Post extends FirebaseDocument implements FirestoreDataConverter<Post> {
+export default class Post extends FirebaseDocument {
     id: string;
     content: string;
     title: string;
@@ -39,7 +39,7 @@ export default class Post extends FirebaseDocument implements FirestoreDataConve
         this.attachment = attachment;
     }
 
-    public static toFirestore(post: Post) {
+    public static toFirestore(post: Post):PostDoc {
         return {
             uid: post.uid,
             title: post.title,
@@ -58,8 +58,8 @@ export default class Post extends FirebaseDocument implements FirestoreDataConve
      * @param snapshot A QueryDocumentSnapshot containing your data and metadata.
      * @param options The SnapshotOptions from the initial call to `data()`.
      */
-    public static fromFirestore(snapshot: QueryDocumentSnapshot, options: SnapshotOptions): Post {
-        const data = snapshot.data() as PostDoc;
+    public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Post {
+        const data = snapshot.data(options) as PostDoc;
         const id = snapshot.id;
         const attachment =
             data.attachmentUrl && data.attachmentType
