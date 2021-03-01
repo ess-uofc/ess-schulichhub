@@ -1,24 +1,92 @@
-import { db, FirebaseAuth, FirebaseAuthError, FirebaseUnsubscribe, GoogleProvider } from "./firebase";
-import PrimaryUser from "./PrimaryUser";
+import {
+    db,
+    FirebaseAuth,
+    FirebaseAuthError,
+    FirebaseUnsubscribe,
+    FirebaseUser,
+    GoogleProvider,
+    OAuthProvider,
+} from './firebase';
+import PrimaryUser from './PrimaryUser';
 
 export class Auth {
     private static auth = FirebaseAuth;
     protected static user = Auth.auth.currentUser;
+    public static get googleProvider(): OAuthProvider {
+        const provider = new GoogleProvider();
+        provider.addScope('https://www.googleapis.com/auth/calendar.events');
+        return provider;
+    }
+
+    public static get microsoftProvider() {
+        const provider = new OAuthProvider('microsoft.com');
+        return provider;
+    }
     /**
      * @author Mohamad Abdel Rida
-     * signs a user in using google redirect. Doesn't acutally work
+     * signs a user in using google redirect. Doesn't work properly
      * @todo implement cordova google sign in
      */
     static signInWithGoogle = async (): Promise<PrimaryUser | void> => {
-        const googleProvider = new GoogleProvider();
+        const googleProvider = Auth.googleProvider;
+
         try {
             const res = await Auth.auth.signInWithPopup(googleProvider);
-            if (res.user) {
-                console.log(res.user);
-                return await PrimaryUser.fromUser(res.user);
+            const user = res.user;
+
+            if (res.additionalUserInfo?.isNewUser && user && user.displayName && user.email) {
+                const [firstName, ...lastName] = user.displayName?.split(' ');
+                const docRef = db.db.collection('users').doc(user.uid);
+
+                const details = {
+                    firstName: firstName,
+                    lastName: lastName.join(),
+                    email: user.email,
+                    uid: user.uid,
+                    major: '',
+                    ref: docRef,
+                };
+                const primaryUser = new PrimaryUser(user, details);
+                await details.ref.withConverter(PrimaryUser).set(primaryUser);
+                return primaryUser;
             } else {
             }
-        } catch (e) {}
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    /**
+     * @author Mohamad Abdel Rida
+     * signs a user in using google redirect. Doesn't work properly
+     * @todo implement cordova google sign in
+     */
+    static signInWithMicrosoft = async (): Promise<PrimaryUser | void> => {
+        const provider = Auth.microsoftProvider;
+
+        try {
+            const res = await Auth.auth.signInWithPopup(provider);
+            const user = res.user;
+
+            if (res.additionalUserInfo?.isNewUser && user && user.displayName && user.email) {
+                const [firstName, ...lastName] = user.displayName?.split(' ');
+                const docRef = db.db.collection('users').doc(user.uid);
+
+                const details = {
+                    firstName: firstName,
+                    lastName: lastName.join(),
+                    email: user.email,
+                    uid: user.uid,
+                    major: '',
+                    ref: docRef,
+                };
+                const primaryUser = new PrimaryUser(user, details);
+                await details.ref.withConverter(PrimaryUser).set(primaryUser);
+                return primaryUser;
+            } else {
+            }
+        } catch (e) {
+            console.log(e);
+        }
     };
     /**
      * @author Mohamad Abdel Rida
@@ -28,12 +96,13 @@ export class Auth {
      * @returns <PrimaryUser|undefined>: a primary user instance that has fully extended firebase functionality
      *
      */
-    static async signInWithEmail(email: string, password: string): Promise<PrimaryUser | undefined> {
+    static async signInWithEmail(email: string, password: string): Promise<FirebaseUser | undefined> {
         try {
             const res = await this.auth.signInWithEmailAndPassword(email, password);
             const user = res.user;
+            console.log(res);
             if (user) {
-                return PrimaryUser.fromUser(user);
+                return user;
             }
         } catch (e) {
             console.log(e);
@@ -64,16 +133,15 @@ export class Auth {
     ): Promise<PrimaryUser | undefined> {
         try {
             const res = await this.auth.createUserWithEmailAndPassword(email, password);
-            res.additionalUserInfo;
             if (res.user) {
                 const user = res.user;
                 await user.updateProfile({ displayName: [details.firstName, details.lastName].join(' ') });
                 const docRef = db.db.collection('users').doc(user.uid);
-                // .collection('users').doc(user.uid).withConverter(PrimaryUser);
                 const primaryUser = new PrimaryUser(user, { uid: user.uid, email: email, ref: docRef, ...details });
+                primaryUser.verifyEmail();
                 console.log(primaryUser);
                 try {
-                    await docRef.set(primaryUser);
+                    await docRef.withConverter(PrimaryUser).set(primaryUser);
                 } catch (e) {
                     console.log(e);
                 }

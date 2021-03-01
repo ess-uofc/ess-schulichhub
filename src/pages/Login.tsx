@@ -52,6 +52,11 @@ const Login: React.FC = () => {
                         Sign in with Google
                     </IonButton>
                 </div>
+                <div>
+                    <IonButton onClick={Auth.signInWithMicrosoft} className="googleLogin">
+                        Sign in with Microsoft
+                    </IonButton>
+                </div>
                 <IonButton
                     className="testLogin"
                     onClick={() => {
