@@ -41,12 +41,7 @@ export default class FirebaseDocument {
             return 'Some time Somewhere in the cosmic web';
         }
     }
-    fromFirestore = () => {
-        throw new Error('Not implemented');
-    };
-    toFirestore = () => {
-        throw new Error('Not implemented');
-    };
+
     constructor(timestamp: Timestamp) {
         this.timestamp = timestamp;
     }

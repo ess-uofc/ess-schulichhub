@@ -18,7 +18,7 @@ export class Auth {
         return provider;
     }
 
-    public static get microsoftProvider() {
+    public static get microsoftProvider(): OAuthProvider {
         const provider = new OAuthProvider('microsoft.com');
         return provider;
     }
