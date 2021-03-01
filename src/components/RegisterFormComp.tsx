@@ -1,20 +1,11 @@
 import React from 'react';
 import './RegisterLanding.scss';
-import {
-    IonButton,
-    IonInput,
-    IonItemDivider,
-    IonSelect,
-    IonSelectOption,
-    IonTitle,
-    IonItem,
-    IonLabel,
-} from '@ionic/react';
+import { IonButton, IonInput, IonItemDivider, IonTitle } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import Select from 'react-select';
 import '../pages/RegisterMain.scss';
-import majorList from '../majors.json';
+import majors from '../majors';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/Auth';
 
@@ -39,19 +30,13 @@ const RegisterForm: React.FC = () => {
         }
     }
 
-    // const [isDisabled, setDisabled] = useState(true);
-    // const [majorOptions, setMajorOptions] = useState();
-
-    const faculties = Object.keys(majorList);
+    const faculties = Object.keys(majors);
     const facultyOptions = faculties.map((item) => ({
         value: item,
         label: item,
     }));
 
     const [faculty, setFaculty] = useState<string>();
-    const [major, setMajor] = useState<string>();
-
-    let isDisabled = true;
 
     return (
         <>
@@ -94,8 +79,17 @@ const RegisterForm: React.FC = () => {
                     setUserState({ ...userState, cPassword: e.detail.value ?? '' })
                 }
             />
-            <Select options={facultyOptions} onChange={(e) => setFaculty(e.detail.target)}></Select>
-            <Select options={majorOptions} isDisabled={majorOptions}></Select>
+            <Select options={facultyOptions} onChange={(e) => setFaculty(e?.value)}></Select>
+            {faculty && (
+                <Select
+                    options={majors[faculty].map((item: string) => ({
+                        value: item,
+                        label: item,
+                    }))}
+                    isDisabled={faculty == null}
+                    onChange={(e) => e && setUserState({ ...userState, major: e.value })}
+                ></Select>
+            )}
             <IonButton className="custombutton" onClick={RegisterUser}>
                 <span className="ButtonText">Sign Up</span>
             </IonButton>
