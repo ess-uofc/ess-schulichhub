@@ -2,9 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/analytics';
-import 'firebase/messaging';
-
-import PrimaryUser from './PrimaryUser';
+// import 'firebase/messaging';
+import 'firebase/storage';
 import FireStoreDB from './firestore';
 export const Timestamp = firebase.firestore.Timestamp;
 export type Timestamp = firebase.firestore.Timestamp;
@@ -19,7 +18,9 @@ export type SetOptions = firebase.firestore.SetOptions;
 export type DocumentReference = firebase.firestore.DocumentReference;
 export const GoogleProvider = firebase.auth.GoogleAuthProvider;
 export type FirebaseAuthError = firebase.auth.Error;
-export type FirebaseUnsubscribe = firebase.Unsubscribe
+export type FirebaseUnsubscribe = firebase.Unsubscribe;
+export const OAuthProvider = firebase.auth.OAuthProvider;
+export type OAuthProvider = firebase.auth.AuthProvider;
 const firebaseConfig = {
     apiKey: 'AIzaSyD9mulwyPhAR7tUp0MdZ31_RodyAhIMdpk',
     authDomain: 'project-hub-116d7.firebaseapp.com',
@@ -32,8 +33,9 @@ const firebaseConfig = {
 };
 const app: firebase.app.App = firebase.initializeApp(firebaseConfig);
 export const analytics = app.analytics(); //UserEvent analytics such as login/creation page view etc...
-export const messaging = app.messaging(); //Push notifications and in app messaging
-export const FirebaseAuth = app.auth()
+// export const messaging = app.messaging(); //Push notifications and in app messaging
+export const FirebaseAuth = app.auth();
+export const Storage = app.storage();
 firebase.firestore().settings({
     cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
 });

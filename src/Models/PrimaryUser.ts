@@ -36,6 +36,6 @@ export default class PrimaryUser extends User {
      * @param {string} continueUrl where to send user after verification is completed
      */
     async verifyEmail(continueUrl = 'https://hub.essucalgary.com/'): Promise<void> {
-        await this.user.sendEmailVerification({ url: continueUrl });
+        console.log(await this.user.sendEmailVerification({ url: continueUrl }));
     }
 }
