@@ -9,7 +9,7 @@ import {
     IonSelect,
     IonSelectOption,
 } from '@ionic/react';
-import {  db, Timestamp } from '../Models/firebase';
+import { db, Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';

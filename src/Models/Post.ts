@@ -39,7 +39,7 @@ export default class Post extends FirebaseDocument {
         this.attachment = attachment;
     }
 
-    public static toFirestore(post: Post):PostDoc {
+    public static toFirestore(post: Post): PostDoc {
         return {
             uid: post.uid,
             title: post.title,
