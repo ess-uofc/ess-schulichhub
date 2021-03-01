@@ -49,6 +49,7 @@ const RegisterForm: React.FC = () => {
     }));
 
     const [faculty, setFaculty] = useState<string>();
+    const [major, setMajor] = useState<string>();
 
     let isDisabled = true;
 
