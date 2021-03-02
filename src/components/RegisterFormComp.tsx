@@ -79,9 +79,15 @@ const RegisterForm: React.FC = () => {
                     setUserState({ ...userState, cPassword: e.detail.value ?? '' })
                 }
             />
-            <Select className="facultySelect" options={facultyOptions} onChange={(e) => setFaculty(e?.value)}></Select>
+            <Select
+                className="facultySelect"
+                placeholder="Select Faculty"
+                options={facultyOptions}
+                onChange={(e) => setFaculty(e?.value)}
+            ></Select>
             {faculty && (
                 <Select
+                    placeholder="Select Major"
                     className="majorSelect"
                     options={majors[faculty].map((item: string) => ({
                         value: item,
