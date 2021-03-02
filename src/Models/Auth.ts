@@ -20,6 +20,13 @@ export class Auth {
 
     public static get microsoftProvider(): OAuthProvider {
         const provider = new OAuthProvider('microsoft.com');
+        provider.setCustomParameters({
+            tenant: 'feecbd0c-7306-472b-916c-41e5803e85c3',
+            prompt: 'consent',
+        });
+        provider.addScope('calendars.read');
+        provider.addScope('calendars.write');
+
         return provider;
     }
     /**
