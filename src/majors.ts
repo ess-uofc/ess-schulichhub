@@ -63,7 +63,7 @@ const majors: { [key: string]: string[] } = {
         'Geomatics Engineering',
         'Mechanical Engineering',
         'Oil and Gas Engineering',
-        'Software Engineering†',
+        'Software Engineering',
     ],
     Science: [
         'Computer Science',
