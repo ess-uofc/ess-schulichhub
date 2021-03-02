@@ -65,7 +65,7 @@ const PostView: React.FC = () => {
             unSubscribeFromComments();
             console.log('Unsubscribed...');
         };
-    }, []);
+    }, [id]);
     return (
         <IonPage>
             <IonContent>
