@@ -68,6 +68,13 @@ const App: React.FC = () => {
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
                     <Route path="/writePost" component={WritePostView} exact={true} />
                     <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
+                    <Route
+                        path="/_auth/handler"
+                        component={() => {
+                            window.location.href = 'https://project-hub-116d7.firebaseapp.com/__/auth/handler';
+                            return null;
+                        }}
+                    />
                 </IonRouterOutlet>
             </IonReactRouter>
         </IonApp>
