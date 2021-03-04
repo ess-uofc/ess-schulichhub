@@ -6,6 +6,7 @@ import { IonList, IonLabel, IonListHeader } from '@ionic/react';
 import PropTypes from 'prop-types';
 
 const PostComments: React.FC<{ comments?: { id: string; comment: Comment }[] }> = (props) => {
+    const commentsArray: Array<Array<number>> = [[0, 1, 2, 3]];
     return (
         <IonList className="commentContainer">
             <IonListHeader>
@@ -13,7 +14,7 @@ const PostComments: React.FC<{ comments?: { id: string; comment: Comment }[] }> 
             </IonListHeader>
             {props.comments &&
                 props.comments.map((v, k) => {
-                    return <SingleComment key={k} comment={v.comment}></SingleComment>;
+                    return <SingleComment key={k} comment={v.comment} commentArray={commentsArray[0]}></SingleComment>;
                 })}
         </IonList>
     );
