@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
-import { CommentDoc } from '../Models/DocTypes';
+import { IComment } from '../Models/DocTypes';
 import { db, Timestamp } from '../Models/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
@@ -12,7 +12,7 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
     function handleComment() {
         if (content) {
             const now = Timestamp.now();
-            db.uploadDoc<CommentDoc>('comments', {
+            db.uploadDoc<IComment>('comments', {
                 user: { ...props.user.toJson(), photoUrl: props.user.getPhotoUrl() ?? '' },
                 replyTo: props.postId,
                 content: content,
