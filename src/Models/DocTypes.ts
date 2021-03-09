@@ -1,7 +1,7 @@
 import { PostAttachmentType } from './Enums';
 import { DocumentReference, Timestamp } from './firebase';
 
-export interface UserDoc {
+export interface IUser {
     firstName: string;
     lastName: string;
     uid: string;
@@ -9,11 +9,10 @@ export interface UserDoc {
     email: string;
     ref: DocumentReference;
     photoUrl?: string;
-    [key: string]: any;
 
     // Add other user fields here
 }
-export interface PostDoc {
+export interface IPost {
     id?: string;
     title: string;
     content: string;
@@ -23,12 +22,11 @@ export interface PostDoc {
     category: string;
     attachmentUrl?: string;
     attachmentType?: PostAttachmentType;
-    [key: string]: any;
 }
-export interface CommentDoc {
+export interface IComment {
     replyTo: string;
-    user?: UserDoc;
+    user?: IUser;
     content: string;
     timestamp: Timestamp;
-    [key: string]: any;
+    id?: string;
 }

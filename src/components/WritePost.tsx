@@ -11,7 +11,7 @@ import {
     IonTextarea,
 } from '@ionic/react';
 import { db, Timestamp } from '../Models/firebase';
-import { PostDoc } from '../Models/DocTypes';
+import { IPost } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
 import { PostCategory } from '../Models/Enums';
@@ -38,7 +38,7 @@ const WritePost: React.FC = () => {
 
         if (user) {
             const _now = Timestamp.now();
-            await db.uploadDoc<PostDoc>('posts', {
+            await db.uploadDoc<IPost>('posts', {
                 title: title,
                 uid: user.uid,
                 content: content,
