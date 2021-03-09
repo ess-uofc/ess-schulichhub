@@ -1,4 +1,4 @@
-import { UserDoc } from './DocTypes';
+import { IUser } from './DocTypes';
 import { FirebaseUser, Firestore } from './firebase';
 import User from './User';
 
@@ -6,7 +6,7 @@ export default class PrimaryUser extends User {
     private user: FirebaseUser;
     getPhotoUrl = (): string | null => this.user.photoURL;
 
-    constructor(user: FirebaseUser, details: UserDoc) {
+    constructor(user: FirebaseUser, details: IUser) {
         super(details);
         this.user = user;
     }
@@ -19,7 +19,7 @@ export default class PrimaryUser extends User {
     static async fromUser(user: FirebaseUser): Promise<PrimaryUser | undefined> {
         try {
             const details = (await Firestore.collection('users').withConverter(User).doc(user.uid).get()).data();
-            return new PrimaryUser(user, details as UserDoc);
+            return new PrimaryUser(user, details as IUser);
         } catch (e) {}
     }
 

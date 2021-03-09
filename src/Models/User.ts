@@ -1,4 +1,4 @@
-import { UserDoc } from './DocTypes';
+import { IUser } from './DocTypes';
 import { DocumentReference, QueryDocumentSnapshot, SnapshotOptions } from './firebase';
 import PrimaryUser from './PrimaryUser';
 
@@ -30,7 +30,7 @@ export class UserError extends Error {
     }
 }
 
-export default class User implements UserDoc {
+export default class User implements IUser {
     /**
      * User class contains uid, firstName, lastName
      * @author Mohamad Abdel Rida
@@ -60,7 +60,7 @@ export default class User implements UserDoc {
      * @param doc UserDoc
      */
 
-    constructor(doc: UserDoc) {
+    constructor(doc: IUser) {
         this.firstName = doc.firstName;
         this.lastName = doc.lastName;
         this.uid = doc.uid;
@@ -70,14 +70,14 @@ export default class User implements UserDoc {
         this.photoUrl = doc.photoUrl;
     }
 
-    public static toFirestore = (user: User | PrimaryUser): UserDoc => {
+    public static toFirestore = (user: User | PrimaryUser): IUser => {
         return user.toJson();
     };
     /**
      * Converts User to UserDoc primitive-ish
      *
      */
-    public toJson(): UserDoc {
+    public toJson(): IUser {
         return {
             uid: this.uid,
             major: this.major,
@@ -92,7 +92,7 @@ export default class User implements UserDoc {
      * @param {SnapshotOptions} options tells firebase how to handle certain fields
      */
     public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): User {
-        const doc = snapshot.data(options) as UserDoc;
+        const doc = snapshot.data(options) as IUser;
         return new this(doc);
     }
 }

@@ -1,4 +1,4 @@
-import { PostDoc } from './DocTypes';
+import { IPost } from './DocTypes';
 import { PostCategory } from './Enums';
 import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
@@ -39,7 +39,7 @@ export default class Post extends FirebaseDocument {
         this.attachment = attachment;
     }
 
-    public static toFirestore(post: Post): PostDoc {
+    public static toFirestore(post: Post): IPost {
         return {
             uid: post.uid,
             title: post.title,
@@ -59,7 +59,7 @@ export default class Post extends FirebaseDocument {
      * @param options The SnapshotOptions from the initial call to `data()`.
      */
     public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Post {
-        const data = snapshot.data(options) as PostDoc;
+        const data = snapshot.data(options) as IPost;
         const id = snapshot.id;
         const attachment =
             data.attachmentUrl && data.attachmentType

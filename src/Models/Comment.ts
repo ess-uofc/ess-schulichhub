@@ -1,11 +1,11 @@
-import { CommentDoc, UserDoc } from './DocTypes';
+import { IComment, IUser } from './DocTypes';
 import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
 import User from './User';
 export default class Comment extends FirebaseDocument {
     /**
      * Comment class for holding comments
-     * @author Robert Brown
+     * @author Robert Brown, Ratik Kapoor
      * @since 0.0.4
      */
 
@@ -32,17 +32,17 @@ export default class Comment extends FirebaseDocument {
         this.user = user;
     }
 
-    public toJson(): CommentDoc {
+    public toJson(): IComment {
         return {
             id: this.id,
             replyTo: this.replyTo,
-            user: this.user as UserDoc,
+            user: this.user as IUser,
             content: this.content,
             timestamp: this.timestamp,
         };
     }
 
-    public static toFirestore(comment: Comment): CommentDoc {
+    public static toFirestore(comment: Comment): IComment {
         return comment.toJson();
     }
 
@@ -54,10 +54,10 @@ export default class Comment extends FirebaseDocument {
      * @param options The SnapshotOptions from the initial call to `data()`.
      */
     public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Comment {
-        const data = snapshot.data(options) as CommentDoc;
+        const data = snapshot.data(options) as IComment;
         const id = snapshot.id;
         console.log(data);
 
-        return new this(id, data.content, data.timestamp, data.replyTo, new User(data.user as UserDoc));
+        return new this(id, data.content, data.timestamp, data.replyTo, new User(data.user as IUser));
     }
 }
