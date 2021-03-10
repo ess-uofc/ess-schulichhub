@@ -1,5 +1,5 @@
 import React from 'react';
-import './SingleComment.scss';
+import './CommentView.scss';
 import Comment from '../Models/Comment';
 import { IonItem, IonAvatar, IonLabel, IonText, IonIcon } from '@ionic/react';
 import { arrowUndo } from 'ionicons/icons';
@@ -9,7 +9,7 @@ interface CommentProps {
     comment: Comment;
 }
 
-const SingleComment: React.FC<CommentProps> = (props: CommentProps) => {
+const CommentView: React.FC<CommentProps> = (props: CommentProps) => {
     const { setReplyToCommentID } = useReplyCommentPair();
 
     console.log(props.comment.user.photoUrl);
@@ -25,4 +25,4 @@ const SingleComment: React.FC<CommentProps> = (props: CommentProps) => {
     );
 };
 
-export default SingleComment;
+export default CommentView;
