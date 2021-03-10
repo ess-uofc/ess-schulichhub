@@ -36,6 +36,7 @@ import WritePostView from './pages/WritePost';
 import TitleBar from './components/TitleBar';
 import unProtectedRoutes from './app/routing';
 import { Auth } from './Models/Auth';
+import ProfileView from './pages/ProfileView';
 
 const App: React.FC = () => {
     const dispatch = useDispatch();
@@ -67,6 +68,7 @@ const App: React.FC = () => {
                     <Route path="/register" component={RegisterLanding} exact={true} />
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
                     <Route path="/writePost" component={WritePostView} exact={true} />
+                    <Route path="/profile" component={ProfileView} exact={true} />
                     <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
                 </IonRouterOutlet>
             </IonReactRouter>
