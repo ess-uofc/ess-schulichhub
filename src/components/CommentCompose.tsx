@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
 import { IComment } from '../Models/DocTypes';
@@ -12,13 +12,17 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
     const [content, setContent] = useState<string>('');
     const { replyToCommentID } = useReplyCommentPair();
 
+    useEffect(() => {
+        console.log('REPLYING TO', replyToCommentID);
+    }, [replyToCommentID]);
+
     function handleComment() {
         if (content) {
             const now = Timestamp.now();
             db.uploadDoc<IComment>('comments', {
                 user: { ...props.user.toJson(), photoUrl: props.user.getPhotoUrl() ?? '' },
                 replyToPost: props.postId,
-                replyToComment: replyToCommentID,
+                replyToComment: replyToCommentID ?? '',
                 content: content,
                 timestamp: now,
             });

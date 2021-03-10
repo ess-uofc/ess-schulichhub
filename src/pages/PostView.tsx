@@ -29,7 +29,7 @@ const PostView: React.FC = () => {
     const [comments, setComments] = useState<{ id: string; comment: Comment }[]>();
     const user = useSelector(selectUser);
     const { id } = useParams<{ id: string }>();
-    const [replyToCommentID, setReplyToCommentID] = useState<string | undefined>(undefined);
+    const [replyToCommentID, setReplyToCommentID] = useState<string>('');
 
     useEffect(() => {
         console.log('Adding event listeners...');
