@@ -46,7 +46,7 @@ const PostView: React.FC = () => {
             });
         const unSubscribeFromComments = db.db
             .collection('comments')
-            .where('replyTo', '==', id)
+            .where('replyToPost', '==', id)
             .orderBy('timestamp', 'desc')
             .withConverter(Comment)
             .onSnapshot({
