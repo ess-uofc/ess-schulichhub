@@ -24,9 +24,10 @@ export interface IPost {
     attachmentType?: PostAttachmentType;
 }
 export interface IComment {
-    replyTo: string;
+    replyToPost: string;
     user?: IUser;
     content: string;
     timestamp: Timestamp;
     id?: string;
+    replyToComment?: string;
 }

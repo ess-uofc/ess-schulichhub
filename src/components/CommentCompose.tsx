@@ -6,15 +6,19 @@ import { db, Timestamp } from '../Models/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import PrimaryUser from '../Models/PrimaryUser';
+import { useReplyCommentPair } from '../contexts/replyComment';
 
 const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) => {
     const [content, setContent] = useState<string>('');
+    const { replyToCommentID } = useReplyCommentPair();
+
     function handleComment() {
         if (content) {
             const now = Timestamp.now();
             db.uploadDoc<IComment>('comments', {
                 user: { ...props.user.toJson(), photoUrl: props.user.getPhotoUrl() ?? '' },
-                replyTo: props.postId,
+                replyToPost: props.postId,
+                replyToComment: replyToCommentID,
                 content: content,
                 timestamp: now,
             });
