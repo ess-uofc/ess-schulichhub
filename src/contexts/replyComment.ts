@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 
 export type ReplyCommentPairType = {
-    replyToCommentID?: string;
+    replyToCommentID: string;
     setReplyToCommentID: (id: string) => void;
 };
 
