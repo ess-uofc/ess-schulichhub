@@ -1,7 +1,7 @@
 import React from 'react';
 import './PostComments.scss';
 import Comment from '../Models/Comment';
-import SingleComment from './SingleComment';
+import CommentView from './CommentView';
 import { IonList, IonLabel, IonListHeader } from '@ionic/react';
 import PropTypes from 'prop-types';
 
@@ -13,7 +13,7 @@ const PostComments: React.FC<{ comments?: { id: string; comment: Comment }[] }> 
             </IonListHeader>
             {props.comments &&
                 props.comments.map((v, k) => {
-                    return <SingleComment key={k} comment={v.comment}></SingleComment>;
+                    return <CommentView key={k} comment={v.comment}></CommentView>;
                 })}
         </IonList>
     );
