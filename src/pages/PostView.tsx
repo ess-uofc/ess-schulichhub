@@ -22,12 +22,14 @@ import Comment from '../Models/Comment';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
 import { db } from '../Models/firebase';
+import { ReplyCommentPairContext } from '../contexts/replyComment';
 
 const PostView: React.FC = () => {
     const [post, setPost] = useState<Post>();
     const [comments, setComments] = useState<{ id: string; comment: Comment }[]>();
     const user = useSelector(selectUser);
     const { id } = useParams<{ id: string }>();
+    const [replyToCommentID, setReplyToCommentID] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         console.log('Adding event listeners...');
@@ -96,8 +98,10 @@ const PostView: React.FC = () => {
                         )}
                     </IonCardContent>
                 </IonCard>
-                <PostComments comments={comments}> </PostComments>
-                {user && <CommentCompose user={user} postId={id} />}
+                <ReplyCommentPairContext.Provider value={{ replyToCommentID, setReplyToCommentID }}>
+                    <PostComments comments={comments} />
+                    {user && <CommentCompose user={user} postId={id} />}
+                </ReplyCommentPairContext.Provider>
             </IonContent>
         </IonPage>
     );

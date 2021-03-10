@@ -12,7 +12,8 @@ export default class Comment extends FirebaseDocument {
     id: string;
     content: string;
     timestamp: Timestamp;
-    replyTo: string;
+    replyToPost: string;
+    replyToComment?: string;
     user: User;
 
     /**
@@ -23,22 +24,31 @@ export default class Comment extends FirebaseDocument {
      * @param replyTo (optional) if the comment is in reply, the parent comment
      * @param user (optional for development) user who posted the comment
      */
-    constructor(id: string, content: string, timestamp: Timestamp, replyTo: string, user: User) {
+    constructor(
+        id: string,
+        content: string,
+        timestamp: Timestamp,
+        replyToPost: string,
+        user: User,
+        replyToComment?: string,
+    ) {
         super(timestamp);
         this.id = id;
         this.content = content;
         this.timestamp = timestamp;
-        this.replyTo = replyTo;
+        this.replyToPost = replyToPost;
         this.user = user;
+        this.replyToComment = replyToComment;
     }
 
     public toJson(): IComment {
         return {
             id: this.id,
-            replyTo: this.replyTo,
+            replyToPost: this.replyToPost,
             user: this.user as IUser,
             content: this.content,
             timestamp: this.timestamp,
+            replyToComment: this.replyToComment,
         };
     }
 
@@ -58,6 +68,6 @@ export default class Comment extends FirebaseDocument {
         const id = snapshot.id;
         console.log(data);
 
-        return new this(id, data.content, data.timestamp, data.replyTo, new User(data.user as IUser));
+        return new this(id, data.content, data.timestamp, data.replyToPost, new User(data.user as IUser));
     }
 }

@@ -3,12 +3,15 @@ import './SingleComment.scss';
 import Comment from '../Models/Comment';
 import { IonItem, IonAvatar, IonLabel, IonText, IonIcon } from '@ionic/react';
 import { arrowUndo } from 'ionicons/icons';
+import { useReplyCommentPair } from '../contexts/replyComment';
 
 interface CommentProps {
     comment: Comment;
 }
 
 const SingleComment: React.FC<CommentProps> = (props: CommentProps) => {
+    const { setReplyToCommentID } = useReplyCommentPair();
+
     console.log(props.comment.user.photoUrl);
     return (
         <IonItem className="commentItem">
@@ -17,7 +20,7 @@ const SingleComment: React.FC<CommentProps> = (props: CommentProps) => {
             </IonAvatar>
             <IonLabel className="commentUser">{props.comment.getTimePosted()}</IonLabel>
             <IonText className="commentContent">{props.comment.content}</IonText>
-            <IonIcon icon={arrowUndo}></IonIcon>
+            <IonIcon icon={arrowUndo} onClick={() => setReplyToCommentID(props.comment.id)} />
         </IonItem>
     );
 };
