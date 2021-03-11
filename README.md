@@ -10,7 +10,30 @@ Link to live website: [hub.essucalgary.com](https://hub.essucalgary.com)
 
 -   [Ionic React](https://ionicframework.com)
 
-## Prerequisites
+## Getting Started
+
+### Using Docker (recommended)
+
+#### Prerequisites
+
+Ensure that you have Docker and `docker-compose` installed on your development computer: [Docker website](https://www.docker.com). Windows computers will need to use WSL2 (Windows Subsystem for Linux) as a backend following [this guide](https://docs.docker.com/docker-for-windows/wsl/).
+
+#### Installation and Development
+
+```bash
+# Clone this repo
+git clone https://github.com/ess-uofc/ess-schulichhub.git
+cd ess-schulichhub
+
+# Start development server
+docker-compose up
+```
+
+To quit the development environment, simply press Ctrl+C and the Docker container will shut down.
+
+### Manual method (not recommended)
+
+#### Prerequisites
 
 Ensure that you have the standard Node.js development tools available to use and the Yarn Package Manager installed globally.
 
@@ -18,20 +41,25 @@ Ensure that you have the standard Node.js development tools available to use and
 -   [Yarn](https://yarnpkg.com)
 -   [Ionic CLI](https://ionicframework.com/docs/cli)
 
-## Installation
+#### Installation
 
 To develop or run this repository locally:
 
 ```bash
-git clone https://github.com/RatikKapoor/ess-schulichhub.git
+# Clone this repo
+git clone https://github.com/ess-uofc/ess-schulichhub.git
 cd ess-schulichhub
+
+# Install dependencies
 yarn install
+
+# Start development server
 ionic serve
 ```
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. Please base all pull requests off of the main branch as they will be rebase merged. Check that there are no linter issues before opening a pull request by running `yarn run lint-check`.
+Pull requests are welcome. Please use semantic commit messages and branch naming conventions using [this guide](https://www.conventionalcommits.org/en/v1.0.0/). Private branches should be named using the `semantic/name/purpose` convention. For example: `docs/ratik/update-readme` signifies that Ratik is responsible for this documentation change and the purpose of the branch is to update the README. For major changes, please open an issue first to discuss what you would like to change. Please base all pull requests off of the main branch as they will be rebase merged. Before opening a pull request: check that there are no linter issues by running `yarn run lint-check` and fix all formatting using `yarn run prettier-fix`. The linear history requirement is enforced on main.
 
 Please make sure to update tests as appropriate.
 
