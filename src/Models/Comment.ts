@@ -13,7 +13,7 @@ export default class Comment extends FirebaseDocument {
     content: string;
     timestamp: Timestamp;
     replyToPost: string;
-    replyToComment?: string;
+    replyToComment: string;
     user: User;
 
     /**
@@ -30,7 +30,7 @@ export default class Comment extends FirebaseDocument {
         timestamp: Timestamp,
         replyToPost: string,
         user: User,
-        replyToComment?: string,
+        replyToComment: string,
     ) {
         super(timestamp);
         this.id = id;
@@ -68,6 +68,13 @@ export default class Comment extends FirebaseDocument {
         const id = snapshot.id;
         console.log(data);
 
-        return new this(id, data.content, data.timestamp, data.replyToPost, new User(data.user as IUser));
+        return new this(
+            id,
+            data.content,
+            data.timestamp,
+            data.replyToPost,
+            new User(data.user as IUser),
+            data.replyToComment,
+        );
     }
 }

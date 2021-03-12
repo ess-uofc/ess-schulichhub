@@ -29,5 +29,5 @@ export interface IComment {
     content: string;
     timestamp: Timestamp;
     id?: string;
-    replyToComment?: string;
+    replyToComment: string;
 }
