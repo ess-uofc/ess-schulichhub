@@ -35,7 +35,11 @@ const CommentView: React.FC<CommentProps> = (props: CommentProps) => {
             {props.comment.replyToComment.length === 0 && (
                 <IonIcon
                     icon={arrowUndo}
-                    onClick={() => setReplyToCommentID(props.comment.id)}
+                    onClick={() => {
+                        replyToCommentID === props.comment.id
+                            ? setReplyToCommentID('')
+                            : setReplyToCommentID(props.comment.id);
+                    }}
                     style={replyToCommentID === props.comment.id ? { color: '#00c4b4' } : undefined}
                 />
             )}
