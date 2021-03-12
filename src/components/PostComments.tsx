@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './PostComments.scss';
 import Comment from '../Models/Comment';
 import CommentView from './CommentView';
@@ -13,7 +13,7 @@ const PostComments: React.FC<{ comments?: { id: string; comment: Comment }[] }> 
             </IonListHeader>
             {props.comments &&
                 props.comments.map((v, k) => {
-                    return <CommentView key={k} comment={v.comment}></CommentView>;
+                    return <CommentView key={k} comment={v.comment} />;
                 })}
         </IonList>
     );

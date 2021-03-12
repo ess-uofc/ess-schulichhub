@@ -23,13 +23,25 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
 import { db } from '../Models/firebase';
 import { ReplyCommentPairContext } from '../contexts/replyComment';
+import _ from 'lodash';
+
+interface PostViewComments {
+    id: string;
+    comment: Comment;
+}
 
 const PostView: React.FC = () => {
     const [post, setPost] = useState<Post>();
-    const [comments, setComments] = useState<{ id: string; comment: Comment }[]>();
+    const [comments, setComments] = useState<PostViewComments[]>();
     const user = useSelector(selectUser);
     const { id } = useParams<{ id: string }>();
     const [replyToCommentID, setReplyToCommentID] = useState<string>('');
+
+    const arrangeComments = (comments: PostViewComments[]): PostViewComments[] => {
+        return _.orderBy(comments, (comment) => {
+            return comment.comment.replyToComment.length === 0 ? comment.comment.id : comment.comment.replyToComment;
+        }).reverse();
+    };
 
     useEffect(() => {
         console.log('Adding event listeners...');
@@ -58,7 +70,7 @@ const PostView: React.FC = () => {
                             comment: e.data(),
                         };
                     });
-                    setComments(Comments);
+                    setComments(arrangeComments(Comments));
                     console.log(Comments);
                 },
             });
