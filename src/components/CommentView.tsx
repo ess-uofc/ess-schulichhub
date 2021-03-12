@@ -10,17 +10,35 @@ interface CommentProps {
 }
 
 const CommentView: React.FC<CommentProps> = (props: CommentProps) => {
-    const { setReplyToCommentID } = useReplyCommentPair();
+    const { replyToCommentID, setReplyToCommentID } = useReplyCommentPair();
 
     console.log(props.comment.user.photoUrl);
     return (
-        <IonItem className="commentItem">
+        <IonItem
+            className={
+                props.comment.replyToComment && props.comment.replyToComment.length > 1
+                    ? 'subCommentItem'
+                    : 'commentItem'
+            }
+        >
             <IonAvatar className="commentAvatar">
-                <img src={props.comment.user.photoUrl ?? 'https://essucalgary.com/images/ess-logo.png'} />
+                <img
+                    src={
+                        props.comment.user.photoUrl?.length
+                            ? props.comment.user.photoUrl
+                            : 'https://essucalgary.com/images/ess-logo.png'
+                    }
+                />
             </IonAvatar>
             <IonLabel className="commentUser">{props.comment.getTimePosted()}</IonLabel>
             <IonText className="commentContent">{props.comment.content}</IonText>
-            <IonIcon icon={arrowUndo} onClick={() => setReplyToCommentID(props.comment.id)} />
+            {props.comment.replyToComment.length === 0 && (
+                <IonIcon
+                    icon={arrowUndo}
+                    onClick={() => setReplyToCommentID(props.comment.id)}
+                    style={replyToCommentID === props.comment.id ? { color: '#00c4b4' } : undefined}
+                />
+            )}
         </IonItem>
     );
 };
