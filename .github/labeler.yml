@@ -12,3 +12,6 @@ scss:
 
 devops:
     - '.github/**/*'
+    - 'Dockerfile'
+    - '.dockerignore'
+    - 'docker-compose.yml'
