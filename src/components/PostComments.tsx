@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './PostComments.scss';
 import Comment from '../Models/Comment';
 import CommentView from './CommentView';
