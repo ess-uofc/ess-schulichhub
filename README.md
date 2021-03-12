@@ -26,7 +26,7 @@ git clone https://github.com/ess-uofc/ess-schulichhub.git
 cd ess-schulichhub
 
 # Start development server
-docker-compose up
+yarn dev
 ```
 
 To quit the development environment, simply press Ctrl+C and the Docker container will shut down.
