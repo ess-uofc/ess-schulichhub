@@ -91,7 +91,7 @@ const WritePost: React.FC = () => {
                     inputMode="text"
                     value={content}
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setContent(e.detail.value ?? '')}
-                ></IonTextarea>
+                />
             </IonItem>
             <IonButton color="danger" onClick={uploadPost}>
                 Upload Post
