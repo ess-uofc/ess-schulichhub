@@ -58,6 +58,7 @@ const WritePost: React.FC = () => {
             <IonItem>
                 <IonLabel>Title</IonLabel>
                 <IonInput
+                    spellcheck={true}
                     type="text"
                     value={title}
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setTitle(e.detail.value ?? '')}
@@ -84,6 +85,7 @@ const WritePost: React.FC = () => {
             <IonItem>
                 <IonLabel>Content</IonLabel>
                 <IonInput
+                    spellcheck={true}
                     type="text"
                     value={content}
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setContent(e.detail.value ?? '')}
