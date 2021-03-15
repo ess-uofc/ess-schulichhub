@@ -26,6 +26,7 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
                 <IonCardContent>
                     <IonAvatar></IonAvatar>
                     <IonTextarea
+                        spellcheck={true}
                         placeholder="Write a comment..."
                         className="commentText"
                         onIonChange={(e) => setContent(e.detail.value ?? '')}

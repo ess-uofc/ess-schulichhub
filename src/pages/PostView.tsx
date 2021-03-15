@@ -90,7 +90,7 @@ const PostView: React.FC = () => {
                             {post ? <IonLabel>{post.category}</IonLabel> : <IonSkeletonText animated />}
                         </IonChip>
                         {post ? (
-                            <IonTextarea auto-grow="true" value={post.content}></IonTextarea>
+                            <IonTextarea spellcheck={true} auto-grow="true" value={post.content}></IonTextarea>
                         ) : (
                             <IonSkeletonText animated />
                         )}
