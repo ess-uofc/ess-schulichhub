@@ -8,7 +8,7 @@ import {
     IonInput,
     IonSelect,
     IonSelectOption,
-    IonTextarea
+    IonTextarea,
 } from '@ionic/react';
 import { db, Timestamp } from '../Models/firebase';
 import { PostDoc } from '../Models/DocTypes';
@@ -87,8 +87,8 @@ const WritePost: React.FC = () => {
                 <IonLabel>Content</IonLabel>
                 <IonTextarea
                     spellcheck={true}
-                    autoGrow= {true}
-                    inputMode='text'
+                    autoGrow={true}
+                    inputMode="text"
                     value={content}
                     onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setContent(e.detail.value ?? '')}
                 ></IonTextarea>
