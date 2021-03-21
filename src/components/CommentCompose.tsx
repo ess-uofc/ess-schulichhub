@@ -7,10 +7,13 @@ import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import PrimaryUser from '../Models/PrimaryUser';
 import { useReplyCommentPair } from '../contexts/replyComment';
+import { selectUser } from '../features/User/UserStore';
+import { useSelector } from 'react-redux';
 
-const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) => {
+const CommentCompose: React.FC<{ postId: string }> = (props) => {
     const [content, setContent] = useState<string>('');
     const { replyToCommentID } = useReplyCommentPair();
+    const user = useSelector(selectUser);
 
     useEffect(() => {
         console.log('REPLYING TO', replyToCommentID);
@@ -19,13 +22,14 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
     function handleComment() {
         if (content) {
             const now = Timestamp.now();
-            db.uploadDoc<IComment>('comments', {
-                user: { ...props.user.toJson(), photoUrl: props.user.getPhotoUrl() ?? '' },
-                replyToPost: props.postId,
-                replyToComment: replyToCommentID ?? '',
-                content: content,
-                timestamp: now,
-            });
+            user &&
+                db.uploadDoc<IComment>('comments', {
+                    user: { ...user.toJson(), photoUrl: user.getPhotoUrl() ?? '' },
+                    replyToPost: props.postId,
+                    replyToComment: replyToCommentID ?? '',
+                    content: content,
+                    timestamp: now,
+                });
         }
     }
     return (
@@ -41,7 +45,7 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
                     ></IonTextarea>
                 </IonCardContent>
             </IonCard>
-            <IonButton onClick={handleComment}>
+            <IonButton disabled={!user?.isEmailVerified} onClick={handleComment}>
                 <IonIcon icon={arrowForward}></IonIcon>
             </IonButton>
         </>
@@ -51,5 +55,4 @@ const CommentCompose: React.FC<{ user: PrimaryUser; postId: string }> = (props) 
 export default CommentCompose;
 CommentCompose.propTypes = {
     postId: PropTypes.string.isRequired,
-    user: PropTypes.instanceOf(PrimaryUser).isRequired,
 };

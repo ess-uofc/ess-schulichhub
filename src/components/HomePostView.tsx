@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './HomePostView.scss';
-import { IonContent, IonLabel, IonSelect, IonSelectOption } from '@ionic/react';
+import { IonCard, IonCardContent, IonContent, IonLabel, IonSelect, IonSelectOption, IonToast } from '@ionic/react';
 import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
 import { PostCategory } from '../Models/Enums';
 import PostSkeleton from './PostContainerSkeleton';
 import { db, QuerySnapshot } from '../Models/firebase';
+import { selectUser } from '../features/User/UserStore';
+import { useSelector } from 'react-redux';
+import { toast } from '../app/toast';
 const HomePostView: React.FC = () => {
     const [posts, setPosts] = useState<{ id: string; data: Post }[]>();
     const [postFilters, SetPostFilters] = useState<PostCategory[]>([]);
+    const user = useSelector(selectUser);
+
     function handleSnapshot(snapshot: QuerySnapshot) {
         /**
          * @author Mohamad Abdel Rida
@@ -47,6 +52,7 @@ const HomePostView: React.FC = () => {
     useEffect(() => {
         console.log('Fetching Posts');
         const unSubscribe = getPosts();
+
         return () => {
             unSubscribe();
         };
@@ -70,6 +76,23 @@ const HomePostView: React.FC = () => {
                     );
                 })}
             </IonSelect>
+            <IonToast
+                message={'Please verify your email to post or comment'}
+                header={'Email Verification Required'}
+                position={'bottom'}
+                buttons={[
+                    {
+                        text: 'verify',
+                        role: '',
+                        handler: () => {
+                            user?.verifyEmail();
+                            toast('Email Verification Sent', '');
+                        },
+                    },
+                ]}
+                isOpen={!user?.isEmailVerified}
+            />
+
             {posts ? (
                 posts.map((v, k) => {
                     return <PostContainer key={k} postData={v.data} />;

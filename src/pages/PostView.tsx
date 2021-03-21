@@ -52,7 +52,7 @@ const PostView: React.FC = () => {
             .onSnapshot({
                 next: (snapshot) => {
                     console.log('Fetched Post');
-                    const doc = snapshot.data() as Post;
+                    const doc = snapshot.data();
                     setPost(doc);
                 },
             });
@@ -104,7 +104,7 @@ const PostView: React.FC = () => {
                             {post ? <IonLabel>{post.category}</IonLabel> : <IonSkeletonText animated />}
                         </IonChip>
                         {post ? (
-                            <IonTextarea spellcheck={true} auto-grow="true" value={post.content}></IonTextarea>
+                            <IonTextarea spellcheck={true} auto-grow="true" value={post.content} readonly></IonTextarea>
                         ) : (
                             <IonSkeletonText animated />
                         )}
@@ -112,7 +112,7 @@ const PostView: React.FC = () => {
                 </IonCard>
                 <ReplyCommentPairContext.Provider value={{ replyToCommentID, setReplyToCommentID }}>
                     <PostComments comments={comments} />
-                    {user && <CommentCompose user={user} postId={id} />}
+                    {user && <CommentCompose postId={id} />}
                 </ReplyCommentPairContext.Provider>
             </IonContent>
         </IonPage>
