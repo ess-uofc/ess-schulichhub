@@ -6,6 +6,10 @@ export default class PrimaryUser extends User {
     private user: FirebaseUser;
     getPhotoUrl = (): string | null => this.user.photoURL;
 
+    get isEmailVerified(): boolean {
+        return this.user.emailVerified;
+    }
+
     constructor(user: FirebaseUser, details: IUser) {
         super(details);
         this.user = user;
