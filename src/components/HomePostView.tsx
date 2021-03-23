@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './HomePostView.scss';
-import { IonCard, IonCardContent, IonContent, IonLabel, IonSelect, IonSelectOption, IonToast } from '@ionic/react';
+import { IonContent, IonLabel, IonSelect, IonSelectOption, IonToast } from '@ionic/react';
 import PostContainer from '../components/PostContainer';
 import Post from '../Models/Post';
 import { PostCategory } from '../Models/Enums';
