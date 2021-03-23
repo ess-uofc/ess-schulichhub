@@ -22,10 +22,10 @@ export class Auth {
         const provider = new OAuthProvider('microsoft.com');
         return provider;
     }
+
     /**
      * @author Mohamad Abdel Rida
      * signs a user in using google redirect. Doesn't work properly
-     * @todo implement cordova google sign in
      */
     static signInWithGoogle = async (): Promise<PrimaryUser | void> => {
         const googleProvider = Auth.googleProvider;
@@ -58,7 +58,6 @@ export class Auth {
     /**
      * @author Mohamad Abdel Rida
      * signs a user in using google redirect. Doesn't work properly
-     * @todo implement cordova google sign in
      */
     static signInWithMicrosoft = async (): Promise<PrimaryUser | void> => {
         const provider = Auth.microsoftProvider;
