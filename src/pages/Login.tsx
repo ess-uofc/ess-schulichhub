@@ -18,7 +18,6 @@ const Login: React.FC = () => {
      */
     async function handleSubmit() {
         const user = await Auth.signInWithEmail(userState.email, userState.password);
-        console.log(user);
         if (user) {
             toast('Yay!', 'login success');
         } else {
@@ -53,18 +52,11 @@ const Login: React.FC = () => {
                     </IonButton>
                 </div>
                 <div>
-                    <IonButton onClick={Auth.signInWithMicrosoft} className="googleLogin">
+                    <IonButton onClick={Auth.signInWithGoogle} className="googleLogin">
                         Sign in with Microsoft
                     </IonButton>
                 </div>
-                <IonButton
-                    className="testLogin"
-                    onClick={() => {
-                        Auth.signInWithEmail('testUser@test.com', '123456');
-                    }}
-                >
-                    Test Sign in
-                </IonButton>
+
                 <p>
                     New here?
                     <IonRouterLink routerLink="/register"> Join the Hub</IonRouterLink>
