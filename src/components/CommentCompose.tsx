@@ -5,7 +5,6 @@ import { IComment } from '../Models/DocTypes';
 import { db, Timestamp } from '../Models/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
-import PrimaryUser from '../Models/PrimaryUser';
 import { useReplyCommentPair } from '../contexts/replyComment';
 import { selectUser } from '../features/User/UserStore';
 import { useSelector } from 'react-redux';
