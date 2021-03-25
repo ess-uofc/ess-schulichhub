@@ -1,5 +1,6 @@
 .singlePost {
     height: 80vh;
+    overflow-y: scroll;
 }
 
 .subjectChip {
@@ -15,7 +16,6 @@
 }
 
 .postName {
-    order: 2;
     text-align: left;
     flex-grow: 5;
 }

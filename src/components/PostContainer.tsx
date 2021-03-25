@@ -14,6 +14,7 @@ import {
     IonItem,
     IonLabel,
     IonRouterLink,
+    IonTextarea,
 } from '@ionic/react';
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import Post from '../Models/Post';
@@ -83,12 +84,12 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                 </IonCardSubtitle>
             </IonCardHeader>
             <IonRouterLink routerLink={`/post/${props.postData.id}`}>
-                <IonCardContent>
+                <IonCardContent className="content">
                     <IonImg
                         className="image"
                         src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
                     ></IonImg>
-                    {props.postData.content}
+                    <IonTextarea auto-grow="true" value={props.postData.content}></IonTextarea>
                 </IonCardContent>
             </IonRouterLink>
         </IonCard>
