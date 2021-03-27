@@ -22,6 +22,7 @@ export interface IPost {
     category: string;
     attachmentUrl?: string;
     attachmentType?: PostAttachmentType;
+    aggregations: PostAggregations;
 }
 export interface IComment {
     replyToPost: string;
@@ -30,4 +31,10 @@ export interface IComment {
     timestamp: Timestamp;
     id?: string;
     replyToComment: string;
+}
+
+export interface PostAggregations {
+    views: number;
+    comments: number;
+    likes: number;
 }

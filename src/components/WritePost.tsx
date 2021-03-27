@@ -44,6 +44,11 @@ const WritePost: React.FC = () => {
                 content: content,
                 timestamp: _now,
                 category: postCategory,
+                aggregations: {
+                    comments: 0,
+                    likes: 0,
+                    views: 0,
+                },
             });
             setLoading(false);
             history.push('/home');
