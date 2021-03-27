@@ -38,7 +38,7 @@ const PostView: React.FC = () => {
     const [replyToCommentID, setReplyToCommentID] = useState<string>('');
     type sortedComment = { [key: string]: PostViewComments[] };
     const arrangeComments = (comments: PostViewComments[]): PostViewComments[] => {
-        const sortedComments: { [key: string]: PostViewComments[] } = {};
+        const sortedComments: sortedComment = {};
         comments.forEach((comment) => {
             if (comment.comment.replyToComment) {
                 if (comment.comment.replyToComment in sortedComments) {
