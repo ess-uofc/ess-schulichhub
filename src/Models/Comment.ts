@@ -1,4 +1,4 @@
-import { IComment, IUser } from './DocTypes';
+import { CommentAggregations, IComment, IUser } from './DocTypes';
 import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
 import User from './User';
@@ -15,6 +15,7 @@ export default class Comment extends FirebaseDocument {
     replyToPost: string;
     replyToComment: string;
     user: User;
+    aggregations: CommentAggregations;
 
     /**
      * default constructor for the comment class
@@ -31,6 +32,7 @@ export default class Comment extends FirebaseDocument {
         replyToPost: string,
         user: User,
         replyToComment: string,
+        aggregations: CommentAggregations,
     ) {
         super(timestamp);
         this.id = id;
@@ -39,6 +41,7 @@ export default class Comment extends FirebaseDocument {
         this.replyToPost = replyToPost;
         this.user = user;
         this.replyToComment = replyToComment;
+        this.aggregations = aggregations;
     }
 
     public toJson(): IComment {
@@ -49,6 +52,7 @@ export default class Comment extends FirebaseDocument {
             content: this.content,
             timestamp: this.timestamp,
             replyToComment: this.replyToComment,
+            aggregations: this.aggregations,
         };
     }
 
@@ -75,6 +79,7 @@ export default class Comment extends FirebaseDocument {
             data.replyToPost,
             new User(data.user as IUser),
             data.replyToComment,
+            data.aggregations,
         );
     }
 }

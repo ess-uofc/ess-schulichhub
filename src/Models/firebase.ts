@@ -21,6 +21,8 @@ export type FirebaseAuthError = firebase.auth.Error;
 export type FirebaseUnsubscribe = firebase.Unsubscribe;
 export const OAuthProvider = firebase.auth.OAuthProvider;
 export type OAuthProvider = firebase.auth.AuthProvider;
+export const FieldValue = firebase.firestore.FieldValue;
+
 const firebaseConfig = {
     apiKey: 'AIzaSyD9mulwyPhAR7tUp0MdZ31_RodyAhIMdpk',
     authDomain: 'project-hub-116d7.firebaseapp.com',
