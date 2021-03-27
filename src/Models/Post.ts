@@ -1,4 +1,4 @@
-import { IPost } from './DocTypes';
+import { IPost, PostAggregations } from './DocTypes';
 import { PostCategory } from './Enums';
 import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
@@ -10,6 +10,7 @@ export default class Post extends FirebaseDocument {
     uid: string;
     attachment?: PostAttachment;
     category: PostCategory;
+    aggregations: PostAggregations;
 
     /**
      * Default constructor
@@ -28,6 +29,7 @@ export default class Post extends FirebaseDocument {
         category: PostCategory,
         timestamp: Timestamp,
         uid: string,
+        aggregations: PostAggregations,
         attachment?: PostAttachment,
     ) {
         super(timestamp);
@@ -37,6 +39,7 @@ export default class Post extends FirebaseDocument {
         this.content = content;
         this.category = category;
         this.attachment = attachment;
+        this.aggregations = aggregations;
     }
 
     public static toFirestore(post: Post): IPost {
@@ -48,6 +51,7 @@ export default class Post extends FirebaseDocument {
             category: post.category,
             attachmentUrl: post.attachment?.getHyperlink(),
             attachmentType: post.attachment?.getAttachmentType(),
+            aggregations: post.aggregations,
         };
     }
 
@@ -72,6 +76,7 @@ export default class Post extends FirebaseDocument {
             data.category as PostCategory,
             data.timestamp,
             data.uid,
+            data.aggregations,
             attachment,
         );
     }
