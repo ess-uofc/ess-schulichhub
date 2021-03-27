@@ -36,11 +36,35 @@ const PostView: React.FC = () => {
     const user = useSelector(selectUser);
     const { id } = useParams<{ id: string }>();
     const [replyToCommentID, setReplyToCommentID] = useState<string>('');
-
+    type sortedComment = { [key: string]: PostViewComments[] };
     const arrangeComments = (comments: PostViewComments[]): PostViewComments[] => {
-        return _.orderBy(comments, (comment) => {
-            return comment.comment.replyToComment.length === 0 ? comment.comment.id : comment.comment.replyToComment;
-        }).reverse();
+        const sortedComments: { [key: string]: PostViewComments[] } = {};
+        comments.forEach((comment) => {
+            if (comment.comment.replyToComment) {
+                if (comment.comment.replyToComment in sortedComments) {
+                    sortedComments[comment.comment.replyToComment].push(comment);
+                } else {
+                    sortedComments[comment.comment.replyToComment] = [comment];
+                }
+            } else {
+                if (comment.id in sortedComments) {
+                    sortedComments[comment.id].unshift(comment);
+                } else {
+                    sortedComments[comment.id] = [comment];
+                }
+            }
+        });
+        console.log('sorted', sortedComments);
+        return _.orderBy(
+            Object.keys(sortedComments).map((e) => {
+                return sortedComments[e];
+            }),
+            (comments) => {
+                return comments[0].comment.timestamp;
+            },
+        )
+            .reverse()
+            .flat();
     };
 
     useEffect(() => {

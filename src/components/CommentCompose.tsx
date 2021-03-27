@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
 import { IComment } from '../Models/DocTypes';
-import { db, Timestamp } from '../Models/firebase';
+import { db, FieldValue, Timestamp } from '../Models/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import { useReplyCommentPair } from '../contexts/replyComment';
@@ -18,17 +18,32 @@ const CommentCompose: React.FC<{ postId: string }> = (props) => {
         console.log('REPLYING TO', replyToCommentID);
     }, [replyToCommentID]);
 
-    function handleComment() {
+    async function handleComment() {
         if (content) {
             const now = Timestamp.now();
-            user &&
-                db.uploadDoc<IComment>('comments', {
-                    user: { ...user.toJson(), photoUrl: user.getPhotoUrl() ?? '' },
-                    replyToPost: props.postId,
-                    replyToComment: replyToCommentID ?? '',
-                    content: content,
-                    timestamp: now,
-                });
+            db.uploadDoc<IComment>('comments', {
+                user: { ...props.user.toJson(), photoUrl: props.user.getPhotoUrl() ?? '' },
+                replyToPost: props.postId,
+                replyToComment: replyToCommentID ?? '',
+                content: content,
+                timestamp: now,
+                aggregations: {
+                    replyComments: 0,
+                },
+            });
+
+            await db.db
+                .collection('posts')
+                .doc(props.postId)
+                .set(
+                    {
+                        aggregations: { comments: FieldValue.increment(1) },
+                    },
+                    {
+                        merge: true,
+                    },
+                );
+            console.log(props.postId);
         }
     }
     return (

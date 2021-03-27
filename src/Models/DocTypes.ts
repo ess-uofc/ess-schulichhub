@@ -31,8 +31,18 @@ export interface IComment {
     timestamp: Timestamp;
     id?: string;
     replyToComment: string;
+    aggregations: CommentAggregations;
 }
 
+export interface CommentAggregations {
+    replyComments: number;
+}
+
+export interface ILike {
+    uid: string;
+    likedId: string;
+    timestamp: Timestamp;
+}
 export interface PostAggregations {
     views: number;
     comments: number;
