@@ -89,7 +89,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                         className="image"
                         src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
                     ></IonImg>
-                    <IonTextarea auto-grow="true" value={props.postData.content}></IonTextarea>
+                    <IonTextarea readonly auto-grow="true" value={props.postData.content}></IonTextarea>
                 </IonCardContent>
             </IonRouterLink>
         </IonCard>
