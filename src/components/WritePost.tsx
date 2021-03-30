@@ -52,6 +52,10 @@ const WritePost: React.FC = () => {
             });
             setLoading(false);
             history.push('/home');
+
+            setContent('')
+            setTitle('')
+            setPostCategory(PostCategory.Discussion)
         }
     }
     return loading ? (
