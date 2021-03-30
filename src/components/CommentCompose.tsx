@@ -19,10 +19,10 @@ const CommentCompose: React.FC<{ postId: string }> = (props) => {
     }, [replyToCommentID]);
 
     async function handleComment() {
-        if (content) {
+        if (content && user) {
             const now = Timestamp.now();
             db.uploadDoc<IComment>('comments', {
-                user: { ...props.user.toJson(), photoUrl: props.user.getPhotoUrl() ?? '' },
+                user: { ...user.toJson(), photoUrl: user.getPhotoUrl() ?? '' },
                 replyToPost: props.postId,
                 replyToComment: replyToCommentID ?? '',
                 content: content,
