@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonPage, IonContent, IonImg, IonItem, IonText, IonButton } from '@ionic/react';
+import { IonPage, IonContent, IonImg, IonItem, IonText, IonButton, IonTitle } from '@ionic/react';
 import './ProfileView.scss';
 
 const bio = 'University of Calgary - ESS LOVER \n This is the Bio \n It supports multiline stuff';
@@ -10,10 +10,10 @@ const ProfileView: React.FC = () => {
         <IonPage>
             <IonContent fullscreen>
                 <IonItem className="wrapper">
-                    <h4>Profile</h4>
+                    <IonTitle>Profile</IonTitle>
                 </IonItem>
                 <IonImg className="videoPlaceholder" src="https://essucalgary.com/images/ess-logo.png" />
-                <h2>{name}</h2>
+                <IonTitle>{name}</IonTitle>
                 <div className="multiline">{bio}</div>
                 <IonButton className="follow">Follow</IonButton>
                 <IonItem>Previous Posts:</IonItem>
