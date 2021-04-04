@@ -68,7 +68,7 @@ const App: React.FC = () => {
                     <Route path="/register" component={RegisterLanding} exact={true} />
                     <Route path="/emailRegister" component={RegisterForm} exact={true} />
                     <Route path="/writePost" component={WritePostView} exact={true} />
-                    <Route path="/u" component={ProfileView} exact={true} />
+                    <Route path="/u/:uid" component={ProfileView} exact={true} />
                     <Route path="/" render={() => <Redirect to="/landing" />} exact={true} />
                 </IonRouterOutlet>
             </IonReactRouter>

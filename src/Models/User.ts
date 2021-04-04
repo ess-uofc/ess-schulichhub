@@ -52,6 +52,7 @@ export default class User implements IUser {
     major: string;
     photoUrl?: string;
     ref: DocumentReference;
+    bio?: string;
 
     // Add user attributes here
 
@@ -73,6 +74,12 @@ export default class User implements IUser {
     public static toFirestore = (user: User | PrimaryUser): IUser => {
         return user.toJson();
     };
+
+    get fullName(): string {
+        return this.firstName + ' ' + this.lastName;
+    }
+
+    
     /**
      * Converts User to UserDoc primitive-ish
      *

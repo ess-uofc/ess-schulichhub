@@ -16,12 +16,17 @@ import {
     IonAvatar,
     IonChip,
     IonImg,
+    IonRouterLink,
 } from '@ionic/react';
 import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/Auth';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/User/UserStore';
 
 const TitleBar: React.FC = () => {
+    const user = useSelector(selectUser);
+
     const handleSignOut = async () => {
         await Auth.signOut();
         toast('You have signed out :(', 'Signed out...');
@@ -70,7 +75,9 @@ const TitleBar: React.FC = () => {
                         <IonAvatar>
                             <IonImg src="https://essucalgary.com/images/ess-logo.png"></IonImg>
                         </IonAvatar>
-                        <IonLabel>Username</IonLabel>
+                        <IonRouterLink color={'black'} routerLink={`/u/${user?.uid ?? ''}`}>
+                            <IonLabel>{user?.fullName}</IonLabel>
+                        </IonRouterLink>
                     </IonChip>
                 </IonToolbar>
             </IonHeader>
