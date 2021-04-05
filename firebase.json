@@ -1,12 +1,48 @@
 {
-    "hosting": {
-        "public": "build",
-        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-        "rewrites": [
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
-        ]
-    }
+    "hosting": [
+        {
+            "public": "build",
+            "target": "live",
+            "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+            "rewrites": [
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        },
+        {
+            "public": "build",
+            "target": "dev",
+            "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+            "rewrites": [
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        },
+        {
+            "public": "build",
+            "target": "dev",
+            "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+            "rewrites": [
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        },
+        {
+            "public": "build",
+            "target": "dev",
+            "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+            "rewrites": [
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        }
+    ]
 }

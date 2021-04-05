@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "project-hub-116d7"
+  },
+   "targets": {
+    "driver-profiles-b579c": {
+      "hosting": {
+        "dev": [
+          "ess-schulichhub-dev"
+        ],
+        "live": [
+          "project-hub-116d7"
+        ]
+      }
+    }
   }
 }
