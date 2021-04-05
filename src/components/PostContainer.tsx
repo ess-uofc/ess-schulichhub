@@ -83,7 +83,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                     {props.postData.getTimePosted()} - University of Calgary{' '}
                 </IonCardSubtitle>
             </IonCardHeader>
-            <IonRouterLink routerLink={`/post/${props.postData.id}`}>
+            <IonRouterLink color={'black'} routerLink={`/post/${props.postData.id}`}>
                 <IonCardContent className="content">
                     <IonImg
                         className="image"

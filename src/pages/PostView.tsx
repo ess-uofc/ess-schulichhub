@@ -8,6 +8,7 @@ import {
     IonCardTitle,
     IonChip,
     IonContent,
+   
     IonLabel,
     IonPage,
     IonSkeletonText,
@@ -132,6 +133,7 @@ const PostView: React.FC = () => {
                         ) : (
                             <IonSkeletonText animated />
                         )}
+                      
                     </IonCardContent>
                 </IonCard>
                 <ReplyCommentPairContext.Provider value={{ replyToCommentID, setReplyToCommentID }}>
