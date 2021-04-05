@@ -5,10 +5,10 @@
   "targets": {
     "project-hub-116d7": {
       "hosting": {
-        "dev": [
+        "live": [
           "project-hub-116d7"
         ],
-        "live": [
+        "dev": [
           "ess-schulichhub-dev"
         ]
       }
