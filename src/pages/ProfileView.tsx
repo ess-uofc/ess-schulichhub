@@ -38,7 +38,7 @@ const ProfileView: React.FC = () => {
             .withConverter(Post)
             .onSnapshot({
                 next: (snapshot) => {
-                    setUserPosts(snapshot.docs.map((e, _) => e.data()));
+                    setUserPosts(snapshot.docs.map((e) => e.data()));
                 },
                 error: (e) => {
                     console.log(e);
