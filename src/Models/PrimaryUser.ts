@@ -10,7 +10,6 @@ export default class PrimaryUser extends User {
         return this.user.emailVerified;
     }
 
-  
     constructor(user: FirebaseUser, details: IUser) {
         super(details);
         this.user = user;

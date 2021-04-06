@@ -79,7 +79,6 @@ export default class User implements IUser {
         return this.firstName + ' ' + this.lastName;
     }
 
-    
     /**
      * Converts User to UserDoc primitive-ish
      *
