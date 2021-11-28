@@ -2,6 +2,7 @@ import React from 'react';
 import './RegisterLanding.scss';
 import { IonButton, IonItemDivider, IonRow, IonText, IonTitle } from '@ionic/react';
 import '../pages/RegisterMain.scss';
+import Footer from '../components/Footer';
 
 const RegisterLanding: React.FC = () => {
     return (
@@ -29,9 +30,7 @@ const RegisterLanding: React.FC = () => {
                     <span className="ButtonText">Sign In</span>
                 </IonButton>
             </div>
-            <IonTitle className="hubLogoText">LG SchulichHub</IonTitle>
-            <IonItemDivider className="footerRule" color="secondary" />
-            <p className="copyRight">© ESS Schulich School of Engineering U of C, 2020</p>
+            <Footer />
         </div>
     );
 };

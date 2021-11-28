@@ -1,6 +1,6 @@
 import React from 'react';
 import './RegisterLanding.scss';
-import { IonButton, IonInput, IonItemDivider, IonTitle } from '@ionic/react';
+import { IonButton, IonInput, IonItemDivider, IonTitle, IonContent } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import Select from 'react-select';
@@ -8,6 +8,7 @@ import '../pages/RegisterMain.scss';
 import majors from '../majors';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/Auth';
+import Footer from '../components/Footer';
 
 const RegisterForm: React.FC = () => {
     const [userState, setUserState] = useState({
@@ -39,7 +40,7 @@ const RegisterForm: React.FC = () => {
     const [faculty, setFaculty] = useState<string>();
 
     return (
-        <>
+        <IonContent>
             <IonTitle className="ion-margin">Join The Hub</IonTitle>
             <IonInput
                 type="email"
@@ -100,10 +101,8 @@ const RegisterForm: React.FC = () => {
             <IonButton className="custombutton" onClick={RegisterUser}>
                 <span className="ButtonText">Sign Up</span>
             </IonButton>
-            <IonTitle className="hubLogoText ion-margin">LG SchulichHub</IonTitle>
-            <IonItemDivider className="footerRule" color="secondary" />
-            <p className="copyRight">© ESS Schulich School of Engineering U of C, 2020</p>
-        </>
+            <Footer />
+        </IonContent>
     );
 };
 

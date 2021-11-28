@@ -4,6 +4,7 @@ import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/
 import './Login.scss';
 import { toast } from '../app/toast';
 import { Auth } from '../Models/Auth';
+import Footer from '../components/Footer';
 
 /**
  * @author Carter Zimmer & Dennis Lieu
@@ -63,6 +64,7 @@ const Login: React.FC = () => {
                 </p>
                 <IonRouterLink>Forgot Password?</IonRouterLink>
             </IonContent>
+            <Footer />
         </IonPage>
     );
 };
