@@ -1,9 +1,10 @@
 import React from 'react';
-import { IonPage, IonContent, IonText, IonItem, IonImg } from '@ionic/react';
+import { IonPage, IonContent, IonItem, IonImg } from '@ionic/react';
 import './Landing.scss';
 import LandingFeatureBox from '../components/LandingFeatureBox';
 import LandingRegisterPrompt from '../components/LandingRegisterPrompt';
 import LandingInfo from '../components/LandingInfo';
+import Footer from '../components/Footer';
 
 const Landing: React.FC = () => {
     return (
@@ -15,9 +16,7 @@ const Landing: React.FC = () => {
                 <LandingInfo />
                 <LandingFeatureBox />
                 <LandingRegisterPrompt />
-                <IonText>[LOGO] SchulichHub</IonText>
-                <IonItem className="footer ion-margin" color="secondary"></IonItem>
-                <IonText>© ESS Schulich School of Engineering U of C, 2020</IonText>
+                <Footer />
             </IonContent>
         </IonPage>
     );
