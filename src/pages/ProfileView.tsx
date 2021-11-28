@@ -9,6 +9,7 @@ import PostContainer from '../components/PostContainer';
 import { db } from '../Models/firebase';
 import PrimaryUser from '../Models/PrimaryUser';
 import User from '../Models/User';
+import Footer from '../components/Footer';
 
 const ProfileView: React.FC = () => {
     const [user, setUser] = useState<User | PrimaryUser | undefined>();
@@ -60,9 +61,7 @@ const ProfileView: React.FC = () => {
                 {!isPrimaryUser && <IonButton className="follow">Follow</IonButton>}
                 <IonItem>Previous Posts:</IonItem>
                 <IonContent>{userPosts && userPosts.map((e, k) => <PostContainer key={k} postData={e} />)}</IonContent>
-                <IonText>[LOGO] SchulichHub</IonText>
-                <IonItem className="footer ion-margin" color="secondary" />
-                <IonText className="bottomOfPage">© ESS Schulich School of Engineering U of C, 2020</IonText>
+                <Footer />
             </IonContent>
         </IonPage>
     );
