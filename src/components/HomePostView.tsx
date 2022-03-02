@@ -63,8 +63,9 @@ const HomePostView: React.FC = () => {
             <IonSelect
                 value={postFilters}
                 multiple={true}
-                cancelText="Nvm.."
+                cancelText="Deselect All"
                 okText="Okay"
+                onIonCancel={() => SetPostFilters([])}
                 onIonChange={(e) => SetPostFilters(e.detail.value)}
                 placeholder="No Filters"
             >
