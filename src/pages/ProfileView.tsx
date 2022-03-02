@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IonPage, IonContent, IonImg, IonItem, IonText, IonButton, IonTitle } from '@ionic/react';
+import { IonPage, IonContent, IonImg, IonItem, IonButton, IonTitle } from '@ionic/react';
 import './ProfileView.scss';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
