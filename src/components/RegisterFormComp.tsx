@@ -1,6 +1,6 @@
 import React from 'react';
 import './RegisterLanding.scss';
-import { IonButton, IonInput, IonItemDivider, IonTitle, IonContent } from '@ionic/react';
+import { IonButton, IonInput, IonTitle, IonContent } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import Select from 'react-select';

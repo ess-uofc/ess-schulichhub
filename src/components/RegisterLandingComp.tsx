@@ -1,6 +1,6 @@
 import React from 'react';
 import './RegisterLanding.scss';
-import { IonButton, IonItemDivider, IonRow, IonText, IonTitle } from '@ionic/react';
+import { IonButton, IonRow, IonText } from '@ionic/react';
 import '../pages/RegisterMain.scss';
 import Footer from '../components/Footer';
 
