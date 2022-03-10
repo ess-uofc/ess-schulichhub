@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import './HomePostView.scss';
 import { IonContent, IonLabel, IonSelect, IonSelectOption, IonToast } from '@ionic/react';
-import PostContainer from '../components/PostContainer';
-import Post from '../Models/Post';
-import { PostCategory } from '../Models/Enums';
-import PostSkeleton from './PostContainerSkeleton';
-import { db, QuerySnapshot } from '../Models/firebase';
-import { selectUser } from '../features/User/UserStore';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from '../app/toast';
-const HomePostView: React.FC = () => {
-    const [posts, setPosts] = useState<{ id: string; data: Post }[]>();
+import PostContainer from '../components/PostContainer';
+import { selectUser } from '../features/User/UserStore';
+import { PostCategory } from '../Models/Enums';
+import { db, QueryDocumentSnapshot, QuerySnapshot } from '../Models/firebase';
+import Post from '../Models/Post';
+import User, { UserError } from '../Models/User';
+import './HomePostView.scss';
+import PostSkeleton from './PostContainerSkeleton';
+
+export interface HomePost extends Post {
+    username?: string;
+}
+
+const HomePostView = () => {
+    const [posts, setPosts] = useState<{ id: string; data: Post }[]>([]);
     const [postFilters, SetPostFilters] = useState<PostCategory[]>([]);
     const user = useSelector(selectUser);
 
-    function handleSnapshot(snapshot: QuerySnapshot) {
+    async function handleSnapshot(snapshot: QuerySnapshot) {
         /**
          * @author Mohamad Abdel Rida
          * @param snapshot firebase query snapshot - post snapshot in this case
@@ -23,13 +29,16 @@ const HomePostView: React.FC = () => {
          * to serve frontend
          *
          */
+
         console.log('Updated');
         const snapshots = snapshot.docs;
-        const docs = snapshots.map((docSnapshot) => {
-            return { id: docSnapshot.id, data: docSnapshot.data() as Post };
-        });
 
-        setPosts(docs);
+        snapshots.forEach(async (docSnapshot) => {
+            const user1 = (await getUser(docSnapshot.data().uid)).fullName;
+            const data = { ...docSnapshot.data(), username: user1 } as HomePost;
+            const docs = [...posts, { id: docSnapshot.id, data }];
+            setPosts(docs);
+        });
     }
     function getPosts() {
         /**
@@ -39,13 +48,22 @@ const HomePostView: React.FC = () => {
          *
          */
         const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(Post);
-
         if (postFilters.length != 0) {
             return postsCollection.where('category', 'in', postFilters).onSnapshot({ next: handleSnapshot });
         } else {
             return postsCollection.onSnapshot({
                 next: handleSnapshot,
             });
+        }
+    }
+
+    async function getUser(id: string): Promise<User> {
+        const users = await db.db.collection('users').where('uid', '==', id).withConverter(User).get();
+        const result = users.docs.map((each: QueryDocumentSnapshot) => each.data() as User);
+        if (result.length !== 0) return result[0];
+        else {
+            console.log(id);
+            throw new UserError();
         }
     }
 

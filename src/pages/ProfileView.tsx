@@ -1,15 +1,15 @@
+import { IonButton, IonContent, IonImg, IonItem, IonPage, IonTitle } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
-import { IonPage, IonContent, IonImg, IonItem, IonButton, IonTitle } from '@ionic/react';
-import './ProfileView.scss';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectUser } from '../features/User/UserStore';
-import Post from '../Models/Post';
 import PostContainer from '../components/PostContainer';
+import { selectUser } from '../features/User/UserStore';
 import { db } from '../Models/firebase';
+import Post from '../Models/Post';
 import PrimaryUser from '../Models/PrimaryUser';
 import User from '../Models/User';
 import Footer from '../components/Footer';
+import './ProfileView.scss';
 
 const ProfileView: React.FC = () => {
     const [user, setUser] = useState<User | PrimaryUser | undefined>();
