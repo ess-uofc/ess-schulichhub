@@ -4,19 +4,36 @@ import { useSelector } from 'react-redux';
 import { toast } from '../app/toast';
 import PostContainer from '../components/PostContainer';
 import { selectUser } from '../features/User/UserStore';
+import { PostAggregations } from '../Models/DocTypes';
 import { PostCategory } from '../Models/Enums';
-import { db, QueryDocumentSnapshot, QuerySnapshot } from '../Models/firebase';
+import { db, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '../Models/firebase';
 import Post from '../Models/Post';
+import PostAttachment from '../Models/PostAttachment';
 import User, { UserError } from '../Models/User';
 import './HomePostView.scss';
 import PostSkeleton from './PostContainerSkeleton';
 
-export interface HomePost extends Post {
+export class HomePost extends Post {
     username?: string;
+
+    constructor(
+        id: string,
+        title: string,
+        content: string,
+        category: PostCategory,
+        timestamp: Timestamp,
+        uid: string,
+        aggregations: PostAggregations,
+        attachment?: PostAttachment,
+        username?: string,
+    ) {
+        super(id, title, content, category, timestamp, uid, aggregations, attachment);
+        this.username = username;
+    }
 }
 
-const HomePostView = () => {
-    const [posts, setPosts] = useState<{ id: string; data: Post }[]>([]);
+const HomePostView: React.FC = () => {
+    const [posts, setPosts] = useState<{ id: string; data: HomePost }[]>([]);
     const [postFilters, SetPostFilters] = useState<PostCategory[]>([]);
     const user = useSelector(selectUser);
 
@@ -29,17 +46,35 @@ const HomePostView = () => {
          * to serve frontend
          *
          */
-
         console.log('Updated');
         const snapshots = snapshot.docs;
 
-        snapshots.forEach(async (docSnapshot) => {
-            const user1 = (await getUser(docSnapshot.data().uid)).fullName;
-            const data = { ...docSnapshot.data(), username: user1 } as HomePost;
-            const docs = [...posts, { id: docSnapshot.id, data }];
-            setPosts(docs);
-        });
+        const array = await Promise.all(
+            snapshots.map(async (docSnapshot) => {
+                const username = (await getUser(docSnapshot.data().uid)).fullName;
+                const data = new HomePost(
+                    docSnapshot.data().id,
+                    docSnapshot.data().title,
+                    docSnapshot.data().content,
+                    docSnapshot.data().category,
+                    docSnapshot.data().timestamp,
+                    docSnapshot.data().uid,
+                    docSnapshot.data().aggregations,
+                    docSnapshot.data().attachment,
+                    username,
+                );
+                return { id: docSnapshot.id, data };
+            }),
+        );
+        setPosts(array);
     }
+    //      * @author Mohamad Abdel Rida
+    //      * @param snapshot firebase query snapshot - post snapshot in this case
+    //      *
+    //      * transforms post collection into an array of objects of type {id:string, data:PostDoc}
+    //      * to serve frontend
+    //      *
+    //      */
     function getPosts() {
         /**
          * @author Mohamad ABdel Rida
@@ -48,11 +83,11 @@ const HomePostView = () => {
          *
          */
         const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(Post);
-        if (postFilters.length != 0) {
+        if (postFilters.length !== 0) {
             return postsCollection.where('category', 'in', postFilters).onSnapshot({ next: handleSnapshot });
         } else {
             return postsCollection.onSnapshot({
-                next: handleSnapshot,
+                next: async (observerObject) => await handleSnapshot(observerObject),
             });
         }
     }
@@ -62,19 +97,14 @@ const HomePostView = () => {
         const result = users.docs.map((each: QueryDocumentSnapshot) => each.data() as User);
         if (result.length !== 0) return result[0];
         else {
-            console.log(id);
             throw new UserError();
         }
     }
 
     useEffect(() => {
         console.log('Fetching Posts');
-        const unSubscribe = getPosts();
-
-        return () => {
-            unSubscribe();
-        };
-    }, [posts?.length, postFilters.length]);
+        getPosts();
+    }, [posts.length]);
     return (
         <IonContent>
             <IonLabel>Post Category</IonLabel>

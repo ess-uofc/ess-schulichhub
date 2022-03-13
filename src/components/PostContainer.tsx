@@ -17,14 +17,14 @@ import {
     IonTextarea,
 } from '@ionic/react';
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
-import Post from '../Models/Post';
 import { toast } from '../app/toast';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
 import { db } from '../Models/firebase';
+import { HomePost } from './HomePostView';
 
 interface ContainerProps {
-    postData: Post;
+    postData: HomePost;
 }
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
@@ -82,6 +82,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                 <IonCardSubtitle className="postInfo text">
                     {props.postData.getTimePosted()} - University of Calgary{' '}
                 </IonCardSubtitle>
+                <IonCardSubtitle className="postInfo text">{props.postData.username}</IonCardSubtitle>
             </IonCardHeader>
             <IonRouterLink color={'black'} routerLink={`/post/${props.postData.id}`}>
                 <IonCardContent className="content">
