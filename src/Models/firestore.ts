@@ -6,7 +6,7 @@ export default class FireStoreDB {
      */
     db = Firestore;
 
-    public async deleteDoc(id: string): Promise<void> {
+    public async deleteDoc(collection: string, id: string): Promise<void> {
         /**
          * @author Mohamad Abdel Rida
          * @param id: Absolute id to the document
@@ -16,7 +16,7 @@ export default class FireStoreDB {
          * being deleted.
          *
          */
-        await this.db.doc(id).delete();
+        await this.db.collection(collection).doc(id).delete();
     }
 
     public async fetchDoc<DocType>(path: string): Promise<DocumentData | undefined | null> {
