@@ -14,6 +14,7 @@ export interface IUser {
 }
 export interface IPost {
     id?: string;
+    postReference?: string;
     title: string;
     content: string;
     uid: string;

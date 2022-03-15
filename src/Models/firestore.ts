@@ -16,7 +16,12 @@ export default class FireStoreDB {
          * being deleted.
          *
          */
-        await this.db.collection(collection).doc(id).delete();
+        console.log(id);
+        try {
+            await this.db.collection(collection).doc(id).delete();
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     public async fetchDoc<DocType>(path: string): Promise<DocumentData | undefined | null> {
