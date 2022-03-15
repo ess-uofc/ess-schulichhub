@@ -20,8 +20,10 @@ import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import { toast } from '../app/toast';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
-import { db } from '../Models/firebase';
+import { db, Timestamp } from '../Models/firebase';
 import { HomePost } from './HomePostView';
+import { IPost } from '../Models/DocTypes';
+import { useHistory } from 'react-router';
 
 interface ContainerProps {
     postData: HomePost;
@@ -33,6 +35,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
         show: boolean;
     }>({ show: false, event: undefined });
     const user = useSelector(selectUser);
+    const history = useHistory();
 
     async function handleDelete() {
         /**
@@ -42,12 +45,35 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
 
         try {
             if (user) {
-                user.uid == props.postData.uid
-                    ? await db.deleteDoc(props.postData.id)
+                user.uid === props.postData.uid
+                    ? await db.deleteDoc('posts', props.postData.id)
                     : toast('Oops...', 'You can not delete this post because it does not belong to you.');
             }
-        } catch (e) {}
+        } catch (e) {
+            console.error(e);
+        }
     }
+
+    async function handleShare() {
+        if (user) {
+            const _now = Timestamp.now();
+            await db.uploadDoc<IPost>('posts', {
+                title: props.postData.title,
+                uid: user.uid,
+                content: props.postData.content,
+                timestamp: _now,
+                category: props.postData.category,
+                postReference: props.postData.postReference ?? props.postData.id,
+                aggregations: {
+                    comments: 0,
+                    likes: 0,
+                    views: 0,
+                },
+            });
+            history.push('/home');
+        }
+    }
+
     return (
         <IonCard>
             <IonCardHeader>
@@ -59,7 +85,7 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                 >
                     <IonList lines="none">
                         <IonListHeader className="listHeader">Options</IonListHeader>
-                        <IonItem className="item">
+                        <IonItem className="item" onClick={handleShare}>
                             <IonLabel>Share</IonLabel> <IonIcon className="stickRight" icon={share}></IonIcon>
                         </IonItem>
                         <IonItem onClick={() => handleDelete()}>
@@ -78,13 +104,15 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                     className="options"
                     icon={ellipsisVertical}
                 ></IonIcon>
-                <IonCardTitle className="postInfo text">{props.postData.title} </IonCardTitle>
+                <IonCardTitle className="postInfo text">
+                    {props.postData.postReference ? `Shared post: ${props.postData.title}` : props.postData.title}{' '}
+                </IonCardTitle>
                 <IonCardSubtitle className="postInfo text">
                     {props.postData.getTimePosted()} - University of Calgary{' '}
                 </IonCardSubtitle>
                 <IonCardSubtitle className="postInfo text">{props.postData.username}</IonCardSubtitle>
             </IonCardHeader>
-            <IonRouterLink color={'black'} routerLink={`/post/${props.postData.id}`}>
+            <IonRouterLink color={'black'} routerLink={`/post/${props.postData.postReference ?? props.postData.id}`}>
                 <IonCardContent className="content">
                     <IonImg
                         className="image"

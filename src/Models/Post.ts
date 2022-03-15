@@ -5,6 +5,7 @@ import FirebaseDocument from './FirebaseDocument';
 import PostAttachment from './PostAttachment';
 export default class Post extends FirebaseDocument {
     id: string;
+    postReference?: string;
     content: string;
     title: string;
     uid: string;
@@ -30,10 +31,12 @@ export default class Post extends FirebaseDocument {
         timestamp: Timestamp,
         uid: string,
         aggregations: PostAggregations,
+        postReference?: string,
         attachment?: PostAttachment,
     ) {
         super(timestamp);
         this.id = id;
+        this.postReference = postReference;
         this.title = title;
         this.uid = uid;
         this.content = content;
@@ -51,6 +54,7 @@ export default class Post extends FirebaseDocument {
             category: post.category,
             attachmentUrl: post.attachment?.getHyperlink(),
             attachmentType: post.attachment?.getAttachmentType(),
+            postReference: post.postReference,
             aggregations: post.aggregations,
         };
     }
@@ -65,6 +69,7 @@ export default class Post extends FirebaseDocument {
     public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Post {
         const data = snapshot.data(options) as IPost;
         const id = snapshot.id;
+
         const attachment =
             data.attachmentUrl && data.attachmentType
                 ? new PostAttachment(data.attachmentUrl, data.attachmentType)
@@ -77,6 +82,7 @@ export default class Post extends FirebaseDocument {
             data.timestamp,
             data.uid,
             data.aggregations,
+            data.postReference,
             attachment,
         );
     }

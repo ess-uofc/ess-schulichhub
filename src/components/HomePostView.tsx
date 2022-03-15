@@ -18,6 +18,7 @@ export class HomePost extends Post {
 
     constructor(
         id: string,
+        postReference: string,
         title: string,
         content: string,
         category: PostCategory,
@@ -27,7 +28,7 @@ export class HomePost extends Post {
         attachment?: PostAttachment,
         username?: string,
     ) {
-        super(id, title, content, category, timestamp, uid, aggregations, attachment);
+        super(id, title, content, category, timestamp, uid, aggregations, postReference, attachment);
         this.username = username;
     }
 }
@@ -54,6 +55,7 @@ const HomePostView: React.FC = () => {
                 const username = (await getUser(docSnapshot.data().uid)).fullName;
                 const data = new HomePost(
                     docSnapshot.data().id,
+                    docSnapshot.data().postReference,
                     docSnapshot.data().title,
                     docSnapshot.data().content,
                     docSnapshot.data().category,
@@ -104,7 +106,7 @@ const HomePostView: React.FC = () => {
     useEffect(() => {
         console.log('Fetching Posts');
         getPosts();
-    }, [posts.length]);
+    }, [posts.length, postFilters.length]);
     return (
         <IonContent>
             <IonLabel>Post Category</IonLabel>
