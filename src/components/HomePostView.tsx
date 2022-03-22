@@ -7,13 +7,13 @@ import { selectUser } from '../features/User/UserStore';
 import { PostAggregations } from '../Models/DocTypes';
 import { PostCategory } from '../Models/Enums';
 import { db, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '../Models/firebase';
-import Post from '../Models/Post';
+import PostFirebase from '../Models/Post.firebase';
 import PostAttachment from '../Models/PostAttachment';
 import User, { UserError } from '../Models/User';
 import './HomePostView.scss';
 import PostSkeleton from './PostContainerSkeleton';
 
-export class HomePost extends Post {
+export class HomePost extends PostFirebase {
     username?: string;
 
     constructor(
@@ -84,7 +84,7 @@ const HomePostView: React.FC = () => {
          * Gets posts that have a Timestamp
          *
          */
-        const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(Post);
+        const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(PostFirebase);
         if (postFilters.length !== 0) {
             return postsCollection.where('category', 'in', postFilters).onSnapshot({ next: handleSnapshot });
         } else {
@@ -102,11 +102,16 @@ const HomePostView: React.FC = () => {
             throw new UserError();
         }
     }
+    const getReferenceData = (id: string) => {
+        const found = posts.find((post) => post.data.id == id);
+        return found ?? posts[0];
+    };
 
     useEffect(() => {
         console.log('Fetching Posts');
         getPosts();
     }, [posts.length, postFilters.length]);
+
     return (
         <IonContent>
             <IonLabel>Post Category</IonLabel>
@@ -145,8 +150,19 @@ const HomePostView: React.FC = () => {
             />
 
             {posts ? (
-                posts.map((v, k) => {
-                    return <PostContainer key={k} postData={v.data} />;
+                posts.map((v) => {
+                    return (
+                        <>
+                            {v.data.postReference && (
+                                <PostContainer key={v.id} postData={v.data}>
+                                    <>
+                                        <PostContainer postData={getReferenceData(v.data.id).data} />
+                                    </>
+                                </PostContainer>
+                            )}
+                            {!v.data.postReference && <PostContainer key={v.id} postData={v.data} />}
+                        </>
+                    );
                 })
             ) : (
                 <PostSkeleton />

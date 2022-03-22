@@ -3,7 +3,7 @@ import { PostCategory } from './Enums';
 import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
 import FirebaseDocument from './FirebaseDocument';
 import PostAttachment from './PostAttachment';
-export default class Post extends FirebaseDocument {
+export default class PostFirebase extends FirebaseDocument {
     id: string;
     postReference?: string;
     content: string;
@@ -45,7 +45,7 @@ export default class Post extends FirebaseDocument {
         this.aggregations = aggregations;
     }
 
-    public static toFirestore(post: Post): IPost {
+    public static toFirestore(post: PostFirebase): IPost {
         return {
             uid: post.uid,
             title: post.title,
@@ -66,7 +66,7 @@ export default class Post extends FirebaseDocument {
      * @param snapshot A QueryDocumentSnapshot containing your data and metadata.
      * @param options The SnapshotOptions from the initial call to `data()`.
      */
-    public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Post {
+    public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): PostFirebase {
         const data = snapshot.data(options) as IPost;
         const id = snapshot.id;
 
