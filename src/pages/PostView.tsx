@@ -16,7 +16,7 @@ import {
 import './PostView.scss';
 import PostComments from '../components/PostComments';
 import CommentCompose from '../components/CommentCompose';
-import Post from '../Models/Post';
+import Post from '../Models/Post.firebase';
 import { useParams } from 'react-router-dom';
 import Comment from '../Models/Comment';
 import { useSelector } from 'react-redux';

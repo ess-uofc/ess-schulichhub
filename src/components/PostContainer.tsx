@@ -1,32 +1,24 @@
-import React, { useState } from 'react';
-import './PostContainer.scss';
 import {
-    IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
-    IonCardContent,
-    IonIcon,
-    IonImg,
-    IonPopover,
-    IonList,
-    IonListHeader,
-    IonItem,
-    IonLabel,
-    IonRouterLink,
-    IonTextarea,
+    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon,
+    IonImg, IonItem,
+    IonLabel, IonList,
+    IonListHeader, IonPopover, IonRouterLink,
+    IonTextarea
 } from '@ionic/react';
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
-import { toast } from '../app/toast';
+import React, { ReactElement, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { toast } from '../app/toast';
 import { selectUser } from '../features/User/UserStore';
+import { IPost } from '../Models/DocTypes';
 import { db, Timestamp } from '../Models/firebase';
 import { HomePost } from './HomePostView';
-import { IPost } from '../Models/DocTypes';
-import { useHistory } from 'react-router';
+import './PostContainer.scss';
 
 interface ContainerProps {
     postData: HomePost;
+    children?: ReactElement;
 }
 
 const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
@@ -112,13 +104,17 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                 </IonCardSubtitle>
                 <IonCardSubtitle className="postInfo text">{props.postData.username}</IonCardSubtitle>
             </IonCardHeader>
+
             <IonRouterLink color={'black'} routerLink={`/post/${props.postData.postReference ?? props.postData.id}`}>
                 <IonCardContent className="content">
                     <IonImg
                         className="image"
                         src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
                     ></IonImg>
-                    <IonTextarea readonly auto-grow="true" value={props.postData.content}></IonTextarea>
+                    {props.children && props.children}
+                    {!props.children && (
+                        <IonTextarea readonly auto-grow="true" value={props.postData.content}></IonTextarea>
+                    )}
                 </IonCardContent>
             </IonRouterLink>
         </IonCard>

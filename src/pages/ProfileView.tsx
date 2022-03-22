@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import PostContainer from '../components/PostContainer';
 import { selectUser } from '../features/User/UserStore';
 import { db } from '../Models/firebase';
-import Post from '../Models/Post';
+import Post from '../Models/Post.firebase';
 import PrimaryUser from '../Models/PrimaryUser';
 import User from '../Models/User';
 import Footer from '../components/Footer';
