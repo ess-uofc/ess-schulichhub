@@ -153,14 +153,12 @@ const HomePostView: React.FC = () => {
                 posts.map((v) => {
                     return (
                         <>
-                            {v.data.postReference && (
+                            {v.data.postReference !== undefined && (
                                 <PostContainer key={v.id} postData={v.data}>
-                                    <>
-                                        <PostContainer postData={getReferenceData(v.data.id).data} />
-                                    </>
+                                    <PostContainer postData={getReferenceData(v.data.postReference).data} />
                                 </PostContainer>
                             )}
-                            {!v.data.postReference && <PostContainer key={v.id} postData={v.data} />}
+                            {v.data.postReference === undefined && <PostContainer key={v.id} postData={v.data} />}
                         </>
                     );
                 })
