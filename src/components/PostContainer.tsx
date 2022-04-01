@@ -1,9 +1,18 @@
 import {
-    IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon,
-    IonImg, IonItem,
-    IonLabel, IonList,
-    IonListHeader, IonPopover, IonRouterLink,
-    IonTextarea
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardSubtitle,
+    IonCardTitle,
+    IonIcon,
+    IonImg,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonListHeader,
+    IonPopover,
+    IonRouterLink,
+    IonTextarea,
 } from '@ionic/react';
 import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import React, { ReactElement, useState } from 'react';
@@ -69,54 +78,58 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
     return (
         <IonCard>
             <IonCardHeader>
-                <IonPopover
-                    cssClass=""
-                    event={popOver.event?.nativeEvent}
-                    isOpen={popOver.show}
-                    onDidDismiss={() => setPopOver({ show: false, event: undefined })}
-                >
-                    <IonList lines="none">
-                        <IonListHeader className="listHeader">Options</IonListHeader>
-                        <IonItem className="item" onClick={handleShare}>
-                            <IonLabel>Share</IonLabel> <IonIcon className="stickRight" icon={share}></IonIcon>
-                        </IonItem>
-                        <IonItem onClick={() => handleDelete()}>
-                            <IonLabel>Delete</IonLabel> <IonIcon className="stickRight" icon={trash}></IonIcon>
-                        </IonItem>
-                    </IonList>
-                </IonPopover>
-                <IonIcon
-                    onClick={(e: React.MouseEvent<HTMLIonIconElement, MouseEvent>) => {
-                        e.persist();
-                        setPopOver({
-                            show: true,
-                            event: e,
-                        });
-                    }}
-                    className="options"
-                    icon={ellipsisVertical}
-                ></IonIcon>
-                <IonCardTitle className="postInfo text">
-                    {props.postData.postReference ? `Shared post: ${props.postData.title}` : props.postData.title}{' '}
-                </IonCardTitle>
-                <IonCardSubtitle className="postInfo text">
-                    {props.postData.getTimePosted()} - University of Calgary{' '}
-                </IonCardSubtitle>
-                <IonCardSubtitle className="postInfo text">{props.postData.username}</IonCardSubtitle>
+                {props.children && (
+                    <>
+                        <IonPopover
+                            cssClass=""
+                            event={popOver.event?.nativeEvent}
+                            isOpen={popOver.show}
+                            onDidDismiss={() => setPopOver({ show: false, event: undefined })}
+                        >
+                            <IonList lines="none">
+                                <IonListHeader className="listHeader">Options</IonListHeader>
+                                <IonItem className="item" onClick={handleShare}>
+                                    <IonLabel>Share</IonLabel> <IonIcon className="stickRight" icon={share}></IonIcon>
+                                </IonItem>
+                                <IonItem onClick={() => handleDelete()}>
+                                    <IonLabel>Delete</IonLabel> <IonIcon className="stickRight" icon={trash}></IonIcon>
+                                </IonItem>
+                            </IonList>
+                        </IonPopover>
+                        <IonIcon
+                            onClick={(e: React.MouseEvent<HTMLIonIconElement, MouseEvent>) => {
+                                e.persist();
+                                setPopOver({
+                                    show: true,
+                                    event: e,
+                                });
+                            }}
+                            className="options"
+                            icon={ellipsisVertical}
+                        ></IonIcon>
+                    </>
+                )}
+                <IonRouterLink color={'black'} routerLink={`/post/${props.postData.id}`}>
+                    <IonCardTitle className="postInfo text">
+                        {props.postData.postReference ? `Shared post: ${props.postData.title}` : props.postData.title}{' '}
+                    </IonCardTitle>
+                    <IonCardSubtitle className="postInfo text">
+                        {props.postData.getTimePosted()} - University of Calgary{' '}
+                    </IonCardSubtitle>
+                    <IonCardSubtitle className="postInfo text">{props.postData.username}</IonCardSubtitle>
+                </IonRouterLink>
             </IonCardHeader>
 
-            <IonRouterLink color={'black'} routerLink={`/post/${props.postData.postReference ?? props.postData.id}`}>
-                <IonCardContent className="content">
-                    <IonImg
-                        className="image"
-                        src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
-                    ></IonImg>
-                    {props.children && props.children}
-                    {!props.children && (
-                        <IonTextarea readonly auto-grow="true" value={props.postData.content}></IonTextarea>
-                    )}
-                </IonCardContent>
-            </IonRouterLink>
+            <IonCardContent>
+                <IonImg
+                    className="image"
+                    src={props.postData.attachment?.getHyperlink() ?? 'https://essucalgary.com/images/ess-logo.png'}
+                ></IonImg>
+                {props.children && props.children}
+                {!props.children && (
+                    <IonTextarea readonly auto-grow="true" value={props.postData.content}></IonTextarea>
+                )}
+            </IonCardContent>
         </IonCard>
     );
 };
