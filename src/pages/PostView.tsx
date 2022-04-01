@@ -111,7 +111,10 @@ const PostView: React.FC = () => {
                     <IonCardHeader className="postInfo">
                         <IonAvatar className="postAvatar"></IonAvatar>
                         {post ? (
-                            <IonCardTitle className="postName">{post.title}</IonCardTitle>
+                            <IonCardTitle className="postName">
+                                {' '}
+                                {post.postReference ? `Shared post: ${post.title}` : post.title}
+                            </IonCardTitle>
                         ) : (
                             <IonSkeletonText animated />
                         )}

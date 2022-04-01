@@ -7,11 +7,17 @@
 .image {
     width: 120px;
     height: 120px;
+
 }
 
-.content {
-    max-height: 385px;
-}
+// .content {
+//     &--main{
+//         max-height: 385px;
+//     }
+//     &--ref{
+//         max-height: 200px;
+//     }
+// }
 
 .listHeader {
     font-weight: bold;

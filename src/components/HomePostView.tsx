@@ -102,10 +102,7 @@ const HomePostView: React.FC = () => {
             throw new UserError();
         }
     }
-    const getReferenceData = (id: string) => {
-        const found = posts.find((post) => post.data.id == id);
-        return found ?? posts[0];
-    };
+    const getReferenceData = (id: string) => posts.find((post) => post.data.id == id);
 
     useEffect(() => {
         console.log('Fetching Posts');
@@ -155,7 +152,10 @@ const HomePostView: React.FC = () => {
                         <>
                             {v.data.postReference !== undefined && (
                                 <PostContainer key={v.id} postData={v.data}>
-                                    <PostContainer postData={getReferenceData(v.data.postReference).data} />
+                                    <PostContainer
+                                        key={v.id + 'ref'}
+                                        postData={getReferenceData(v.data.postReference)?.data ?? v.data}
+                                    />
                                 </PostContainer>
                             )}
                             {v.data.postReference === undefined && <PostContainer key={v.id} postData={v.data} />}
