@@ -91,9 +91,11 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                                 <IonItem className="item" onClick={handleShare}>
                                     <IonLabel>Share</IonLabel> <IonIcon className="stickRight" icon={share}></IonIcon>
                                 </IonItem>
-                                <IonItem onClick={() => handleDelete()}>
-                                    <IonLabel>Delete</IonLabel> <IonIcon className="stickRight" icon={trash}></IonIcon>
-                                </IonItem>
+                                {user?.uid == props.postData.uid && (
+                                    <IonItem onClick={() => handleDelete()}>
+                                        <IonLabel>Delete</IonLabel> <IonIcon className="stickRight" icon={trash}></IonIcon>
+                                    </IonItem>
+                                )}
                             </IonList>
                         </IonPopover>
                         <IonIcon
