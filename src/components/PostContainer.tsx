@@ -81,7 +81,6 @@ const PostContainer: React.FC<ContainerProps> = (props: ContainerProps) => {
                 {props.children && (
                     <>
                         <IonPopover
-                            cssClass=""
                             event={popOver.event?.nativeEvent}
                             isOpen={popOver.show}
                             onDidDismiss={() => setPopOver({ show: false, event: undefined })}

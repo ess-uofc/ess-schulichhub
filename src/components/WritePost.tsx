@@ -99,7 +99,7 @@ const WritePost: React.FC = () => {
                     autoGrow={true}
                     inputMode="text"
                     value={content}
-                    onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setContent(e.detail.value ?? '')}
+                    // onIonChange={(e: CustomEvent<InputChangeEventDetail>) => setContent(e.detail.value ?? '')}
                 />
             </IonItem>
             <IonButton color="danger" onClick={uploadPost}>
