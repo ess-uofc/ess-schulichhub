@@ -1,6 +1,6 @@
-import { IUser } from './DocTypes';
-import { DocumentReference, QueryDocumentSnapshot, SnapshotOptions } from './firebase';
-import PrimaryUser from './PrimaryUser';
+import { IUser } from './models/DocTypes.model';
+import { DocumentReference, QueryDocumentSnapshot, SnapshotOptions } from './data/firebase';
+import PrimaryUser from './PrimaryUser.service';
 
 export class UserError extends Error {
     /**

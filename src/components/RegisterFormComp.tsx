@@ -7,7 +7,7 @@ import Select from 'react-select';
 import '../pages/RegisterMain.scss';
 import majors from '../majors';
 import { toast } from '../app/toast';
-import { Auth } from '../Models/Auth';
+import { FirebaseAuthService } from '../services/FirebaseAuth.service';
 import Footer from '../components/Footer';
 
 const RegisterForm: React.FC = () => {
@@ -22,7 +22,7 @@ const RegisterForm: React.FC = () => {
 
     async function RegisterUser() {
         if (userState.password == userState.cPassword) {
-            if (await Auth.createWithEmail(userState.email, userState.password, userState)) {
+            if (await FirebaseAuthService.createWithEmail(userState.email, userState.password, userState)) {
             } else {
                 toast('Oops...', 'Sign up failed');
             }

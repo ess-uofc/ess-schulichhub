@@ -20,7 +20,7 @@ import {
 } from '@ionic/react';
 import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
 import { toast } from '../app/toast';
-import { Auth } from '../Models/Auth';
+import { FirebaseAuthService } from '../services/FirebaseAuth.service';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
 
@@ -28,7 +28,7 @@ const TitleBar: React.FC = () => {
     const user = useSelector(selectUser);
 
     const handleSignOut = async () => {
-        await Auth.signOut();
+        await FirebaseAuthService.signOut();
         toast('You have signed out :(', 'Signed out...');
 
         location.href = '/login';

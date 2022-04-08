@@ -1,6 +1,6 @@
-import { IUser } from './DocTypes';
-import { FirebaseUser, Firestore } from './firebase';
-import User from './User';
+import { IUser } from './models/DocTypes.model';
+import { FirebaseUser, Firestore } from './data/firebase';
+import User from './User.service';
 
 export default class PrimaryUser extends User {
     private user: FirebaseUser;

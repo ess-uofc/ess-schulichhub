@@ -1,12 +1,12 @@
-import { CommentAggregations, IComment, IUser } from './DocTypes';
-import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
-import FirebaseDocument from './FirebaseDocument';
-import User from './User';
-export default class Comment extends FirebaseDocument {
+import { CommentAggregations, IComment, IUser } from './models/DocTypes.model';
+import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './data/firebase';
+import FirebaseDocument from './FirebaseDocument.service';
+import User from './User.service';
+export default class FirebaseCommentService extends FirebaseDocument {
     /**
      * Comment class for holding comments
      * @author Robert Brown, Ratik Kapoor
-     * @since 0.0.4
+     * @since 0.0.4z
      */
 
     id: string;
@@ -56,7 +56,7 @@ export default class Comment extends FirebaseDocument {
         };
     }
 
-    public static toFirestore(comment: Comment): IComment {
+    public static toFirestore(comment: FirebaseCommentService): IComment {
         return comment.toJson();
     }
 
@@ -67,7 +67,7 @@ export default class Comment extends FirebaseDocument {
      * @param snapshot A QueryDocumentSnapshot containing your data and metadata.
      * @param options The SnapshotOptions from the initial call to `data()`.
      */
-    public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): Comment {
+    public static fromFirestore(snapshot: QueryDocumentSnapshot, options?: SnapshotOptions): FirebaseCommentService {
         const data = snapshot.data(options) as IComment;
         const id = snapshot.id;
         console.log(data);

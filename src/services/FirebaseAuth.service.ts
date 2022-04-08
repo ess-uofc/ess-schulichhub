@@ -6,12 +6,12 @@ import {
     FirebaseUser,
     GoogleProvider,
     OAuthProvider,
-} from './firebase';
-import PrimaryUser from './PrimaryUser';
+} from './data/firebase';
+import PrimaryUser from './PrimaryUser.service';
 
-export class Auth {
+export class FirebaseAuthService {
     private static auth = FirebaseAuth;
-    protected static user = Auth.auth.currentUser;
+    protected static user = FirebaseAuthService.auth.currentUser;
     public static get googleProvider(): OAuthProvider {
         const provider = new GoogleProvider();
         provider.addScope('https://www.googleapis.com/auth/calendar.events');
@@ -28,10 +28,10 @@ export class Auth {
      * signs a user in using google redirect. Doesn't work properly
      */
     static signInWithGoogle = async (): Promise<PrimaryUser | void> => {
-        const googleProvider = Auth.googleProvider;
+        const googleProvider = FirebaseAuthService.googleProvider;
 
         try {
-            const res = await Auth.auth.signInWithPopup(googleProvider);
+            const res = await FirebaseAuthService.auth.signInWithPopup(googleProvider);
             const user = res.user;
 
             if (res.additionalUserInfo?.isNewUser && user && user.displayName && user.email) {
@@ -60,10 +60,10 @@ export class Auth {
      * signs a user in using google redirect. Doesn't work properly
      */
     static signInWithMicrosoft = async (): Promise<PrimaryUser | void> => {
-        const provider = Auth.microsoftProvider;
+        const provider = FirebaseAuthService.microsoftProvider;
 
         try {
-            const res = await Auth.auth.signInWithPopup(provider);
+            const res = await FirebaseAuthService.auth.signInWithPopup(provider);
             const user = res.user;
 
             if (res.additionalUserInfo?.isNewUser && user && user.displayName && user.email) {
@@ -165,7 +165,7 @@ export class Auth {
         error?: (e: FirebaseAuthError) => void,
         completed?: FirebaseUnsubscribe,
     ): FirebaseUnsubscribe {
-        return Auth.auth.onAuthStateChanged(
+        return FirebaseAuthService.auth.onAuthStateChanged(
             async (user) => {
                 if (user) {
                     const primaryUser = await PrimaryUser.fromUser(user);

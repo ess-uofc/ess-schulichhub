@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
-import { IComment } from '../Models/DocTypes';
-import { db, FieldValue, Timestamp } from '../Models/firebase';
+import { IComment } from '../services/models/DocTypes.model';
+import { db, FieldValue, Timestamp } from '../services/data/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import { useReplyCommentPair } from '../contexts/replyComment';

@@ -20,8 +20,8 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { toast } from '../app/toast';
 import { selectUser } from '../features/User/UserStore';
-import { IPost } from '../Models/DocTypes';
-import { db, Timestamp } from '../Models/firebase';
+import { IPost } from '../services/models/DocTypes.model';
+import { db, Timestamp } from '../services/data/firebase';
 import { HomePost } from './HomePostView';
 import './PostContainer.scss';
 

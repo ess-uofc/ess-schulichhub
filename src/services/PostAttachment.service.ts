@@ -1,4 +1,4 @@
-import { PostAttachmentType } from './Enums';
+import { PostAttachmentType } from './models/Enums.model';
 
 /**
  * PostAttachment

@@ -4,16 +4,16 @@ import { useSelector } from 'react-redux';
 import { toast } from '../app/toast';
 import PostContainer from '../components/PostContainer';
 import { selectUser } from '../features/User/UserStore';
-import { PostAggregations } from '../Models/DocTypes';
-import { PostCategory } from '../Models/Enums';
-import { db, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '../Models/firebase';
-import PostFirebase from '../Models/Post.firebase';
-import PostAttachment from '../Models/PostAttachment';
-import User, { UserError } from '../Models/User';
+import { PostAggregations } from '../services/models/DocTypes.model';
+import { PostCategory } from '../services/models/Enums.model';
+import { db, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '../services/data/firebase';
+import FirebasePostService from '../services/FirebasePost.service';
+import PostAttachment from '../services/PostAttachment.service';
+import User, { UserError } from '../services/User.service';
 import './HomePostView.scss';
 import PostSkeleton from './PostContainerSkeleton';
 
-export class HomePost extends PostFirebase {
+export class HomePost extends FirebasePostService {
     username?: string;
 
     constructor(
@@ -84,7 +84,10 @@ const HomePostView: React.FC = () => {
          * Gets posts that have a Timestamp
          *
          */
-        const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(PostFirebase);
+        const postsCollection = db.db
+            .collection('posts')
+            .orderBy('timestamp', 'desc')
+            .withConverter(FirebasePostService);
         if (postFilters.length !== 0) {
             return postsCollection.where('category', 'in', postFilters).onSnapshot({ next: handleSnapshot });
         } else {

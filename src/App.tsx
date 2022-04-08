@@ -35,14 +35,14 @@ import { PrivateRoute } from './components/PrivateRoute';
 import WritePostView from './pages/WritePost';
 import TitleBar from './components/TitleBar';
 import unProtectedRoutes from './app/routing';
-import { Auth } from './Models/Auth';
+import { FirebaseAuthService } from './services/FirebaseAuth.service';
 import ProfileView from './pages/ProfileView';
 
 const App: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const unSubscribe = Auth.onAuthStateChange((user) => {
+        const unSubscribe = FirebaseAuthService.onAuthStateChange((user) => {
             if (user) {
                 console.log('Signed in');
                 dispatch(setUser(user)); // Push user to redux

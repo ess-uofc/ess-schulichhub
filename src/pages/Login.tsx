@@ -3,7 +3,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/react';
 import './Login.scss';
 import { toast } from '../app/toast';
-import { Auth } from '../Models/Auth';
+import { FirebaseAuthService } from '../services/FirebaseAuth.service';
 import Footer from '../components/Footer';
 
 /**
@@ -18,7 +18,7 @@ const Login: React.FC = () => {
      * @author Carter Zimmer
      */
     async function handleSubmit() {
-        const user = await Auth.signInWithEmail(userState.email, userState.password);
+        const user = await FirebaseAuthService.signInWithEmail(userState.email, userState.password);
         if (user) {
             toast('Yay!', 'login success');
         } else {
@@ -48,12 +48,12 @@ const Login: React.FC = () => {
                     Sign In
                 </IonButton>
                 <div>
-                    <IonButton onClick={Auth.signInWithGoogle} className="googleLogin">
+                    <IonButton onClick={FirebaseAuthService.signInWithGoogle} className="googleLogin">
                         Sign in with Google
                     </IonButton>
                 </div>
                 <div>
-                    <IonButton onClick={Auth.signInWithGoogle} className="googleLogin">
+                    <IonButton onClick={FirebaseAuthService.signInWithGoogle} className="googleLogin">
                         Sign in with Microsoft
                     </IonButton>
                 </div>
