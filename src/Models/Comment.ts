@@ -1,5 +1,5 @@
 import { CommentAggregations, IComment, IUser } from './DocTypes';
-import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
+import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from 'firebase/firestore';
 import FirebaseDocument from './FirebaseDocument';
 import User from './User';
 export default class Comment extends FirebaseDocument {

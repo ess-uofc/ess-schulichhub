@@ -1,5 +1,7 @@
+import { sendEmailVerification, User as FirebaseUser } from 'firebase/auth';
+import { collection, doc, getDoc } from 'firebase/firestore';
 import { IUser } from './DocTypes';
-import { FirebaseUser, Firestore } from './firebase';
+import { db } from './firebase';
 import User from './User';
 
 export default class PrimaryUser extends User {
@@ -22,7 +24,8 @@ export default class PrimaryUser extends User {
      */
     static async fromUser(user: FirebaseUser): Promise<PrimaryUser | undefined> {
         try {
-            const details = (await Firestore.collection('users').withConverter(User).doc(user.uid).get()).data();
+            const usersRef = collection(db.db, 'users').withConverter(User);
+            const details = (await getDoc(doc(usersRef, user.uid))).data();
             return new PrimaryUser(user, details as IUser);
         } catch (e) {}
     }
@@ -40,6 +43,6 @@ export default class PrimaryUser extends User {
      * @param {string} continueUrl where to send user after verification is completed
      */
     async verifyEmail(continueUrl = 'https://hub.essucalgary.com/'): Promise<void> {
-        console.log(await this.user.sendEmailVerification({ url: continueUrl }));
+        console.log(await sendEmailVerification(this.user, { url: continueUrl }));
     }
 }

@@ -6,7 +6,18 @@ import PostContainer from '../components/PostContainer';
 import { selectUser } from '../features/User/UserStore';
 import { PostAggregations } from '../Models/DocTypes';
 import { PostCategory } from '../Models/Enums';
-import { db, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '../Models/firebase';
+import { db } from '../Models/firebase';
+import {
+    collection,
+    orderBy,
+    QueryDocumentSnapshot,
+    QuerySnapshot,
+    Timestamp,
+    query,
+    where,
+    onSnapshot,
+    getDocs,
+} from 'firebase/firestore';
 import PostFirebase from '../Models/Post.firebase';
 import PostAttachment from '../Models/PostAttachment';
 import User, { UserError } from '../Models/User';
@@ -84,18 +95,20 @@ const HomePostView: React.FC = () => {
          * Gets posts that have a Timestamp
          *
          */
-        const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(PostFirebase);
+        // const postsCollection = db.db.collection('posts').orderBy('timestamp', 'desc').withConverter(PostFirebase);
+        const postsRef = collection(db.db, 'posts');
+        const postsCollection = query(postsRef, orderBy('timestamp', 'desc')).withConverter(PostFirebase);
         if (postFilters.length !== 0) {
-            return postsCollection.where('category', 'in', postFilters).onSnapshot({ next: handleSnapshot });
+            return onSnapshot(query(postsCollection, where('category', 'in', postFilters)), { next: handleSnapshot });
         } else {
-            return postsCollection.onSnapshot({
+            return onSnapshot(postsCollection, {
                 next: async (observerObject) => await handleSnapshot(observerObject),
             });
         }
     }
 
     async function getUser(id: string): Promise<User> {
-        const users = await db.db.collection('users').where('uid', '==', id).withConverter(User).get();
+        const users = await getDocs(query(collection(db.db, 'users'), where('uid', '==', id)).withConverter(User));
         const result = users.docs.map((each: QueryDocumentSnapshot) => each.data() as User);
         if (result.length !== 0) return result[0];
         else {

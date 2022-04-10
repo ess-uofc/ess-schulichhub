@@ -1,19 +1,26 @@
+import { db, FirebaseAuth } from './firebase';
 import {
-    db,
-    FirebaseAuth,
-    FirebaseAuthError,
-    FirebaseUnsubscribe,
-    FirebaseUser,
-    GoogleProvider,
+    GoogleAuthProvider,
     OAuthProvider,
-} from './firebase';
+    Auth as FBAuth,
+    User as FirebaseUser,
+    signInWithPopup,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    updateProfile,
+    Unsubscribe,
+    getAdditionalUserInfo,
+    onAuthStateChanged,
+} from 'firebase/auth';
 import PrimaryUser from './PrimaryUser';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { FirebaseError } from 'firebase/app';
 
 export class Auth {
-    private static auth = FirebaseAuth;
+    private static auth: FBAuth = FirebaseAuth;
     protected static user = Auth.auth.currentUser;
-    public static get googleProvider(): OAuthProvider {
-        const provider = new GoogleProvider();
+    public static get googleProvider(): GoogleAuthProvider {
+        const provider = new GoogleAuthProvider();
         provider.addScope('https://www.googleapis.com/auth/calendar.events');
         return provider;
     }
@@ -31,12 +38,11 @@ export class Auth {
         const googleProvider = Auth.googleProvider;
 
         try {
-            const res = await Auth.auth.signInWithPopup(googleProvider);
+            const res = await signInWithPopup(Auth.auth, googleProvider);
             const user = res.user;
-
-            if (res.additionalUserInfo?.isNewUser && user && user.displayName && user.email) {
+            if (getAdditionalUserInfo(res)?.isNewUser && user && user.displayName && user.email) {
                 const [firstName, ...lastName] = user.displayName?.split(' ');
-                const docRef = db.db.collection('users').doc(user.uid);
+                const docRef = doc(collection(db.db, 'users'), user.uid);
 
                 const details = {
                     firstName: firstName,
@@ -47,7 +53,7 @@ export class Auth {
                     ref: docRef,
                 };
                 const primaryUser = new PrimaryUser(user, details);
-                await details.ref.withConverter(PrimaryUser).set(primaryUser);
+                await setDoc(details.ref.withConverter(PrimaryUser), primaryUser);
                 return primaryUser;
             } else {
             }
@@ -63,12 +69,12 @@ export class Auth {
         const provider = Auth.microsoftProvider;
 
         try {
-            const res = await Auth.auth.signInWithPopup(provider);
+            const res = await signInWithPopup(FirebaseAuth, provider);
             const user = res.user;
 
-            if (res.additionalUserInfo?.isNewUser && user && user.displayName && user.email) {
+            if (getAdditionalUserInfo(res)?.isNewUser && user && user.displayName && user.email) {
                 const [firstName, ...lastName] = user.displayName?.split(' ');
-                const docRef = db.db.collection('users').doc(user.uid);
+                const docRef = doc(collection(db.db, 'users'), user.uid);
 
                 const details = {
                     firstName: firstName,
@@ -79,7 +85,7 @@ export class Auth {
                     ref: docRef,
                 };
                 const primaryUser = new PrimaryUser(user, details);
-                await details.ref.withConverter(PrimaryUser).set(primaryUser);
+                await setDoc(details.ref.withConverter(PrimaryUser), primaryUser);
                 return primaryUser;
             } else {
             }
@@ -97,7 +103,7 @@ export class Auth {
      */
     static async signInWithEmail(email: string, password: string): Promise<FirebaseUser | undefined> {
         try {
-            const res = await this.auth.signInWithEmailAndPassword(email, password);
+            const res = await signInWithEmailAndPassword(FirebaseAuth, email, password);
             const user = res.user;
             console.log(res);
             if (user) {
@@ -128,19 +134,31 @@ export class Auth {
     static async createWithEmail(
         email: string,
         password: string,
-        details: { firstName: string; lastName: string; major: string; [key: string]: string },
+        details: {
+            firstName: string;
+            lastName: string;
+            major: string;
+            [key: string]: string;
+        },
     ): Promise<PrimaryUser | undefined> {
         try {
-            const res = await this.auth.createUserWithEmailAndPassword(email, password);
+            const res = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
             if (res.user) {
                 const user = res.user;
-                await user.updateProfile({ displayName: [details.firstName, details.lastName].join(' ') });
-                const docRef = db.db.collection('users').doc(user.uid);
-                const primaryUser = new PrimaryUser(user, { uid: user.uid, email: email, ref: docRef, ...details });
+                await updateProfile(user, {
+                    displayName: [details.firstName, details.lastName].join(' '),
+                });
+                const docRef = doc(collection(db.db, 'users'), user.uid);
+                const primaryUser = new PrimaryUser(user, {
+                    uid: user.uid,
+                    email: email,
+                    ref: docRef,
+                    ...details,
+                });
                 primaryUser.verifyEmail();
                 console.log(primaryUser);
                 try {
-                    await docRef.withConverter(PrimaryUser).set(primaryUser);
+                    await setDoc(docRef.withConverter(PrimaryUser), primaryUser);
                 } catch (e) {
                     console.log(e);
                 }
@@ -162,10 +180,11 @@ export class Auth {
      */
     static onAuthStateChange(
         callback: (user: PrimaryUser | undefined) => void,
-        error?: (e: FirebaseAuthError) => void,
-        completed?: FirebaseUnsubscribe,
-    ): FirebaseUnsubscribe {
-        return Auth.auth.onAuthStateChanged(
+        error?: (e: FirebaseError) => void,
+        completed?: Unsubscribe,
+    ): Unsubscribe {
+        return onAuthStateChanged(
+            FirebaseAuth,
             async (user) => {
                 if (user) {
                     const primaryUser = await PrimaryUser.fromUser(user);
@@ -173,7 +192,7 @@ export class Auth {
                     callback(primaryUser);
                 }
             },
-            error,
+            async (error) => console.log(error),
             completed,
         );
     }

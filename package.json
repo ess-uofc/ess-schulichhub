@@ -21,7 +21,7 @@
         "@types/react-select": "^5.0.1",
         "classnames": "^2.3.1",
         "cordova-plugin-youtube-video-player": "^2.4.0",
-        "firebase": "^8.0.2",
+        "firebase": "^9.6.7",
         "ionicons": "^5.4.0",
         "lodash": "^4.17.21",
         "react": "^17.0.1",

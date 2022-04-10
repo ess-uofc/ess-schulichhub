@@ -1,5 +1,5 @@
 import { PostAttachmentType } from './Enums';
-import { DocumentReference, Timestamp } from './firebase';
+import { DocumentReference, Timestamp } from 'firebase/firestore';
 
 export interface IUser {
     firstName: string;

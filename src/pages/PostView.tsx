@@ -24,6 +24,7 @@ import { selectUser } from '../features/User/UserStore';
 import { db } from '../Models/firebase';
 import { ReplyCommentPairContext } from '../contexts/replyComment';
 import _ from 'lodash';
+import { collection, doc, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 
 interface PostViewComments {
     id: string;
@@ -69,35 +70,31 @@ const PostView: React.FC = () => {
 
     useEffect(() => {
         console.log('Adding event listeners...');
-        const unSubscribeFromPosts = db.db
-            .collection('posts')
-            .withConverter(Post)
-            .doc(id)
-            .onSnapshot({
-                next: (snapshot) => {
-                    console.log('Fetched Post');
-                    const doc = snapshot.data();
-                    setPost(doc);
-                },
-            });
-        const unSubscribeFromComments = db.db
-            .collection('comments')
-            .where('replyToPost', '==', id)
-            .orderBy('timestamp', 'desc')
-            .withConverter(Comment)
-            .onSnapshot({
-                next: (snapshot) => {
-                    console.log('Fetched Comments');
-                    const Comments = snapshot.docs.map((e) => {
-                        return {
-                            id: e.id,
-                            comment: e.data(),
-                        };
-                    });
-                    setComments(arrangeComments(Comments));
-                    console.log(Comments);
-                },
-            });
+        const unSubscribeFromPosts = onSnapshot(doc(collection(db.db, 'posts'), id).withConverter(Post), (snapshot) => {
+            console.log('Fetched Post');
+            const docu = snapshot.data();
+            setPost(docu);
+        });
+
+        const unSubscribeFromComments = onSnapshot(
+            query(
+                collection(db.db, 'comments'),
+                where('replyToPost', '==', id),
+                orderBy('timestamp', 'desc'),
+            ).withConverter(Comment),
+            (snapshot) => {
+                console.log('Fetched Comments');
+                const Comments = snapshot.docs.map((e) => {
+                    return {
+                        id: e.id,
+                        comment: e.data(),
+                    };
+                });
+                setComments(arrangeComments(Comments));
+                console.log(Comments);
+            },
+        );
+
         return () => {
             unSubscribeFromPosts();
             unSubscribeFromComments();

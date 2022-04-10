@@ -21,7 +21,8 @@ import { useHistory } from 'react-router';
 import { toast } from '../app/toast';
 import { selectUser } from '../features/User/UserStore';
 import { IPost } from '../Models/DocTypes';
-import { db, Timestamp } from '../Models/firebase';
+import { db } from '../Models/firebase';
+import { Timestamp } from 'firebase/firestore';
 import { HomePost } from './HomePostView';
 import './PostContainer.scss';
 

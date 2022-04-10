@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { IonAvatar, IonButton, IonCard, IonCardContent, IonIcon, IonTextarea } from '@ionic/react';
 import './CommentCompose.scss';
 import { IComment } from '../Models/DocTypes';
-import { db, FieldValue, Timestamp } from '../Models/firebase';
+import { db } from '../Models/firebase';
+import { collection, doc, setDoc, Timestamp, increment } from 'firebase/firestore';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import { useReplyCommentPair } from '../contexts/replyComment';
@@ -32,17 +33,17 @@ const CommentCompose: React.FC<{ postId: string }> = (props) => {
                 },
             });
 
-            await db.db
-                .collection('posts')
-                .doc(props.postId)
-                .set(
-                    {
-                        aggregations: { comments: FieldValue.increment(1) },
-                    },
-                    {
-                        merge: true,
-                    },
-                );
+            const postsRef = collection(db.db, 'posts');
+
+            await setDoc(
+                doc(postsRef, props.postId),
+                {
+                    aggregations: { comments: increment(1) },
+                },
+                {
+                    merge: true,
+                },
+            );
             console.log(props.postId);
         }
     }

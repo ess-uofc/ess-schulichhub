@@ -5,7 +5,9 @@ import CommentView from './CommentView';
 import { IonList, IonLabel, IonListHeader } from '@ionic/react';
 import PropTypes from 'prop-types';
 
-const PostComments: React.FC<{ comments?: { id: string; comment: Comment }[] }> = (props) => {
+const PostComments: React.FC<{
+    comments?: { id: string; comment: Comment }[];
+}> = (props) => {
     return (
         <IonList className="commentContainer">
             <IonListHeader>

@@ -1,6 +1,6 @@
 import { IPost, PostAggregations } from './DocTypes';
 import { PostCategory } from './Enums';
-import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from './firebase';
+import { QueryDocumentSnapshot, SnapshotOptions, Timestamp } from 'firebase/firestore';
 import FirebaseDocument from './FirebaseDocument';
 import PostAttachment from './PostAttachment';
 export default class PostFirebase extends FirebaseDocument {

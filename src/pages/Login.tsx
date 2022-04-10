@@ -12,7 +12,10 @@ import Footer from '../components/Footer';
  * are used when the login button is clicked
  */
 const Login: React.FC = () => {
-    const [userState, setUserState] = useState<{ email: string; password: string }>({ email: '', password: '' });
+    const [userState, setUserState] = useState<{
+        email: string;
+        password: string;
+    }>({ email: '', password: '' });
 
     /**
      * @author Carter Zimmer

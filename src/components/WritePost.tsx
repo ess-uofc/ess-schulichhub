@@ -10,7 +10,8 @@ import {
     IonSelectOption,
     IonTextarea,
 } from '@ionic/react';
-import { db, Timestamp } from '../Models/firebase';
+import { db } from '../Models/firebase';
+import { Timestamp } from 'firebase/firestore';
 import { IPost } from '../Models/DocTypes';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';

@@ -1,4 +1,5 @@
 import { IonButton, IonContent, IonImg, IonItem, IonPage, IonTitle } from '@ionic/react';
+import { collection, doc, getDoc, onSnapshot, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -23,7 +24,7 @@ const ProfileView: React.FC = () => {
             const user = useSelector(selectUser);
             setUser(user);
         } else {
-            const user = (await db.db.collection('users').doc(uid).withConverter(User).get()).data();
+            const user = (await getDoc(doc(db.db, 'users', uid).withConverter(User))).data();
             setUser(user);
         }
     }
@@ -33,18 +34,12 @@ const ProfileView: React.FC = () => {
         setIsPrimaryUser(isPrimaryUser);
         setUserBasedOnType(isPrimaryUser);
 
-        const userPostsQueryListener = db.db
-            .collection('posts')
-            .where('uid', '==', uid)
-            .withConverter(Post)
-            .onSnapshot({
-                next: (snapshot) => {
-                    setUserPosts(snapshot.docs.map((e) => e.data()));
-                },
-                error: (e) => {
-                    console.log(e);
-                },
-            });
+        const userPostsQueryListener = onSnapshot(
+            query(collection(db.db, 'posts'), where('uid', '==', uid)).withConverter(Post),
+            (snapshot) => setUserPosts(snapshot.docs.map((e) => e.data())),
+            (e) => console.log(e),
+        );
+
         return () => {
             userPostsQueryListener();
         };

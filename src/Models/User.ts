@@ -1,6 +1,7 @@
 import { IUser } from './DocTypes';
-import { DocumentReference, QueryDocumentSnapshot, SnapshotOptions } from './firebase';
+import { DocumentReference, QueryDocumentSnapshot, SnapshotOptions } from 'firebase/firestore';
 import PrimaryUser from './PrimaryUser';
+import { FirebaseError } from 'firebase/app';
 
 export class UserError extends Error {
     /**
@@ -16,7 +17,7 @@ export class UserError extends Error {
      * converts error to user friendly string
      * @throw Error with user friendly string wrapped
      */
-    static handle(res: firebase.default.auth.Error): void {
+    static handle(res: FirebaseError): void {
         const code = res.code;
         switch (code) {
             case 'auth/email-already-exists':

@@ -1,4 +1,15 @@
-import { DocumentData, Firestore, WhereFilterOp } from './firebase';
+import { Firestore } from './firebase';
+import {
+    doc,
+    collection as fbcollection,
+    query as fbquery,
+    DocumentData,
+    getDoc,
+    WhereFilterOp,
+    where,
+    getDocs,
+    setDoc,
+} from 'firebase/firestore';
 
 export default class FireStoreDB {
     /**
@@ -18,7 +29,8 @@ export default class FireStoreDB {
          */
         console.log(id);
         try {
-            await this.db.collection(collection).doc(id).delete();
+            await this.deleteDoc(collection, id);
+            // await this.db.collection(collection).doc(id).delete();
         } catch (error) {
             console.error(error);
         }
@@ -29,8 +41,8 @@ export default class FireStoreDB {
          * Fetches a document from the given id or path
          */
         try {
-            const doc = await this.db.doc(path).get();
-            return doc.data() as DocType;
+            const docu = await getDoc(doc(this.db, path));
+            return docu.data() as DocType;
         } catch (e) {
             return null;
         }
@@ -52,9 +64,9 @@ export default class FireStoreDB {
         operator: WhereFilterOp,
         value: string | Map<string, string | number> | Array<string | number> | number,
     ): Promise<Array<T>> {
-        const query = (await this.db.collection(collection).where(field, operator, value).get()).docs.map(
-            (doc) => doc.data() as T,
-        );
+        const query = await (
+            await getDocs(fbquery(fbcollection(this.db, collection), where(field, operator, value)))
+        ).docs.map((doc) => doc.data() as T);
         return query;
     }
 
@@ -71,7 +83,7 @@ export default class FireStoreDB {
          * 
         */
         try {
-            await this.db.collection(collection).doc().set(fields);
+            await setDoc(doc(fbcollection(this.db, collection)), fields);
         } catch (e) {
             // Catch permission errors and display them to a user
             console.log(e);
