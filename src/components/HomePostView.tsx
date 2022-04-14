@@ -161,7 +161,11 @@ const HomePostView: React.FC = () => {
                                     />
                                 </PostContainer>
                             )}
-                            {v.data.postReference === undefined && <PostContainer key={v.id} postData={v.data} />}
+                            {v.data.postReference === undefined && (
+                                <PostContainer key={v.id} postData={v.data}>
+                                    <></>
+                                </PostContainer>
+                            )}
                         </>
                     );
                 })
