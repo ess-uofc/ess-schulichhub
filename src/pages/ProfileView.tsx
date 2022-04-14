@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import PostContainer from '../components/PostContainer';
-import { selectUser } from '../features/User/UserStore';
-import { db } from '../Models/firebase';
-import Post from '../Models/Post.firebase';
-import PrimaryUser from '../Models/PrimaryUser';
-import User from '../Models/User';
-import './ProfileView.scss';
+import { selectUser } from '../stores/users/user.store';
+import { db } from '../services/data/firebase';
+import Post from '../services/FirebasePost.service';
+import PrimaryUser from '../services/PrimaryUser.service';
+import User from '../services/User.service';
+import '../styles/pages/ProfileView.scss';
 
 const ProfileView: React.FC = () => {
     const [user, setUser] = useState<User | PrimaryUser | undefined>();

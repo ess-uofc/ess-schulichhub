@@ -18,12 +18,12 @@ import { ellipsisVertical, share, trash } from 'ionicons/icons';
 import React, { ReactElement, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { toast } from '../app/toast';
-import { selectUser } from '../features/User/UserStore';
-import { IPost } from '../Models/DocTypes';
-import { db, Timestamp } from '../Models/firebase';
+import { toast } from './data/toast';
+import { selectUser } from '../stores/users/user.store';
+import { IPost } from '../services/models/DocTypes.model';
+import { db, Timestamp } from '../services/data/firebase';
 import { HomePost } from './HomePostView';
-import './PostContainer.scss';
+import '../styles/components/PostContainer.scss';
 
 interface ContainerProps {
     postData: HomePost;

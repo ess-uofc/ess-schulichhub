@@ -1,7 +1,6 @@
 import React from 'react';
-import './RegisterLanding.scss';
+import '../styles/components/RegisterLanding.scss';
 import { IonButton, IonRow, IonText } from '@ionic/react';
-import '../pages/RegisterMain.scss';
 import Footer from '../components/Footer';
 
 const RegisterLanding: React.FC = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import './PostComments.scss';
-import Comment from '../Models/Comment';
+import '../styles/components/PostComments.scss';
+import Comment from '../services/FirebaseComment.service';
 import CommentView from './CommentView';
 import { IonList, IonLabel, IonListHeader } from '@ionic/react';
 import PropTypes from 'prop-types';

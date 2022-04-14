@@ -4,7 +4,7 @@ import 'firebase/auth';
 import 'firebase/analytics';
 // import 'firebase/messaging';
 import 'firebase/storage';
-import FireStoreDB from './firestore';
+import FirestoreService from '../Firestore.service';
 export const Timestamp = firebase.firestore.Timestamp;
 export type Timestamp = firebase.firestore.Timestamp;
 export type DocumentData = firebase.firestore.DocumentData;
@@ -44,4 +44,4 @@ firebase.firestore().settings({
 firebase.firestore().enablePersistence({ synchronizeTabs: true });
 export const Firestore = app.firestore();
 
-export const db = new FireStoreDB();
+export const db = new FirestoreService();

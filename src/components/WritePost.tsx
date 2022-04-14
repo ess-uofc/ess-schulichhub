@@ -10,15 +10,15 @@ import {
     IonSelectOption,
     IonTextarea,
 } from '@ionic/react';
-import { db, Timestamp } from '../Models/firebase';
-import { IPost } from '../Models/DocTypes';
+import { IPost } from '../services/models/DocTypes.model';
 import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
-import { PostCategory } from '../Models/Enums';
+import { PostCategory } from '../services/models/Enums.model';
 import { useHistory } from 'react-router';
-import './HomePostView.scss';
+import '../styles/components/HomePostView.scss';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
+import { db, Timestamp } from '../services/data/firebase';
 
 const WritePost: React.FC = () => {
     const [content, setContent] = useState('');

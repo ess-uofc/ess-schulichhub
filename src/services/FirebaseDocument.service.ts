@@ -1,6 +1,6 @@
-import { Timestamp } from './firebase';
+import { Timestamp } from './data/firebase';
 
-export default class FirebaseDocument {
+export default class FirebaseDocumentService {
     /**
      *
      *@author Mohamad Abdel Rida

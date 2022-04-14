@@ -4,7 +4,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 // Connects global state to App
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { store } from './stores/store';
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { IonPage, IonContent, IonItem, IonImg } from '@ionic/react';
-import './Landing.scss';
+import '../styles/pages/Landing.scss';
 import LandingFeatureBox from '../components/LandingFeatureBox';
 import LandingRegisterPrompt from '../components/LandingRegisterPrompt';
 import LandingInfo from '../components/LandingInfo';
 import Footer from '../components/Footer';
 
-const Landing: React.FC = () => {
+const LandingPage: React.FC = () => {
     return (
         <IonPage>
             <IonContent fullscreen>
@@ -22,4 +22,4 @@ const Landing: React.FC = () => {
     );
 };
 
-export default Landing;
+export default LandingPage;

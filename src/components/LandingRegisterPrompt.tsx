@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonButton, IonGrid, IonRow, IonCol, IonHeader } from '@ionic/react';
-import '../pages/Landing.scss';
+import '../styles/pages/Landing.scss';
 
 const LandingRegisterPrompt: React.FC = () => {
     return (

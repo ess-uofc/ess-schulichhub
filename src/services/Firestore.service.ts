@@ -1,6 +1,6 @@
-import { DocumentData, Firestore, WhereFilterOp } from './firebase';
+import { DocumentData, Firestore, WhereFilterOp } from './data/firebase';
 
-export default class FireStoreDB {
+export default class FirestoreService {
     /**
      * @author Mohamad Abdel Rida
      */

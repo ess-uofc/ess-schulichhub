@@ -1,16 +1,15 @@
 import React from 'react';
 import { IonContent, IonPage } from '@ionic/react';
-import './RegisterMain.scss';
-import RegisterForm from '../components/RegisterFormComp';
+import RegisterLanding from '../components/RegisterLandingComp';
 
-const Tab1: React.FC = () => {
+const RegisterLandingPage: React.FC = () => {
     return (
         <IonPage>
             <IonContent fullscreen>
-                <RegisterForm />
+                <RegisterLanding />
             </IonContent>
         </IonPage>
     );
 };
 
-export default Tab1;
+export default RegisterLandingPage;
