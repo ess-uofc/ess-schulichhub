@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import PostContainer from '../components/PostContainer';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
 import { db } from '../services/data/firebase';
 import Post from '../services/FirebasePost.service';
 import PrimaryUser from '../services/PrimaryUser.service';

@@ -3,7 +3,7 @@ import { IonPage, IonButton } from '@ionic/react';
 import '../styles/pages/Home.scss';
 import HomePostView from '../components/HomePostView';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
 
 const Home: React.FC = () => {
     const user = useSelector(selectUser);

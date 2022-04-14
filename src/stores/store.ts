@@ -1,6 +1,5 @@
-import { configureStore, ThunkAction, Action, createImmutableStateInvariantMiddleware } from '@reduxjs/toolkit';
-// import counterReducer from '../features/counter/counterSlice';
-import userReducer from '../features/User/UserStore';
+import { Action, configureStore, createImmutableStateInvariantMiddleware, ThunkAction } from '@reduxjs/toolkit';
+import userReducer from './users/user.store';
 export const store = configureStore({
     reducer: {
         user: userReducer,

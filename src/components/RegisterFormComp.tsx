@@ -5,8 +5,8 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import Select from 'react-select';
 import majors from '../majors';
-import { toast } from '../app/toast';
-import { FirebaseAuthService } from '../services/FirebaseAuth.service';
+import { toast } from './data/toast';
+import FirebaseAuthService from '../services/FirebaseAuth.service';
 import Footer from '../components/Footer';
 
 const RegisterForm: React.FC = () => {

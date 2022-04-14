@@ -19,10 +19,10 @@ import {
     IonRouterLink,
 } from '@ionic/react';
 import { ellipseOutline, homeOutline, logOutOutline } from 'ionicons/icons';
-import { toast } from '../app/toast';
-import { FirebaseAuthService } from '../services/FirebaseAuth.service';
+import { toast } from './data/toast';
+import FirebaseAuthService from '../services/FirebaseAuth.service';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
 
 const TitleBar: React.FC = () => {
     const user = useSelector(selectUser);

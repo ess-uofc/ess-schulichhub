@@ -6,7 +6,7 @@ import { db, FieldValue, Timestamp } from '../services/data/firebase';
 import { arrowForward } from 'ionicons/icons';
 import PropTypes from 'prop-types';
 import { useReplyCommentPair } from '../contexts/replyComment';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
 import { useSelector } from 'react-redux';
 
 const CommentCompose: React.FC<{ postId: string }> = (props) => {

@@ -1,9 +1,9 @@
 import { IonContent, IonLabel, IonSelect, IonSelectOption, IonToast } from '@ionic/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { toast } from '../app/toast';
+import { toast } from './data/toast';
 import PostContainer from '../components/PostContainer';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
 import { PostAggregations } from '../services/models/DocTypes.model';
 import { PostCategory } from '../services/models/Enums.model';
 import { db, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '../services/data/firebase';

@@ -17,7 +17,7 @@ import { PostCategory } from '../services/models/Enums.model';
 import { useHistory } from 'react-router';
 import '../styles/components/HomePostView.scss';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
 import { db, Timestamp } from '../services/data/firebase';
 
 const WritePost: React.FC = () => {

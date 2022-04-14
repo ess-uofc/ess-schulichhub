@@ -9,7 +9,7 @@ import {
 } from './data/firebase';
 import PrimaryUser from './PrimaryUser.service';
 
-export class FirebaseAuthService {
+export default class FirebaseAuthService {
     private static auth = FirebaseAuth;
     protected static user = FirebaseAuthService.auth.currentUser;
     public static get googleProvider(): OAuthProvider {

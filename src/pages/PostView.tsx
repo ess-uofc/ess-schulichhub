@@ -20,7 +20,7 @@ import Post from '../services/FirebasePost.service';
 import { useParams } from 'react-router-dom';
 import Comment from '../services/FirebaseComment.service';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../features/User/UserStore';
+import { selectUser } from '../stores/users/user.store';
 import { db } from '../services/data/firebase';
 import { ReplyCommentPairContext } from '../contexts/replyComment';
 import _ from 'lodash';

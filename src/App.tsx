@@ -16,11 +16,11 @@ import '@ionic/react/css/typography.css';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
-import unProtectedRoutes from './app/routing';
+import unProtectedRoutes from './pages/data/router.data';
 import { PrivateRoute } from './components/PrivateRoute';
 import TitleBar from './components/TitleBar';
 /* Redux for User */
-import { clearUser, setUser } from './features/User/UserStore';
+import { clearUser, setUser } from './stores/users/user.store';
 import Home from './pages/HomePage';
 import Landing from './pages/LandingPage';
 import Login from './pages/LoginPage';
@@ -29,7 +29,7 @@ import ProfileView from './pages/ProfileView';
 import RegisterFormPage from './pages/RegisterFormPage';
 import RegisterLandingPage from './pages/RegisterLandingPage';
 import WritePostView from './pages/WritePostView';
-import { FirebaseAuthService } from './services/FirebaseAuth.service';
+import FirebaseAuthService from './services/FirebaseAuth.service';
 /* Theme variables */
 import './styles/theme/variables.scss';
 
