@@ -21,9 +21,9 @@ import { PrivateRoute } from './components/PrivateRoute';
 import TitleBar from './components/TitleBar';
 /* Redux for User */
 import { clearUser, setUser } from './features/User/UserStore';
-import Home from './pages/Home';
-import Landing from './pages/Landing';
-import Login from './pages/Login';
+import Home from './pages/HomePage';
+import Landing from './pages/LandingPage';
+import Login from './pages/LoginPage';
 import PostView from './pages/PostView';
 import ProfileView from './pages/ProfileView';
 import RegisterFormPage from './pages/RegisterFormPage';
@@ -31,7 +31,7 @@ import RegisterLandingPage from './pages/RegisterLandingPage';
 import WritePostView from './pages/WritePostView';
 import { FirebaseAuthService } from './services/FirebaseAuth.service';
 /* Theme variables */
-import './theme/variables.scss';
+import './styles/theme/variables.scss';
 
 const App: React.FC = () => {
     const dispatch = useDispatch();

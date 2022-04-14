@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Login from '../pages/Login';
+import Login from '../pages/LoginPage';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
 
