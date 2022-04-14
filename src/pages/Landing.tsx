@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonPage, IonContent, IonItem, IonImg } from '@ionic/react';
-import './Landing.scss';
+import '../styles/pages/Landing.scss';
 import LandingFeatureBox from '../components/LandingFeatureBox';
 import LandingRegisterPrompt from '../components/LandingRegisterPrompt';
 import LandingInfo from '../components/LandingInfo';

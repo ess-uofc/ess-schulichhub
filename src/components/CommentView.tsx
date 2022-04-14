@@ -1,5 +1,5 @@
 import React from 'react';
-import './CommentView.scss';
+import '../styles/components/CommentView.scss';
 import Comment from '../services/FirebaseComment.service';
 import { IonItem, IonAvatar, IonLabel, IonText, IonIcon } from '@ionic/react';
 import { arrowUndo } from 'ionicons/icons';

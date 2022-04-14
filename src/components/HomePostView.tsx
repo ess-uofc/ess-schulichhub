@@ -10,7 +10,7 @@ import { db, QueryDocumentSnapshot, QuerySnapshot, Timestamp } from '../services
 import FirebasePostService from '../services/FirebasePost.service';
 import PostAttachment from '../services/PostAttachment.service';
 import User, { UserError } from '../services/User.service';
-import './HomePostView.scss';
+import '../styles/components/HomePostView.scss';
 import PostSkeleton from './PostContainerSkeleton';
 
 export class HomePost extends FirebasePostService {

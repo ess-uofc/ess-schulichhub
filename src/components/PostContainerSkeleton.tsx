@@ -1,5 +1,5 @@
 import React from 'react';
-import './PostContainer.scss';
+import '../styles/components/PostContainer.scss';
 import {
     IonCard,
     IonCardHeader,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { IonContent, IonPage, IonInput, IonButton, IonRouterLink } from '@ionic/react';
-import './Login.scss';
+import '../styles/pages/Login.scss';
 import { toast } from '../app/toast';
 import { FirebaseAuthService } from '../services/FirebaseAuth.service';
 import Footer from '../components/Footer';

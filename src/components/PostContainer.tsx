@@ -23,7 +23,7 @@ import { selectUser } from '../features/User/UserStore';
 import { IPost } from '../services/models/DocTypes.model';
 import { db, Timestamp } from '../services/data/firebase';
 import { HomePost } from './HomePostView';
-import './PostContainer.scss';
+import '../styles/components/PostContainer.scss';
 
 interface ContainerProps {
     postData: HomePost;

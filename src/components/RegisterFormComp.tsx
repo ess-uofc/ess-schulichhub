@@ -1,10 +1,9 @@
 import React from 'react';
-import './RegisterLanding.scss';
+import '../styles/components/RegisterLanding.scss';
 import { IonButton, IonInput, IonTitle, IonContent } from '@ionic/react';
 import { InputChangeEventDetail } from '@ionic/core';
 import { useState } from 'react';
 import Select from 'react-select';
-import '../pages/RegisterMain.scss';
 import majors from '../majors';
 import { toast } from '../app/toast';
 import { FirebaseAuthService } from '../services/FirebaseAuth.service';

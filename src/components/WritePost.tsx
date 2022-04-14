@@ -15,7 +15,7 @@ import { InputChangeEventDetail } from '@ionic/core';
 import { loadingComponent } from './Loading';
 import { PostCategory } from '../services/models/Enums.model';
 import { useHistory } from 'react-router';
-import './HomePostView.scss';
+import '../styles/components/HomePostView.scss';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';
 import { db, Timestamp } from '../services/data/firebase';

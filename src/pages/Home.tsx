@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonPage, IonButton } from '@ionic/react';
-import './Home.scss';
+import '../styles/pages/Home.scss';
 import HomePostView from '../components/HomePostView';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/User/UserStore';

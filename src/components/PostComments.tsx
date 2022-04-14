@@ -1,5 +1,5 @@
 import React from 'react';
-import './PostComments.scss';
+import '../styles/components/PostComments.scss';
 import Comment from '../services/FirebaseComment.service';
 import CommentView from './CommentView';
 import { IonList, IonLabel, IonListHeader } from '@ionic/react';

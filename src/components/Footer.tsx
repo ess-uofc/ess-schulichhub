@@ -1,5 +1,5 @@
 import React from 'react';
-import './Footer.scss';
+import '../styles/components/Footer.scss';
 import { IonText, IonImg, IonFooter, IonToolbar, IonGrid, IonRow, IonCol, IonRouterLink } from '@ionic/react';
 
 const Footer: React.FC = () => {

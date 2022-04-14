@@ -13,7 +13,7 @@ import {
     IonSkeletonText,
     IonTextarea,
 } from '@ionic/react';
-import './PostView.scss';
+import '../styles/pages/PostView.scss';
 import PostComments from '../components/PostComments';
 import CommentCompose from '../components/CommentCompose';
 import Post from '../services/FirebasePost.service';
